@@ -1,2 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+* working-tree-encoding=cp1251 eol=CRLF
+* encoding=cp1251
