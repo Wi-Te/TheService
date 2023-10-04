@@ -1,0 +1,12 @@
+12.03.2022 12:06:34	!
+12.03.2022 12:06:34	Started Service
+12.03.2022 12:08:21	!
+12.03.2022 12:08:21	Started Service
+12.03.2022 12:09:23	Starting [TimerProc1]. Timers count = 1; Users count = 0
+12.03.2022 12:09:23	Done [TimerProc1]
+12.03.2022 12:10:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+12.03.2022 12:10:00	Done [TimerProc2]
+12.03.2022 12:10:23	Starting [TimerProc1]. Timers count = 1; Users count = 0
+12.03.2022 12:10:23	Done [TimerProc1]
+12.03.2022 12:10:53	Stopped Service
+12.03.2022 12:10:53	!

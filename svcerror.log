@@ -1,0 +1,293 @@
+11.06.19 08:57:12	Exception in AfterInstall: FU
+11.06.19 09:27:09	Exception in BeforeUninstall: FU
+11.06.19 09:31:23	Exception in BeforeUninstall: FU
+11.06.19 13:29:35	Exception in OnStart: FU
+11.06.19 13:29:56	Exception in OnStart: FU
+23.07.19 15:27:52	Exception in OnStart: Error reading settings from *.ini: GetTimers: Key [until] not found in section [TIMER3]
+23.07.19 15:42:51	Exception in OnStart: Error reading settings from *.ini: GetTimers: Key [until] not found in section [TIMER3]
+23.07.19 16:10:55	Exception in OnStart: Error reading settings from *.ini: GetTimers: Key [until] not found in section [TIMER3]
+23.07.19 16:16:58	Exception in OnStart: Error reading settings from *.ini: GetTimers: Key [every, 0] not found in section [TIMER3]
+23.07.19 16:17:38	Exception in OnStart: CreateWindowEx
+			code 1400: Недопустимый дескриптор окна
+14.08.19 07:30:55	Exception in OnStart: Error reading settings from *.ini: Key [port] in section [SERVER] is not an integer
+15.08.19 07:17:37	Exception in OnStart: Error reading settings from *.ini: Key [port] in section [SERVER] is not an integer
+16.08.19 07:12:37	Exception in OnStart: Error reading settings from *.ini: Key [port] in section [SERVER] is not an integer
+19.08.19 07:14:18	Exception in OnStart: Error reading settings from *.ini: Key [port] in section [SERVER] is not an integer
+20.08.19 07:19:42	Exception in OnStart: Error reading settings from *.ini: Key [port] in section [SERVER] is not an integer
+21.08.19 07:25:08	Exception in OnStart: Error reading settings from *.ini: Key [port] in section [SERVER] is not an integer
+22.08.19 07:22:52	Exception in OnStart: Error reading settings from *.ini: Key [port] in section [SERVER] is not an integer
+22.08.19 11:37:43	Exception in OnStart: Error reading settings from *.ini: Key [port] in section [SERVER] is not an integer
+23.08.19 07:18:15	Exception in OnStart: Error reading settings from *.ini: Key [port] in section [SERVER] is not an integer
+26.08.19 07:17:12	Exception in OnStart: Error reading settings from *.ini: Key [port] in section [SERVER] is not an integer
+27.08.19 07:15:23	Exception in OnStart: Error reading settings from *.ini: Key [port] in section [SERVER] is not an integer
+28.08.19 07:26:22	Exception in OnStart: Error reading settings from *.ini: Key [port] in section [SERVER] is not an integer
+29.08.19 07:27:10	Exception in OnStart: Error reading settings from *.ini: Key [port] in section [SERVER] is not an integer
+30.08.19 07:28:33	Exception in OnStart: Error reading settings from *.ini: Key [port] in section [SERVER] is not an integer
+11.09.19 10:42:54	Exception in OnStart: Некорректно сформулирован таймер [Timer3]:
+			Не указано время окончания [until]
+11.09.19 10:44:32	Exception in OnStart: Error on MakeWindow: Access violation at address 0039082E. Read of address 0039082E
+11.09.19 10:44:56	Exception in OnStart: Error on MakeWindow: Access violation at address 00100DDA. Read of address 00100DDA
+11.09.19 10:46:20	Exception in OnStart: Error on MakeWindow: Access violation at address 004D08B4. Write of address 00000000
+11.09.19 10:47:50	Exception in OnStart: Error on MakeWindow: Access violation at address 005E095A. Read of address 005E095A
+11.09.19 10:50:16	Exception in OnStart: Error on MakeWindow: Access violation at address 0075097E. Write of address 00000000
+11.09.19 12:48:16	Exception in OnStart: Error on MakeWindow: Access violation at address 00700792. Read of address 00000000
+11.09.19 12:48:16	Errors in StopAndFree:
+			DestroyWindowClass: code 1412: Не все окна, принадлежащие данному классу, закрыты
+11.09.19 12:50:08	Exception in OnStart: Error on MakeWindow: Access violation at address 000703A8. Read of address 000703A8
+11.09.19 12:50:20	Errors in StopAndFree:
+			DestroyWindowClass: code 1412: Не все окна, принадлежащие данному классу, закрыты
+11.09.19 12:55:02	Exception in OnStart: Error on MakeWindow: Access violation at address 00510458. Write of address 00000000
+11.09.19 12:55:02	Errors in StopAndFree:
+			DestroyWindowClass: code 1412: Не все окна, принадлежащие данному классу, закрыты
+11.09.19 12:58:15	Exception in OnStart: Error on MakeWindow: Access violation at address 001A03BC. Read of address 001A03BC
+11.09.19 12:58:29	Errors in StopAndFree:
+			DestroyWindowClass: code 1412: Не все окна, принадлежащие данному классу, закрыты
+11.09.19 13:41:45	Exception in OnStart: Error in LoadDll: LoadLibrary [D:\0 - Sources\TheService\testdll\testdll.dll]
+			code 126: Не найден указанный модуль
+11.09.19 13:44:29	Exception in OnStart: Error in LoadDll: LoadLibrary [D:\0 - Sources\TheService\testdll\testdll.dll]
+			code 126: Не найден указанный модуль
+11.09.19 13:46:43	Exception in OnStart: Error in LoadDll: LoadLibrary [D:\0 - Sources\TheService\testdll\testdll.dll]
+			code 126: Не найден указанный модуль
+11.09.19 13:47:30	Exception in OnStart: Error in LoadDll: LoadLibrary [D:\0 - Sources\TheService\testdll\testdll.dll]
+			code 126: Не найден указанный модуль
+11.09.19 13:52:41	Exception in OnStart: Error in LoadDll: проверить регистр, у меня очередь тасков проверяется case-sensitive
+11.09.19 14:12:23	Error in WndProc: Access violation at address 0045FE85 in module 'TheService.exe'. Write of address 00000000
+11.09.19 14:48:08	Error in MySockCallback: WM_SRV_REQUEST: ServerReadRequest: select
+11.09.19 14:51:49	Error in MySockCallback: WM_SRV_REQUEST: ServerReadRequest: selectlect
+11.09.19 14:54:04	Error in FSvcStop was properly ignored: Access violation at address 00DDF1B4. Read of address 00DDF1B4
+12.09.19 12:39:31	Exception in OnStart: Error reading settings from *.ini: saTIniFile.LoadSections [D:\0 - Sources\TheService\Test.ini]: Не удалось открыть файл
+			code [2]: Не удается найти указанный файл
+12.09.19 12:50:01	Exception in OnStart: Error reading user/pass from registry: Cannot open key [\SYSTEM\CurrentControlSet\Services\Test\Parameters]
+12.09.19 13:31:03	Exception in Task Proc []: Access violation at address 00000000. Read of address 00000000
+12.09.19 14:10:15	Error in WndProc: Access violation at address 0046037D in module 'Test.exe'. Write of address 00000000
+12.09.19 14:16:50	Exception in Task Proc [UserProc]: Wrong Args Sizeельно
+12.09.19 14:19:54	Exception in Task Proc [UserProc]: Wrong Args Sizeельно
+12.09.19 14:26:03	Exception in Task Proc [UserProc]: Wrong Args Size
+17.09.19 10:36:06	Error in FSvcStart was properly ignored: Resource TFormLogs not found
+17.09.19 11:19:50	Exception in Task Proc [UserProc]: Wrong Args Size
+17.09.19 11:21:18	Errors in StopAndFree:
+			FreeTasks: External exception C0000008
+			Terminate WorkerThread: WorkerEvent.SetEvent
+			code 6: Неверный дескриптор
+17.09.19 11:35:19	Exception in Task Proc [UserProc]: Wrong Args Size
+17.09.19 11:57:27	Exception in Task Proc [UserProc]: Wrong Args Size
+17.09.19 12:02:32	Exception in Task Proc [UserProc]: Wrong Args Size
+17.09.19 12:08:06	Exception in Task Proc [UserProc]: Invalid pointer operation
+17.09.19 12:09:53	Errors in StopAndFree:
+			Terminate WorkerThread: Access violation at address 0045FC06 in module 'Test.exe'. Read of address 00000004
+17.09.19 12:10:54	Exception in Task Proc [UserProc]: Invalid pointer operation
+17.09.19 12:11:18	Error in MySockCallback: WaitForSingleObject: Windows socket error: Удаленный хост принудительно разорвал существующее подключение (10054), on call "send"
+17.09.19 12:11:31	Error in WndProc:
+17.09.19 13:28:06	Exception in Task Proc [UserProc]: Invalid pointer operation
+17.09.19 13:28:06	Error in WndProc:
+17.09.19 14:00:25	Errors in StopAndFree:
+			Terminate WorkerThread: Access violation at address 0045FC06 in module 'Test.exe'. Read of address 00000004
+18.09.19 09:47:41	Error in MySockCallback: WaitForSingleObject: Windows socket error: Программа на вашем хост-компьютере разорвала установленное подключение (10053), on call "send"
+18.09.19 09:48:21	Error in WndProc:
+18.09.19 09:48:36	Errors in StopAndFree:
+			Terminate WorkerThread: Access violation at address 0045FBFC in module 'Test.exe'. Read of address 00000004
+18.09.19 10:04:50	Error in WndProc:
+25.10.19 15:08:09	Exception in OnStart: Can't find dll [D:\0 - Sources\TheService\my.dll]
+25.10.19 15:08:32	Ошибка автоматического обновления: error during selfupdate: Нет доступа к [D:\TS_TEST\]
+25.10.19 15:08:32	Exception in OnStart: Error in LoadDll: GetProcAddress [msgproc]
+			code 127: Не найдена указанная процедура
+25.10.19 15:10:45	Exception in OnStart: Can't find dll [D:\0 - Sources\TheService\my.dll]
+25.10.19 15:11:04	Ошибка автоматического обновления: error during selfupdate: Нет доступа к [D:\TS_TEST\]
+25.10.19 15:12:33	Exception in Task Proc [SomeProc]: Не удалось скопировать ask.dbf [stru\] -> [data\] код 3: Системе не удается найти указанный путь
+25.10.19 15:13:16	Exception in Task Proc [SomeProc]: Не удалось скопировать ask.dbf [stru\] -> [data\] код 3: Системе не удается найти указанный путь
+25.10.19 15:15:09	Ошибка автоматического обновления: error during selfupdate: Нет доступа к [D:\TS_TEST\]
+25.10.19 15:16:50	Exception in OnStart: Windows socket error: Обычно разрешается одно использование адреса сокета (протокол/сетевой адрес/порт) (10048), on call "bind"
+04.11.19 11:26:13	Ошибка автоматического обновления: error during selfupdate: Нет доступа к [D:\TS_TEST\]
+04.11.19 11:26:23	Error in WndProc: GetProcAddress [TimerProc1]
+			code 127: Не найдена указанная процедура
+04.11.19 11:26:44	Error in MySockCallback: WaitForSingleObject: Windows socket error: Удаленный хост принудительно разорвал существующее подключение (10054), on call "send"
+04.11.19 11:45:12	Ошибка автоматического обновления: error during selfupdate: Нет доступа к [D:\TS_TEST\]
+04.11.19 11:47:22	Error in MySockCallback: WaitForSingleObject: Windows socket error: Удаленный хост принудительно разорвал существующее подключение (10054), on call "send"
+04.11.19 11:47:24	Error in WndProc:
+04.11.19 11:47:29	Errors in StopAndFree:
+			Terminate WorkerThread: Access violation at address 0045FBFC in module 'Test.exe'. Read of address 00000004
+04.11.19 11:48:47	Ошибка автоматического обновления: error during selfupdate: Нет доступа к [D:\TS_TEST\]
+04.11.19 12:37:30	Ошибка автоматического обновления: error during selfupdate: Нет доступа к [D:\TS_TEST\]
+04.11.19 12:39:56	Error in MySockCallback: WaitForSingleObject: Windows socket error: Удаленный хост принудительно разорвал существующее подключение (10054), on call "send"
+04.11.19 12:43:24	Exception in Task Proc [TimerProc2]: Access violation at address 00F27A4F in module 'testdll.dll'. Read of address 00000000
+04.11.19 12:44:27	Error in WndProc:
+04.11.19 12:54:41	Ошибка автоматического обновления: error during selfupdate: Нет доступа к [D:\TS_TEST\]
+04.11.19 12:55:00	Error in WndProc: Invalid pointer operation
+04.11.19 12:55:00	Error in MySockCallback: WaitForSingleObject: Windows socket error: Программа на вашем хост-компьютере разорвала установленное подключение (10053), on call "send"
+04.11.19 12:55:40	Error in MySockCallback: WaitForSingleObject: Windows socket error: Удаленный хост принудительно разорвал существующее подключение (10054), on call "send"
+04.11.19 12:56:20	Error in MySockCallback: WaitForSingleObject: Windows socket error: Программа на вашем хост-компьютере разорвала установленное подключение (10053), on call "send"
+04.11.19 12:56:25	Error in MySockCallback: WaitForSingleObject: Windows socket error: Удаленный хост принудительно разорвал существующее подключение (10054), on call "send"
+04.11.19 12:56:37	Errors in StopAndFree:
+			FreeTasks: Invalid pointer operation
+12.10.2021 13:35:42	Ошибка автоматического обновления: error during selfupdate: Нет доступа к [D:\TS_TEST\]
+12.10.2021 13:44:45	Ошибка автоматического обновления: error during selfupdate: Нет доступа к [D:\TS_TEST\]
+12.10.2021 13:54:07	2493206
+12.10.2021 13:56:19	6818650
+12.10.2021 15:27:21	6818646
+12.10.2021 15:32:59	397436
+12.10.2021 15:34:19	266378
+12.10.2021 15:38:57	4457980
+12.10.2021 15:40:22	8588036
+12.10.2021 15:49:31	2886046
+12.10.2021 15:49:31	3696
+12.10.2021 15:49:48	3696
+12.10.2021 15:49:49	3696
+12.10.2021 15:49:55	3696
+12.10.2021 15:53:25	787350
+12.10.2021 16:04:56	Exception in OnStart: fu
+12.10.2021 16:42:38	OnInstall: логин не задан, настройка входа в Novell на вашей совести
+13.10.2021 08:54:22	Exception in OnStart: fu
+13.10.2021 12:31:28	Exception in OnStart: fu
+18.10.2021 12:43:12	Exception in OnStart: Error reading settings from *.ini: GetTimers: Access violation at address 0045AE7B in module 'Test.exe'. Read of address 00000000
+18.10.2021 14:19:10	Error in WndProc: Invalid pointer operation
+19.10.2021 14:21:34	Exception in OnStart: Error reading settings from *.ini: GetTimers: Access violation at address 0045AD8F in module 'TheService.exe'. Read of address 00000000
+19.10.2021 14:22:29	Exception in OnStart: Error reading settings from *.ini: GetTimers: Access violation at address 0045AD8F in module 'TheService.exe'. Read of address 00000000
+20.10.2021 09:26:44	Error in MySockCallback: WaitForSingleObject: Access violation at address 0045E582 in module 'Test.exe'. Read of address 00000004
+20.10.2021 10:40:53	Error in MySockCallback: WaitForSingleObject: ServerSendResponse: Windows socket error: Программа на вашем хост-компьютере разорвала установленное подключение (10053), on call "send"
+20.10.2021 10:46:26	Error in MySockCallback: WaitForSingleObject: ServerSendResponse: Windows socket error: Программа на вашем хост-компьютере разорвала установленное подключение (10053), on call "send"
+20.10.2021 10:51:12	Errors in StopAndFree:
+			FreeTasks: Access violation at address 0045E4B9 in module 'Test.exe'. Read of address 45DB73FC
+20.10.2021 10:52:22	Error in MySockCallback: WaitForSingleObject: ServerSendResponse: Windows socket error: Удаленный хост принудительно разорвал существующее подключение (10054), on call "send"
+20.10.2021 10:53:26	Error in MySockCallback: WaitForSingleObject: ServerSendResponse: Windows socket error: Программа на вашем хост-компьютере разорвала установленное подключение (10053), on call "send"
+20.10.2021 11:29:25	Errors in StopAndFree:
+			WaitFor WorkerThread: WAIT_TIMEOUT
+20.10.2021 12:23:17	Exception in Task Proc []: Access violation at address 00000000. Read of address 00000000
+20.10.2021 12:24:42	Exception in Task Proc []: Access violation at address 00000000. Read of address 00000000
+20.10.2021 12:29:19	Error in MySockCallback: WM_SRV_REQUEST: ServerReadRequest: пустая строка
+21.10.2021 10:25:13	Error in MySockCallback: WaitForSingleObject: ServerSendResponse: Windows socket error: Программа на вашем хост-компьютере разорвала установленное подключение (10053), on call "send"
+21.10.2021 15:56:57	Exception in OnStart: Error in LoadDll: GetProcAddress [free]
+			code 127: Не найдена указанная процедура
+21.10.2021 15:58:31	Exception in OnStart: Error in LoadDll: GetProcAddress [free]
+			code 127: Не найдена указанная процедура
+21.10.2021 15:59:26	Exception in OnStart: Error in LoadDll: GetProcAddress [free]
+			code 127: Не найдена указанная процедура
+21.10.2021 15:59:51	Exception in OnStart: Error in LoadDll: GetProcAddress [free]
+			code 127: Не найдена указанная процедура
+21.10.2021 16:01:46	Exception in OnStart: Error in LoadDll: GetProcAddress [free]
+			code 127: Не найдена указанная процедура
+21.10.2021 16:02:18	Exception in OnStart: Error in LoadDll: GetProcAddress [free]
+			code 127: Не найдена указанная процедура
+21.10.2021 16:03:40	Exception in OnStart: Error in LoadDll: GetProcAddress [free]
+			code 127: Не найдена указанная процедура
+21.10.2021 16:03:42	Exception in OnStart: Error in LoadDll: GetProcAddress [free]
+			code 127: Не найдена указанная процедура
+21.10.2021 16:03:42	Exception in OnStart: Error in LoadDll: GetProcAddress [free]
+			code 127: Не найдена указанная процедура
+21.10.2021 16:04:00	Exception in OnStart: Error in LoadDll: GetProcAddress [free]
+			code 127: Не найдена указанная процедура
+21.10.2021 16:32:07	Error in onServiceStart procedure: Failed to initialize BDE: FU
+21.10.2021 16:44:39	Error in onServiceStart procedure: Failed to initialize BDE: FU
+21.10.2021 16:45:55	Exception in OnStart: Error in onServiceStart procedure: Failed to initialize BDE: FU
+21.10.2021 16:46:12	Exception in OnStart: Error in onServiceStart procedure: Failed to initialize BDE: FU
+21.10.2021 17:05:55	Exception in OnStart: Error in onServiceStart procedure: Failed to initialize BDE: FU
+21.10.2021 17:06:24	Exception in OnStart: Error in onServiceStart procedure: Failed to initialize BDE: FU
+21.10.2021 17:40:36	Exception in TWorkerThread.Execute: Error in FSvcStart: Failed to initialize BDE: FU
+21.10.2021 17:45:04	Exception in TWorkerThread.Execute: Error in FSvcStart: FUUU
+21.10.2021 17:46:43	Exception in TWorkerThread.Execute: Error in FSvcStart: FUUU
+22.10.2021 10:27:52	Exception in OnStart: Error in FSvcStart: FUUU
+22.10.2021 10:39:48	Exception in OnStart: Error in TWorkerThread.FOnStart: FUUU
+22.10.2021 10:43:10	Exception in OnStart: InitEvent WAIT_TIMEOUT
+22.10.2021 10:44:24	Exception in OnStart: InitEvent WAIT_TIMEOUT
+22.10.2021 10:44:54	Exception in OnStart: Error in TWorkerThread.FOnStart: Failed to initialize BDE: FU
+22.10.2021 10:48:13	Exception in OnStart: Error in TWorkerThread.FOnStart: Failed to initialize BDE: FU
+22.10.2021 10:56:16	Exception in OnStart: TAService.GetProc empty procedure name
+22.10.2021 10:56:44	Errors in StopAndFree:
+			WaitFor WorkerThread: WAIT_TIMEOUT
+22.10.2021 10:58:11	Exception in OnStart: TAService.GetProc empty procedure name
+22.10.2021 11:00:42	Exception in TWorkerThread.Execute: fuuu
+22.10.2021 11:03:35	Exception in TWorkerThread.Execute: fuuu
+22.10.2021 11:05:37	Exception in TWorkerThread.Execute: fuuu
+22.10.2021 11:06:56	Exception in TWorkerThread.Execute: fuuu
+22.10.2021 11:14:29	Exception in TWorkerThread.Execute: fuuu
+14.12.2021 15:48:46	Exception in OnStart: InitEvent WAIT_TIMEOUT
+14.12.2021 15:49:59	Exception in OnStart: Error in TWorkerThread.FOnStart: Proc result = 11030752
+17.12.2021 10:02:45	Exception in OnStart: Can't find dll [D:\0 - Sources\TheService\mydll.dll]
+17.12.2021 10:03:18	Exception in OnStart: Can't find dll [D:\0 - Sources\TheService\mydll.dll]
+27.12.2021 10:22:55	Error in MySockCallback: WaitForSingleObject: ServerSendResponse: SendAll: WindSock error [10053] on [send]: Программа на вашем хост-компьютере разорвала установленное подключение
+27.12.2021 10:23:41	Errors in StopAndFree:
+			WaitFor WorkerThread: WAIT_TIMEOUT
+27.12.2021 10:25:40	Errors in StopAndFree:
+			WaitFor WorkerThread: WAIT_TIMEOUT
+27.12.2021 10:27:08	Errors in StopAndFree:
+			WaitFor WorkerThread: WAIT_TIMEOUT
+27.12.2021 10:44:21	Errors in StopAndFree:
+			WaitFor WorkerThread: WAIT_TIMEOUT
+27.12.2021 16:35:34	Exception in Task Proc [UserProc]: Access violation at address 00000000. Read of address 00000000
+27.12.2021 16:35:48	Error in WndProc: GetProcAddress [!RESTART REQUEST!]
+			code 127: Не найдена указанная процедура
+27.12.2021 16:35:58	Error in MySockCallback: WaitForSingleObject: ServerSendResponse: SendAll: WindSock error [10053] on [send]: Программа на вашем хост-компьютере разорвала установленное подключение
+27.12.2021 16:37:06	Error in MySockCallback: WaitForSingleObject: ServerSendResponse: SendAll: WindSock error [10053] on [send]: Программа на вашем хост-компьютере разорвала установленное подключение
+27.12.2021 16:41:36	Exception in Task Proc [UserProc]: Access violation at address 00000000. Read of address 00000000
+27.12.2021 16:41:59	Exception in Task Proc [UserProc]: Access violation at address 00000000. Read of address 00000000
+27.12.2021 16:42:54	Exception in Task Proc [UserProc]: Access violation at address 00000000. Read of address 00000000
+27.12.2021 16:42:57	Error in WndProc: GetProcAddress [!RESTART REQUEST!]
+			code 127: Не найдена указанная процедура
+27.12.2021 16:43:07	Error in MySockCallback: WaitForSingleObject: ServerSendResponse: SendAll: WindSock error [10053] on [send]: Программа на вашем хост-компьютере разорвала установленное подключение
+27.12.2021 16:43:50	Error in MySockCallback: WaitForSingleObject: ServerSendResponse: SendAll: WindSock error [10053] on [send]: Программа на вашем хост-компьютере разорвала установленное подключение
+27.12.2021 17:32:56	Exception in Task Proc [UserProc]: FU
+27.12.2021 17:33:16	Exception in Task Proc [UserProc]: FU
+27.12.2021 17:45:41	Exception in Task Proc [GetProcAddress [TimerProc1fu]
+			code 127: Не найдена указанная процедура]: Access violation at address 00000000. Read of address 00000000
+27.12.2021 17:51:33	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+27.12.2021 17:51:55	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+27.12.2021 17:52:37	Exception in Task Proc [UserProc]: Access violation at address 00000000. Read of address 00000000
+27.12.2021 17:52:40	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+27.12.2021 17:54:41	Exception in Task Proc [UserProc]: Access violation at address 00000000. Read of address 00000000
+27.12.2021 17:55:32	Exception in Task Proc [UserProc]: Access violation at address 00000000. Read of address 00000000
+30.12.2021 14:12:48	Ошибка автоматического обновления программы: Нет доступа к [D:\TS_TEST\]: code 2: Не удается найти указанный файл
+03.01.2022 10:18:09	Ошибка автоматического обновления программы: Нет доступа к [D:\TS_TEST\]: code 2: Не удается найти указанный файл
+03.01.2022 10:20:25	Ошибка автоматического обновления программы: Нет доступа к [D:\TS_TEST\]: code 2: Не удается найти указанный файл
+03.01.2022 10:29:25	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:29:45	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:31:19	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:36:33	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:37:29	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:38:02	Exception in Task Proc [UserProc]: Unexpected error from external database driver (15877)
+03.01.2022 10:38:09	Exception in Task Proc [UserProc]: Unexpected error from external database driver (15877)
+03.01.2022 10:39:52	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:49:51	Exception in OnStart: InitEvent WAIT_TIMEOUT
+03.01.2022 10:50:53	Errors in StopAndFree:
+			WaitFor WorkerThread: WAIT_TIMEOUT
+03.01.2022 10:51:39	Exception in Task Proc [UserProc]: Unexpected error from external database driver (15877)
+03.01.2022 10:51:59	Exception in Task Proc [UserProc]: Unexpected error from external database driver (15877)
+03.01.2022 10:57:10	Exception in Task Proc [UserProc]: Unexpected error from external database driver (15877)
+25.02.2022 17:34:29	Exception in OnStart: Error reading settings from *.ini: Key [onDLLinit] not found in section [PAYLOAD]
+25.02.2022 17:42:26	Exception in OnStart: Error reading settings from *.ini: Key [onDLLinit] not found in section [PAYLOAD]
+25.02.2022 17:53:40	Exception in Task Proc [UserProc]: Разрушительный сбой
+28.02.2022 10:09:35	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+28.02.2022 11:36:23	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+28.02.2022 11:39:48	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+28.02.2022 11:47:39	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+28.02.2022 11:50:43	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+28.02.2022 11:56:48	Exception in Task Proc [UserProc]: FU
+28.02.2022 11:58:39	Error in FSrvMessage was properly ignored: Access violation at address 00C73E51 in module 'testdll.dll'. Write of address 60830C42
+28.02.2022 11:59:30	Error in FSrvMessage was properly ignored: test
+28.02.2022 12:03:13	Error in FSrvMessage was properly ignored: test
+28.02.2022 12:05:33	Error in FSrvMessage was properly ignored: Server started on 53760 (socket = 1808)
+28.02.2022 12:09:27	Error in FSrvMessage was properly ignored: Server started on 53760 (socket = 244)
+28.02.2022 12:09:32	Error in FSrvMessage was properly ignored: Incomming from 127.0.0.1 (socket = 260)
+28.02.2022 12:09:32	Error in FSrvMessage was properly ignored: Total thread count: 1
+28.02.2022 12:09:32	Error in FSrvMessage was properly ignored: Socket closed: 260
+28.02.2022 12:09:33	Error in FSrvMessage was properly ignored: Incomming from 127.0.0.1 (socket = 260)
+28.02.2022 12:09:33	Error in FSrvMessage was properly ignored: Total thread count: 1
+28.02.2022 12:09:33	Error in FSrvMessage was properly ignored: Socket closed: 260
+28.02.2022 12:09:34	Error in FSrvMessage was properly ignored: Incomming from 127.0.0.1 (socket = 260)
+28.02.2022 12:09:34	Error in FSrvMessage was properly ignored: Total thread count: 1
+28.02.2022 12:09:34	Error in FSrvMessage was properly ignored: Socket closed: 260
+28.02.2022 12:09:34	Error in FSrvMessage was properly ignored: Incomming from 127.0.0.1 (socket = 260)
+28.02.2022 12:09:34	Error in FSrvMessage was properly ignored: Total thread count: 1
+28.02.2022 12:09:35	Error in FSrvMessage was properly ignored: Socket closed: 260
+28.02.2022 12:09:35	Error in FSrvMessage was properly ignored: Incomming from 127.0.0.1 (socket = 260)
+28.02.2022 12:09:35	Error in FSrvMessage was properly ignored: Total thread count: 1
+28.02.2022 12:09:35	Error in FSrvMessage was properly ignored: Socket closed: 260
+28.02.2022 12:09:36	Error in FSrvMessage was properly ignored: Incomming from 127.0.0.1 (socket = 260)
+28.02.2022 12:09:36	Error in FSrvMessage was properly ignored: Total thread count: 1
+28.02.2022 12:09:37	Error in FSrvMessage was properly ignored: Socket closed: 260

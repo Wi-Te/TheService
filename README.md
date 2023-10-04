@@ -1,0 +1,2 @@
+# TheService
+ Windows service template

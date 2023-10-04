@@ -1,0 +1,1 @@
+TheService.exe /install
