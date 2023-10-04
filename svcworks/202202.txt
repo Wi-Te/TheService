@@ -1,0 +1,274 @@
+25.02.2022 17:51:51	!
+25.02.2022 17:51:51	Started Service
+25.02.2022 17:52:01	Stopped Service
+25.02.2022 17:52:01	!
+25.02.2022 17:52:44	!
+25.02.2022 17:52:44	Started Service
+25.02.2022 17:52:49	User request [TimerProc1]
+25.02.2022 17:52:49	Starting [TimerProc1]. Timers count = 0; Users count = 1
+25.02.2022 17:52:49	Done [TimerProc1]
+25.02.2022 17:52:50	User request [TimerProc2]
+25.02.2022 17:52:50	Starting [TimerProc2]. Timers count = 0; Users count = 1
+25.02.2022 17:52:50	Done [TimerProc2]
+25.02.2022 17:52:54	Restart request recieved
+25.02.2022 17:52:54	Stopped Service
+25.02.2022 17:52:54	!
+25.02.2022 17:52:54	!
+25.02.2022 17:52:54	Started Service
+25.02.2022 17:52:59	User request [UserProc]
+25.02.2022 17:52:59	Starting [UserProc]. Timers count = 0; Users count = 1
+25.02.2022 17:53:40	Exception in Task Proc [UserProc]: Разрушительный сбой
+25.02.2022 17:53:40	Starting [TimerProc1]. Timers count = 1; Users count = 0
+25.02.2022 17:53:40	Done [UserProc]
+25.02.2022 17:53:40	Done [TimerProc1]
+25.02.2022 17:54:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+25.02.2022 17:54:00	Done [TimerProc1]
+25.02.2022 17:54:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+25.02.2022 17:54:00	Done [TimerProc2]
+25.02.2022 17:54:25	Stopped Service
+25.02.2022 17:54:25	!
+25.02.2022 18:06:50	!
+25.02.2022 18:06:50	Started Service
+25.02.2022 18:06:57	User request [TimerProc1]
+25.02.2022 18:06:57	Starting [TimerProc1]. Timers count = 0; Users count = 1
+25.02.2022 18:06:57	Done [TimerProc1]
+25.02.2022 18:06:58	User request [TimerProc2]
+25.02.2022 18:06:58	Starting [TimerProc2]. Timers count = 0; Users count = 1
+25.02.2022 18:06:59	Done [TimerProc2]
+25.02.2022 18:07:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+25.02.2022 18:07:00	Done [TimerProc1]
+25.02.2022 18:07:01	User request [UserProc]
+25.02.2022 18:07:01	Starting [UserProc]. Timers count = 0; Users count = 1
+25.02.2022 18:07:02	Done [UserProc]
+25.02.2022 18:07:04	Restart request recieved
+25.02.2022 18:07:04	Stopped Service
+25.02.2022 18:07:04	!
+25.02.2022 18:07:08	!
+25.02.2022 18:07:08	Started Service
+25.02.2022 18:07:10	User request [UserProc]
+25.02.2022 18:07:10	Starting [UserProc]. Timers count = 0; Users count = 1
+25.02.2022 18:07:10	Done [UserProc]
+25.02.2022 18:07:58	Restart request recieved
+25.02.2022 18:07:58	Stopped Service
+25.02.2022 18:07:58	!
+25.02.2022 18:08:04	!
+25.02.2022 18:08:04	Started Service
+25.02.2022 18:08:07	User request [UserProc]
+25.02.2022 18:08:07	Starting [UserProc]. Timers count = 0; Users count = 1
+25.02.2022 18:08:07	Done [UserProc]
+25.02.2022 18:08:30	Stopped Service
+25.02.2022 18:08:30	!
+28.02.2022 10:05:07	!
+28.02.2022 10:05:07	Started Service
+28.02.2022 10:05:11	Stopped Service
+28.02.2022 10:05:12	!
+28.02.2022 10:08:23	!
+28.02.2022 10:08:23	Started Service
+28.02.2022 10:08:26	Stopped Service
+28.02.2022 10:08:26	!
+28.02.2022 10:08:28	!
+28.02.2022 10:08:28	Started Service
+28.02.2022 10:08:34	Stopped Service
+28.02.2022 10:08:34	!
+28.02.2022 10:08:41	!
+28.02.2022 10:08:41	Started Service
+28.02.2022 10:08:51	User request [TimerProc1]
+28.02.2022 10:08:51	Starting [TimerProc1]. Timers count = 0; Users count = 1
+28.02.2022 10:08:51	Done [TimerProc1]
+28.02.2022 10:08:53	User request [TimerProc2]
+28.02.2022 10:08:53	Starting [TimerProc2]. Timers count = 0; Users count = 1
+28.02.2022 10:08:53	Done [TimerProc2]
+28.02.2022 10:08:54	User request [UserProc]
+28.02.2022 10:08:54	Starting [UserProc]. Timers count = 0; Users count = 1
+28.02.2022 10:08:59	Done [UserProc]
+28.02.2022 10:09:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 10:09:00	Done [TimerProc1]
+28.02.2022 10:09:02	User request [UserProc]
+28.02.2022 10:09:02	Starting [UserProc]. Timers count = 0; Users count = 1
+28.02.2022 10:09:05	Done [UserProc]
+28.02.2022 10:09:21	Restart request recieved
+28.02.2022 10:09:21	Stopped Service
+28.02.2022 10:09:21	!
+28.02.2022 10:09:21	!
+28.02.2022 10:09:21	Started Service
+28.02.2022 10:09:23	User request [TimerProc1]
+28.02.2022 10:09:23	Starting [TimerProc1]. Timers count = 0; Users count = 1
+28.02.2022 10:09:23	Done [TimerProc1]
+28.02.2022 10:09:25	User request [TimerProc2]
+28.02.2022 10:09:25	Starting [TimerProc2]. Timers count = 0; Users count = 1
+28.02.2022 10:09:25	Done [TimerProc2]
+28.02.2022 10:09:26	User request [UserProc]
+28.02.2022 10:09:26	Starting [UserProc]. Timers count = 0; Users count = 1
+28.02.2022 10:09:26	Done [UserProc]
+28.02.2022 10:09:28	User request [TimerProc2]
+28.02.2022 10:09:28	Starting [TimerProc2]. Timers count = 0; Users count = 1
+28.02.2022 10:09:28	Done [TimerProc2]
+28.02.2022 10:09:30	User request [fu bitch]
+28.02.2022 10:09:30	Starting [fu bitch]. Timers count = 0; Users count = 1
+28.02.2022 10:09:35	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+28.02.2022 10:09:35	Done [fu bitch]
+28.02.2022 10:09:39	User request [TimerProc1]
+28.02.2022 10:09:39	Starting [TimerProc1]. Timers count = 0; Users count = 1
+28.02.2022 10:09:39	Done [TimerProc1]
+28.02.2022 10:09:40	User request [TimerProc2]
+28.02.2022 10:09:40	Starting [TimerProc2]. Timers count = 0; Users count = 1
+28.02.2022 10:09:40	Done [TimerProc2]
+28.02.2022 10:09:41	User request [UserProc]
+28.02.2022 10:09:41	Starting [UserProc]. Timers count = 0; Users count = 1
+28.02.2022 10:09:41	Done [UserProc]
+28.02.2022 10:09:42	Restart request recieved
+28.02.2022 10:09:43	Stopped Service
+28.02.2022 10:09:43	!
+28.02.2022 10:09:43	!
+28.02.2022 10:09:43	Started Service
+28.02.2022 10:09:44	User request [UserProc]
+28.02.2022 10:09:44	Starting [UserProc]. Timers count = 0; Users count = 1
+28.02.2022 10:09:44	Done [UserProc]
+28.02.2022 10:09:45	User request [TimerProc2]
+28.02.2022 10:09:45	Starting [TimerProc2]. Timers count = 0; Users count = 1
+28.02.2022 10:09:45	Done [TimerProc2]
+28.02.2022 10:09:46	User request [TimerProc1]
+28.02.2022 10:09:46	Starting [TimerProc1]. Timers count = 0; Users count = 1
+28.02.2022 10:09:46	Done [TimerProc1]
+28.02.2022 10:10:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+28.02.2022 10:10:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 10:10:00	Done [TimerProc2]
+28.02.2022 10:10:00	Done [TimerProc1]
+28.02.2022 10:10:22	Restart request recieved
+28.02.2022 10:10:22	Stopped Service
+28.02.2022 10:10:22	!
+28.02.2022 10:10:22	!
+28.02.2022 10:10:22	Started Service
+28.02.2022 10:10:24	User request [UserProc]
+28.02.2022 10:10:24	Starting [UserProc]. Timers count = 0; Users count = 1
+28.02.2022 10:10:24	Done [UserProc]
+28.02.2022 10:10:32	User request [UserProc]
+28.02.2022 10:10:32	Starting [UserProc]. Timers count = 0; Users count = 1
+28.02.2022 10:10:32	Done [UserProc]
+28.02.2022 10:10:48	Restart request recieved
+28.02.2022 10:10:48	Stopped Service
+28.02.2022 10:10:48	!
+28.02.2022 10:10:48	!
+28.02.2022 10:10:48	Started Service
+28.02.2022 10:10:51	User request [UserProc]
+28.02.2022 10:10:51	Starting [UserProc]. Timers count = 0; Users count = 1
+28.02.2022 10:10:51	Done [UserProc]
+28.02.2022 10:11:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 10:11:00	Done [TimerProc1]
+28.02.2022 10:11:05	Stopped Service
+28.02.2022 10:11:05	!
+28.02.2022 11:34:31	!
+28.02.2022 11:34:31	Started Service
+28.02.2022 11:35:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:35:05	Done [TimerProc1]
+28.02.2022 11:35:55	User request [fu bitch]
+28.02.2022 11:35:55	Starting [fu bitch]. Timers count = 0; Users count = 1
+28.02.2022 11:36:24	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+28.02.2022 11:36:24	Done [fu bitch]
+28.02.2022 11:36:24	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:37:09	Starting [TimerProc2]. Timers count = 1; Users count = 0
+28.02.2022 11:37:11	Done [TimerProc1]
+28.02.2022 11:37:11	Done [TimerProc2]
+28.02.2022 11:37:39	User request [fu bitch]
+28.02.2022 11:39:11	Starting [fu bitch]. Timers count = 0; Users count = 1
+28.02.2022 11:39:48	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+28.02.2022 11:39:48	Done [fu bitch]
+28.02.2022 11:39:48	Starting [TimerProc2]. Timers count = 1; Users count = 0
+28.02.2022 11:40:17	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:40:20	Done [TimerProc2]
+28.02.2022 11:40:26	Done [TimerProc1]
+28.02.2022 11:41:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:41:01	Done [TimerProc1]
+28.02.2022 11:42:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+28.02.2022 11:42:16	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:42:17	Done [TimerProc2]
+28.02.2022 11:42:19	Done [TimerProc1]
+28.02.2022 11:43:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:43:04	Done [TimerProc1]
+28.02.2022 11:44:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:44:03	Starting [TimerProc2]. Timers count = 1; Users count = 0
+28.02.2022 11:44:03	Done [TimerProc1]
+28.02.2022 11:44:03	Done [TimerProc2]
+28.02.2022 11:45:05	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:46:01	Done [TimerProc1]
+28.02.2022 11:46:04	Starting [TimerProc2]. Timers count = 1; Users count = 0
+28.02.2022 11:46:07	Done [TimerProc2]
+28.02.2022 11:47:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:47:00	Done [TimerProc1]
+28.02.2022 11:47:13	User request [fu bitch]
+28.02.2022 11:47:37	Starting [fu bitch]. Timers count = 0; Users count = 1
+28.02.2022 11:47:39	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+28.02.2022 11:47:39	Done [fu bitch]
+28.02.2022 11:47:41	Stopped Service
+28.02.2022 11:47:41	!
+28.02.2022 11:50:18	!
+28.02.2022 11:50:18	Started Service
+28.02.2022 11:50:22	User request [fu bitch]
+28.02.2022 11:50:26	Starting [fu bitch]. Timers count = 0; Users count = 1
+28.02.2022 11:50:43	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+28.02.2022 11:51:13	Done [fu bitch]
+28.02.2022 11:51:15	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:51:15	Done [TimerProc1]
+28.02.2022 11:52:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:52:00	Done [TimerProc1]
+28.02.2022 11:52:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+28.02.2022 11:52:01	Done [TimerProc2]
+28.02.2022 11:53:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:53:00	Done [TimerProc1]
+28.02.2022 11:54:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+28.02.2022 11:54:00	Done [TimerProc2]
+28.02.2022 11:54:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:54:01	Done [TimerProc1]
+28.02.2022 11:55:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:55:00	Done [TimerProc1]
+28.02.2022 11:55:53	User request [UserProc]
+28.02.2022 11:55:53	Starting [UserProc]. Timers count = 0; Users count = 1
+28.02.2022 11:56:48	Exception in Task Proc [UserProc]: FU
+28.02.2022 11:57:16	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 11:57:16	Done [UserProc]
+28.02.2022 11:57:19	Starting [TimerProc2]. Timers count = 1; Users count = 0
+28.02.2022 11:57:19	Done [TimerProc1]
+28.02.2022 11:57:19	Done [TimerProc2]
+28.02.2022 11:57:26	Stopped Service
+28.02.2022 11:57:26	!
+28.02.2022 11:58:35	!
+28.02.2022 11:58:35	Started Service
+28.02.2022 11:59:19	!
+28.02.2022 11:59:19	Started Service
+28.02.2022 12:00:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+28.02.2022 12:00:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+28.02.2022 12:00:00	Done [TimerProc2]
+28.02.2022 12:00:00	Done [TimerProc1]
+28.02.2022 12:03:10	!
+28.02.2022 12:03:10	Started Service
+28.02.2022 12:03:20	Stopped Service
+28.02.2022 12:03:20	!
+28.02.2022 12:03:33	!
+28.02.2022 12:03:33	Started Service
+28.02.2022 12:09:27	!
+28.02.2022 12:09:27	Started Service
+28.02.2022 12:09:32	User request [TimerProc1]
+28.02.2022 12:09:32	Starting [TimerProc1]. Timers count = 0; Users count = 1
+28.02.2022 12:09:32	Done [TimerProc1]
+28.02.2022 12:09:33	User request [TimerProc1]
+28.02.2022 12:09:33	Starting [TimerProc1]. Timers count = 0; Users count = 1
+28.02.2022 12:09:33	Done [TimerProc1]
+28.02.2022 12:09:34	User request [TimerProc1]
+28.02.2022 12:09:34	Starting [TimerProc1]. Timers count = 0; Users count = 1
+28.02.2022 12:09:34	Done [TimerProc1]
+28.02.2022 12:09:34	User request [TimerProc2]
+28.02.2022 12:09:34	Starting [TimerProc2]. Timers count = 0; Users count = 1
+28.02.2022 12:09:35	Done [TimerProc2]
+28.02.2022 12:09:35	User request [TimerProc2]
+28.02.2022 12:09:35	Starting [TimerProc2]. Timers count = 0; Users count = 1
+28.02.2022 12:09:35	Done [TimerProc2]
+28.02.2022 12:09:36	User request [TimerProc1]
+28.02.2022 12:09:36	Starting [TimerProc1]. Timers count = 0; Users count = 1
+28.02.2022 12:09:37	Done [TimerProc1]
+28.02.2022 12:09:38	Stopped Service
+28.02.2022 12:09:38	!

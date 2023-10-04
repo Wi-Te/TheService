@@ -1,0 +1,36 @@
+unit UnitWait;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, uDllHelper;
+
+type         
+  TForm1 = class(TForm)
+    Label1: TLabel;
+    Edit1: TEdit;
+    Button1: TButton;
+    Timer1: TTimer;
+    procedure Button1Click(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+  private
+  public                    
+    abortcallback: TAbortCallback;
+  end;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  Close();
+end;
+
+procedure TForm1.Timer1Timer(Sender: TObject);
+begin
+  if abortcallback then close;
+end;
+
+end.

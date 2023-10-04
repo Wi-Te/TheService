@@ -1,0 +1,255 @@
+03.01.2022 10:18:09	!
+03.01.2022 10:18:09	Started Service
+03.01.2022 10:19:14	Restart request recieved
+03.01.2022 10:20:19	Stopped Service
+03.01.2022 10:20:20	!
+03.01.2022 10:20:50	!
+03.01.2022 10:20:50	Started Service
+03.01.2022 10:20:53	User request [TimerProc1]
+03.01.2022 10:20:53	Starting [TimerProc1]. Timers count = 0; Users count = 1
+03.01.2022 10:20:56	Done [TimerProc1]
+03.01.2022 10:20:59	User request [TimerProc2]
+03.01.2022 10:20:59	Starting [TimerProc2]. Timers count = 0; Users count = 1
+03.01.2022 10:20:59	Done [TimerProc2]
+03.01.2022 10:21:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+03.01.2022 10:21:00	Done [TimerProc1]
+03.01.2022 10:21:10	Restart request recieved
+03.01.2022 10:21:12	Stopped Service
+03.01.2022 10:21:12	!
+03.01.2022 10:21:22	!
+03.01.2022 10:21:22	Started Service
+03.01.2022 10:21:25	Stopped Service
+03.01.2022 10:21:25	!
+03.01.2022 10:22:33	!
+03.01.2022 10:22:33	Started Service
+03.01.2022 10:22:41	Restart request recieved
+03.01.2022 10:22:44	Stopped Service
+03.01.2022 10:22:44	!
+03.01.2022 10:22:46	!
+03.01.2022 10:22:46	Started Service
+03.01.2022 10:22:51	Stopped Service
+03.01.2022 10:22:52	!
+03.01.2022 10:28:57	!
+03.01.2022 10:28:57	Started Service
+03.01.2022 10:29:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+03.01.2022 10:29:00	Done [TimerProc1]
+03.01.2022 10:29:04	User request [UserProc]
+03.01.2022 10:29:04	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:29:04	Done [UserProc]
+03.01.2022 10:29:24	Restart request recieved
+03.01.2022 10:29:24	Stopped Service
+03.01.2022 10:29:24	!
+03.01.2022 10:29:24	!
+03.01.2022 10:29:24	Started Service
+03.01.2022 10:29:25	User request [UserProc]
+03.01.2022 10:29:25	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:29:25	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:29:25	Done [UserProc]
+03.01.2022 10:29:42	User request [TimerProc2]
+03.01.2022 10:29:42	Starting [TimerProc2]. Timers count = 0; Users count = 1
+03.01.2022 10:29:43	Done [TimerProc2]
+03.01.2022 10:29:44	User request [TimerProc1]
+03.01.2022 10:29:44	Starting [TimerProc1]. Timers count = 0; Users count = 1
+03.01.2022 10:29:44	Done [TimerProc1]
+03.01.2022 10:29:45	User request [UserProc]
+03.01.2022 10:29:45	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:29:45	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:29:45	Done [UserProc]
+03.01.2022 10:29:59	Stopped Service
+03.01.2022 10:29:59	!
+03.01.2022 10:30:25	!
+03.01.2022 10:30:25	Started Service
+03.01.2022 10:30:34	User request [UserProc]
+03.01.2022 10:30:34	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:30:46	Done [UserProc]
+03.01.2022 10:30:56	Restart request recieved
+03.01.2022 10:31:01	Stopped Service
+03.01.2022 10:31:01	!
+03.01.2022 10:31:06	!
+03.01.2022 10:31:06	Started Service
+03.01.2022 10:31:10	User request [TimerProc1]
+03.01.2022 10:31:10	Starting [TimerProc1]. Timers count = 0; Users count = 1
+03.01.2022 10:31:10	Done [TimerProc1]
+03.01.2022 10:31:11	User request [TimerProc2]
+03.01.2022 10:31:11	Starting [TimerProc2]. Timers count = 0; Users count = 1
+03.01.2022 10:31:11	Done [TimerProc2]
+03.01.2022 10:31:11	User request [UserProc]
+03.01.2022 10:31:11	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:31:19	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:31:19	Done [UserProc]
+03.01.2022 10:36:11	!
+03.01.2022 10:36:11	Started Service
+03.01.2022 10:36:16	User request [UserProc]
+03.01.2022 10:36:16	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:36:19	Done [UserProc]
+03.01.2022 10:36:27	Restart request recieved
+03.01.2022 10:36:27	Stopped Service
+03.01.2022 10:36:27	!
+03.01.2022 10:36:29	!
+03.01.2022 10:36:29	Started Service
+03.01.2022 10:36:30	User request [UserProc]
+03.01.2022 10:36:30	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:36:33	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:36:33	Done [UserProc]
+03.01.2022 10:37:08	!
+03.01.2022 10:37:08	Started Service
+03.01.2022 10:37:16	Restart request recieved
+03.01.2022 10:37:18	Stopped Service
+03.01.2022 10:37:18	!
+03.01.2022 10:37:19	!
+03.01.2022 10:37:19	Started Service
+03.01.2022 10:37:20	Restart request recieved
+03.01.2022 10:37:21	Stopped Service
+03.01.2022 10:37:21	!
+03.01.2022 10:37:22	!
+03.01.2022 10:37:22	Started Service
+03.01.2022 10:37:23	User request [UserProc]
+03.01.2022 10:37:24	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:37:29	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:37:29	Done [UserProc]
+03.01.2022 10:37:35	Stopped Service
+03.01.2022 10:37:35	!
+03.01.2022 10:37:45	!
+03.01.2022 10:37:45	Started Service
+03.01.2022 10:37:47	Stopped Service
+03.01.2022 10:37:47	!
+03.01.2022 10:37:54	!
+03.01.2022 10:37:54	Started Service
+03.01.2022 10:37:57	User request [UserProc]
+03.01.2022 10:37:57	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:38:02	Exception in Task Proc [UserProc]: Unexpected error from external database driver (15877)
+03.01.2022 10:38:02	Starting [TimerProc2]. Timers count = 1; Users count = 0
+03.01.2022 10:38:02	Done [UserProc]
+03.01.2022 10:38:02	Starting [TimerProc1]. Timers count = 1; Users count = 0
+03.01.2022 10:38:03	Done [TimerProc2]
+03.01.2022 10:38:03	Done [TimerProc1]
+03.01.2022 10:38:05	Restart request recieved
+03.01.2022 10:38:05	Stopped Service
+03.01.2022 10:38:05	!
+03.01.2022 10:38:05	!
+03.01.2022 10:38:05	Started Service
+03.01.2022 10:38:07	User request [UserProc]
+03.01.2022 10:38:07	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:38:09	Exception in Task Proc [UserProc]: Unexpected error from external database driver (15877)
+03.01.2022 10:38:09	Done [UserProc]
+03.01.2022 10:38:28	Stopped Service
+03.01.2022 10:38:28	!
+03.01.2022 10:39:43	!
+03.01.2022 10:39:43	Started Service
+03.01.2022 10:39:44	User request [UserProc]
+03.01.2022 10:39:44	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:39:44	Done [UserProc]
+03.01.2022 10:39:46	Restart request recieved
+03.01.2022 10:39:46	Stopped Service
+03.01.2022 10:39:46	!
+03.01.2022 10:39:46	!
+03.01.2022 10:39:46	Started Service
+03.01.2022 10:39:47	User request [UserProc]
+03.01.2022 10:39:47	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:39:52	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:39:52	Done [UserProc]
+03.01.2022 10:39:58	Stopped Service
+03.01.2022 10:39:58	!
+03.01.2022 10:40:27	!
+03.01.2022 10:40:27	Started Service
+03.01.2022 10:40:29	User request [UserProc]
+03.01.2022 10:40:29	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:40:29	Done [UserProc]
+03.01.2022 10:40:31	Restart request recieved
+03.01.2022 10:40:31	Stopped Service
+03.01.2022 10:40:31	!
+03.01.2022 10:40:31	!
+03.01.2022 10:40:31	Started Service
+03.01.2022 10:40:32	User request [UserProc]
+03.01.2022 10:40:32	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:40:32	Done [UserProc]
+03.01.2022 10:40:34	Restart request recieved
+03.01.2022 10:40:34	Stopped Service
+03.01.2022 10:40:34	!
+03.01.2022 10:40:34	!
+03.01.2022 10:40:34	Started Service
+03.01.2022 10:40:35	User request [UserProc]
+03.01.2022 10:40:35	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:40:35	Done [UserProc]
+03.01.2022 10:40:39	Stopped Service
+03.01.2022 10:40:39	!
+03.01.2022 10:48:10	!
+03.01.2022 10:48:10	Started Service
+03.01.2022 10:48:18	Stopped Service
+03.01.2022 10:48:18	!
+03.01.2022 10:48:21	!
+03.01.2022 10:48:21	Started Service
+03.01.2022 10:48:26	Stopped Service
+03.01.2022 10:48:26	!
+03.01.2022 10:48:40	!
+03.01.2022 10:48:40	Started Service
+03.01.2022 10:48:46	User request [TimerProc2]
+03.01.2022 10:48:46	Starting [TimerProc2]. Timers count = 0; Users count = 1
+03.01.2022 10:48:46	Done [TimerProc2]
+03.01.2022 10:48:47	User request [UserProc]
+03.01.2022 10:48:47	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:48:47	Done [UserProc]
+03.01.2022 10:48:48	Restart request recieved
+03.01.2022 10:48:48	Stopped Service
+03.01.2022 10:48:48	!
+03.01.2022 10:48:55	!
+03.01.2022 10:48:55	Started Service
+03.01.2022 10:48:58	User request [UserProc]
+03.01.2022 10:48:58	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:48:58	Done [UserProc]
+03.01.2022 10:49:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+03.01.2022 10:49:01	Done [TimerProc1]
+03.01.2022 10:49:06	Stopped Service
+03.01.2022 10:49:06	!
+03.01.2022 10:51:29	!
+03.01.2022 10:51:29	Started Service
+03.01.2022 10:51:35	User request [UserProc]
+03.01.2022 10:51:35	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:51:39	Exception in Task Proc [UserProc]: Unexpected error from external database driver (15877)
+03.01.2022 10:51:39	Done [UserProc]
+03.01.2022 10:51:46	Stopped Service
+03.01.2022 10:51:46	!
+03.01.2022 10:51:55	!
+03.01.2022 10:51:55	Started Service
+03.01.2022 10:51:56	User request [UserProc]
+03.01.2022 10:51:56	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:51:59	Exception in Task Proc [UserProc]: Unexpected error from external database driver (15877)
+03.01.2022 10:51:59	Done [UserProc]
+03.01.2022 10:52:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+03.01.2022 10:52:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+03.01.2022 10:52:00	Done [TimerProc2]
+03.01.2022 10:52:00	Done [TimerProc1]
+03.01.2022 10:52:09	Stopped Service
+03.01.2022 10:52:09	!
+03.01.2022 10:55:10	!
+03.01.2022 10:55:10	Started Service
+03.01.2022 10:55:14	Stopped Service
+03.01.2022 10:55:14	!
+03.01.2022 10:56:34	!
+03.01.2022 10:56:34	Started Service
+03.01.2022 10:56:38	Restart request recieved
+03.01.2022 10:56:59	Stopped Service
+03.01.2022 10:56:59	!
+03.01.2022 10:57:04	!
+03.01.2022 10:57:04	Started Service
+03.01.2022 10:57:07	User request [UserProc]
+03.01.2022 10:57:07	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:57:10	Exception in Task Proc [UserProc]: Unexpected error from external database driver (15877)
+03.01.2022 10:57:10	Done [UserProc]
+03.01.2022 10:57:17	Stopped Service
+03.01.2022 10:57:17	!
+03.01.2022 10:59:18	!
+03.01.2022 10:59:18	Started Service
+03.01.2022 10:59:24	User request [UserProc]
+03.01.2022 10:59:24	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:59:24	Done [UserProc]
+03.01.2022 10:59:34	Restart request recieved
+03.01.2022 10:59:34	Stopped Service
+03.01.2022 10:59:34	!
+03.01.2022 10:59:34	!
+03.01.2022 10:59:34	Started Service
+03.01.2022 10:59:36	User request [UserProc]
+03.01.2022 10:59:36	Starting [UserProc]. Timers count = 0; Users count = 1
+03.01.2022 10:59:36	Done [UserProc]
+03.01.2022 10:59:49	Stopped Service
+03.01.2022 10:59:49	!

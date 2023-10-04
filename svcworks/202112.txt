@@ -1,0 +1,465 @@
+14.12.2021 15:51:44	!
+14.12.2021 15:51:44	Started Service
+14.12.2021 15:52:57	Starting [TimerProc2]. Timers count = 1; Users count = 0
+14.12.2021 15:55:02	Starting [TimerProc1]. Timers count = 1; Users count = 0
+14.12.2021 15:55:22	Done [TimerProc2]
+14.12.2021 15:55:40	Done [TimerProc1]
+14.12.2021 15:55:50	Stopped Service
+14.12.2021 15:55:50	!
+14.12.2021 15:57:53	!
+14.12.2021 15:57:53	Started Service
+14.12.2021 15:58:03	Starting [TimerProc2]. Timers count = 1; Users count = 0
+14.12.2021 15:58:09	Starting [TimerProc1]. Timers count = 1; Users count = 0
+14.12.2021 15:58:09	Done [TimerProc2]
+14.12.2021 15:58:09	Done [TimerProc1]
+14.12.2021 15:59:41	Starting [TimerProc1]. Timers count = 1; Users count = 0
+14.12.2021 16:00:28	User request [TimerProc2]
+14.12.2021 16:01:22	Starting [TimerProc2]. Timers count = 1; Users count = 1
+14.12.2021 16:01:22	Done [TimerProc1]
+14.12.2021 16:01:27	Done [TimerProc2]
+14.12.2021 16:01:40	User request [TimerProc1]
+14.12.2021 16:01:40	Starting [TimerProc1]. Timers count = 0; Users count = 1
+14.12.2021 16:01:40	Done [TimerProc1]
+14.12.2021 16:01:42	User request [TimerProc1]
+14.12.2021 16:01:42	Starting [TimerProc1]. Timers count = 0; Users count = 1
+14.12.2021 16:01:42	Done [TimerProc1]
+14.12.2021 16:01:43	User request [TimerProc2]
+14.12.2021 16:01:43	Starting [TimerProc2]. Timers count = 0; Users count = 1
+14.12.2021 16:01:43	Done [TimerProc2]
+14.12.2021 16:01:44	User request [TimerProc2]
+14.12.2021 16:01:44	Starting [TimerProc2]. Timers count = 0; Users count = 1
+14.12.2021 16:01:44	Done [TimerProc2]
+14.12.2021 16:01:46	User request [TimerProc1]
+14.12.2021 16:01:46	Starting [TimerProc1]. Timers count = 0; Users count = 1
+14.12.2021 16:01:46	Done [TimerProc1]
+14.12.2021 16:01:48	User request [TimerProc2]
+14.12.2021 16:01:48	Starting [TimerProc2]. Timers count = 0; Users count = 1
+14.12.2021 16:01:48	Done [TimerProc2]
+14.12.2021 16:01:54	User request [UserProc]
+14.12.2021 16:01:54	Starting [UserProc]. Timers count = 0; Users count = 1
+14.12.2021 16:02:02	Starting [TimerProc1]. Timers count = 1; Users count = 0
+14.12.2021 16:02:02	Done [UserProc]
+14.12.2021 16:02:02	Starting [TimerProc2]. Timers count = 1; Users count = 0
+14.12.2021 16:02:02	Done [TimerProc1]
+14.12.2021 16:02:02	Done [TimerProc2]
+14.12.2021 16:02:05	User request [UserProc]
+14.12.2021 16:02:05	Starting [UserProc]. Timers count = 0; Users count = 1
+14.12.2021 16:02:08	Done [UserProc]
+14.12.2021 16:02:23	Stopped Service
+14.12.2021 16:02:23	!
+17.12.2021 10:02:04	!
+17.12.2021 10:02:04	Started Service
+17.12.2021 10:02:09	Stopped Service
+17.12.2021 10:02:09	!
+17.12.2021 10:04:52	!
+17.12.2021 10:04:52	Started Service
+17.12.2021 10:05:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+17.12.2021 10:05:00	Done [TimerProc2]
+17.12.2021 10:05:06	Stopped Service
+17.12.2021 10:05:06	!
+27.12.2021 10:22:24	!
+27.12.2021 10:22:24	Started Service
+27.12.2021 10:22:32	User request [TimerProc1]
+27.12.2021 10:22:32	Starting [TimerProc1]. Timers count = 0; Users count = 1
+27.12.2021 10:22:32	Done [TimerProc1]
+27.12.2021 10:22:35	User request [UserProc]
+27.12.2021 10:22:35	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 10:22:50	User request [TimerProc1]
+27.12.2021 10:23:41	Stopped Service
+27.12.2021 10:23:41	!
+27.12.2021 10:24:49	!
+27.12.2021 10:24:49	Started Service
+27.12.2021 10:24:57	Stopped Service
+27.12.2021 10:24:57	!
+27.12.2021 10:25:06	!
+27.12.2021 10:25:06	Started Service
+27.12.2021 10:25:10	User request [UserProc]
+27.12.2021 10:25:10	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 10:25:40	Stopped Service
+27.12.2021 10:25:40	!
+27.12.2021 10:26:32	!
+27.12.2021 10:26:32	Started Service
+27.12.2021 10:26:34	User request [UserProc]
+27.12.2021 10:26:34	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 10:27:08	Stopped Service
+27.12.2021 10:27:08	!
+27.12.2021 10:42:14	!
+27.12.2021 10:42:14	Started Service
+27.12.2021 10:42:35	User request [UserProc]
+27.12.2021 10:42:35	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 10:44:21	Stopped Service
+27.12.2021 10:44:21	!
+27.12.2021 10:44:39	!
+27.12.2021 10:44:39	Started Service
+27.12.2021 10:44:44	User request [UserProc]
+27.12.2021 10:44:44	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 10:45:26	Stopped Service
+27.12.2021 10:45:26	!
+27.12.2021 14:54:05	!
+27.12.2021 14:54:05	Started Service
+27.12.2021 14:54:13	User request [UserProc]
+27.12.2021 14:54:13	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 14:54:27	Stopped Service
+27.12.2021 14:54:31	!
+27.12.2021 14:54:40	!
+27.12.2021 14:54:40	Started Service
+27.12.2021 14:54:45	User request [UserProc]
+27.12.2021 14:54:45	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 14:54:45	Done [UserProc]
+27.12.2021 14:55:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+27.12.2021 14:55:00	Done [TimerProc1]
+27.12.2021 14:55:20	Stopped Service
+27.12.2021 14:55:20	!
+27.12.2021 14:56:49	!
+27.12.2021 14:56:49	Started Service
+27.12.2021 14:56:59	User request [UserProc]
+27.12.2021 14:56:59	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 14:56:59	Done [UserProc]
+27.12.2021 14:57:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+27.12.2021 14:57:00	Done [TimerProc1]
+27.12.2021 14:57:23	User request [UserProc]
+27.12.2021 14:57:23	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 14:57:23	Done [UserProc]
+27.12.2021 14:57:31	Stopped Service
+27.12.2021 14:57:31	!
+27.12.2021 14:58:04	!
+27.12.2021 14:58:04	Started Service
+27.12.2021 14:58:05	User request [UserProc]
+27.12.2021 14:58:05	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 14:58:07	Restart request recieved
+27.12.2021 14:58:13	Stopped Service
+27.12.2021 14:58:13	!
+27.12.2021 14:58:58	!
+27.12.2021 14:58:58	Started Service
+27.12.2021 14:59:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+27.12.2021 14:59:00	Done [TimerProc1]
+27.12.2021 14:59:05	User request [TimerProc1]
+27.12.2021 14:59:05	Starting [TimerProc1]. Timers count = 0; Users count = 1
+27.12.2021 14:59:05	Done [TimerProc1]
+27.12.2021 14:59:07	User request [TimerProc2]
+27.12.2021 14:59:07	Starting [TimerProc2]. Timers count = 0; Users count = 1
+27.12.2021 14:59:07	Done [TimerProc2]
+27.12.2021 14:59:09	User request [UserProc]
+27.12.2021 14:59:09	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 14:59:11	Restart request recieved
+27.12.2021 14:59:11	Stopped Service
+27.12.2021 14:59:11	!
+27.12.2021 14:59:11	!
+27.12.2021 14:59:11	Started Service
+27.12.2021 14:59:21	Stopped Service
+27.12.2021 14:59:21	!
+27.12.2021 14:59:40	!
+27.12.2021 14:59:40	Started Service
+27.12.2021 15:00:04	Starting [TimerProc2]. Timers count = 1; Users count = 0
+27.12.2021 15:00:06	User request [UserProc]
+27.12.2021 15:00:06	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 15:00:08	Done [TimerProc2]
+27.12.2021 15:00:08	Restart request recieved
+27.12.2021 15:00:12	Stopped Service
+27.12.2021 15:00:12	!
+27.12.2021 15:00:12	!
+27.12.2021 15:00:12	Started Service
+27.12.2021 15:00:19	Stopped Service
+27.12.2021 15:00:19	!
+27.12.2021 16:28:06	!
+27.12.2021 16:28:06	Started Service
+27.12.2021 16:31:29	Starting [TimerProc2]. Timers count = 1; Users count = 0
+27.12.2021 16:31:29	User request [TimerProc1]
+27.12.2021 16:31:29	Starting [TimerProc1]. Timers count = 1; Users count = 1
+27.12.2021 16:31:29	Done [TimerProc2]
+27.12.2021 16:31:56	Done [TimerProc1]
+27.12.2021 16:32:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+27.12.2021 16:32:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+27.12.2021 16:32:00	Done [TimerProc2]
+27.12.2021 16:32:00	Done [TimerProc1]
+27.12.2021 16:32:10	User request [TimerProc2]
+27.12.2021 16:32:10	Starting [TimerProc2]. Timers count = 0; Users count = 1
+27.12.2021 16:32:10	Done [TimerProc2]
+27.12.2021 16:32:19	Stopped Service
+27.12.2021 16:32:19	!
+27.12.2021 16:32:39	!
+27.12.2021 16:32:39	Started Service
+27.12.2021 16:33:08	Restart request recieved
+27.12.2021 16:33:08	Stopped Service
+27.12.2021 16:33:08	!
+27.12.2021 16:33:08	!
+27.12.2021 16:33:09	Started Service
+27.12.2021 16:33:50	Restart request recieved
+27.12.2021 16:33:50	Stopped Service
+27.12.2021 16:33:50	!
+27.12.2021 16:33:52	!
+27.12.2021 16:33:52	Started Service
+27.12.2021 16:33:58	User request [TimerProc1]
+27.12.2021 16:33:58	Starting [TimerProc1]. Timers count = 0; Users count = 1
+27.12.2021 16:33:58	Done [TimerProc1]
+27.12.2021 16:34:00	User request [TimerProc2]
+27.12.2021 16:34:00	Starting [TimerProc2]. Timers count = 0; Users count = 1
+27.12.2021 16:34:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+27.12.2021 16:34:00	Done [TimerProc2]
+27.12.2021 16:34:00	Done [TimerProc1]
+27.12.2021 16:34:06	Restart request recieved
+27.12.2021 16:34:06	Stopped Service
+27.12.2021 16:34:06	!
+27.12.2021 16:34:06	!
+27.12.2021 16:34:06	Started Service
+27.12.2021 16:34:12	Stopped Service
+27.12.2021 16:34:12	!
+27.12.2021 16:34:39	!
+27.12.2021 16:34:39	Started Service
+27.12.2021 16:34:45	User request [UserProc]
+27.12.2021 16:34:45	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 16:34:49	Stopped Service
+27.12.2021 16:34:49	!
+27.12.2021 16:34:57	!
+27.12.2021 16:34:57	Started Service
+27.12.2021 16:34:58	User request [UserProc]
+27.12.2021 16:34:58	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 16:35:00	Stopped Service
+27.12.2021 16:35:00	!
+27.12.2021 16:35:32	!
+27.12.2021 16:35:32	Started Service
+27.12.2021 16:35:33	User request [UserProc]
+27.12.2021 16:35:33	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 16:35:34	Done [UserProc]
+27.12.2021 16:35:44	User request [TimerProc1]
+27.12.2021 16:35:44	Starting [TimerProc1]. Timers count = 0; Users count = 1
+27.12.2021 16:35:44	Done [TimerProc1]
+27.12.2021 16:35:46	User request [TimerProc2]
+27.12.2021 16:35:46	Starting [TimerProc2]. Timers count = 0; Users count = 1
+27.12.2021 16:35:46	Done [TimerProc2]
+27.12.2021 16:35:48	User request [!RESTART REQUEST!]
+27.12.2021 16:35:48	Starting [!RESTART REQUEST!]. Timers count = 0; Users count = 1
+27.12.2021 16:36:16	User request [TimerProc1]
+27.12.2021 16:36:58	User request [TimerProc2]
+27.12.2021 16:37:43	Stopped Service
+27.12.2021 16:37:43	!
+27.12.2021 16:38:23	!
+27.12.2021 16:38:23	Started Service
+27.12.2021 16:39:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+27.12.2021 16:39:01	Done [TimerProc2]
+27.12.2021 16:40:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+27.12.2021 16:40:00	Done [TimerProc2]
+27.12.2021 16:40:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+27.12.2021 16:40:01	Done [TimerProc1]
+27.12.2021 16:41:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+27.12.2021 16:41:00	Done [TimerProc2]
+27.12.2021 16:41:05	Stopped Service
+27.12.2021 16:41:05	!
+27.12.2021 16:41:11	!
+27.12.2021 16:41:11	Started Service
+27.12.2021 16:41:30	User request [TimerProc1]
+27.12.2021 16:41:30	Starting [TimerProc1]. Timers count = 0; Users count = 1
+27.12.2021 16:41:30	Done [TimerProc1]
+27.12.2021 16:41:32	User request [TimerProc2]
+27.12.2021 16:41:32	Starting [TimerProc2]. Timers count = 0; Users count = 1
+27.12.2021 16:41:32	Done [TimerProc2]
+27.12.2021 16:41:35	User request [UserProc]
+27.12.2021 16:41:35	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 16:41:36	Done [UserProc]
+27.12.2021 16:41:40	User request [TimerProc2]
+27.12.2021 16:41:40	Starting [TimerProc2]. Timers count = 0; Users count = 1
+27.12.2021 16:41:40	Done [TimerProc2]
+27.12.2021 16:41:58	User request [UserProc]
+27.12.2021 16:41:58	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 16:41:59	Done [UserProc]
+27.12.2021 16:42:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+27.12.2021 16:42:00	Done [TimerProc2]
+27.12.2021 16:42:53	User request [UserProc]
+27.12.2021 16:42:53	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 16:42:54	Done [UserProc]
+27.12.2021 16:42:57	User request [!RESTART REQUEST!]
+27.12.2021 16:42:57	Starting [!RESTART REQUEST!]. Timers count = 0; Users count = 1
+27.12.2021 16:43:10	User request [TimerProc1]
+27.12.2021 17:30:57	Stopped Service
+27.12.2021 17:30:57	!
+27.12.2021 17:31:22	!
+27.12.2021 17:31:22	Started Service
+27.12.2021 17:31:30	User request [UserProc]
+27.12.2021 17:32:07	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 17:32:30	Stopped Service
+27.12.2021 17:32:30	!
+27.12.2021 17:32:32	!
+27.12.2021 17:32:32	Started Service
+27.12.2021 17:32:41	User request [UserProc]
+27.12.2021 17:32:44	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 17:32:57	Done [UserProc]
+27.12.2021 17:33:03	Starting [TimerProc1]. Timers count = 1; Users count = 0
+27.12.2021 17:33:05	Done [TimerProc1]
+27.12.2021 17:33:12	User request [TimerProc1]
+27.12.2021 17:33:12	Starting [TimerProc1]. Timers count = 0; Users count = 1
+27.12.2021 17:33:12	Done [TimerProc1]
+27.12.2021 17:33:13	User request [TimerProc2]
+27.12.2021 17:33:13	Starting [TimerProc2]. Timers count = 0; Users count = 1
+27.12.2021 17:33:13	Done [TimerProc2]
+27.12.2021 17:33:15	User request [UserProc]
+27.12.2021 17:33:15	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 17:33:16	Done [UserProc]
+27.12.2021 17:33:55	Stopped Service
+27.12.2021 17:33:55	!
+27.12.2021 17:35:07	!
+27.12.2021 17:35:07	Started Service
+27.12.2021 17:35:11	User request [TimerProc1]
+27.12.2021 17:35:17	Starting [TimerProc1]. Timers count = 0; Users count = 1
+27.12.2021 17:35:32	Failed: GetProcAddress [TimerProc1fu]
+			code 127: Не найдена указанная процедура
+27.12.2021 17:44:53	!
+27.12.2021 17:44:53	Started Service
+27.12.2021 17:45:03	Starting [TimerProc1]. Timers count = 1; Users count = 0
+27.12.2021 17:45:41	User request [TimerProc1]
+27.12.2021 17:45:41	Exception in Task Proc [GetProcAddress [TimerProc1fu]
+			code 127: Не найдена указанная процедура]: Access violation at address 00000000. Read of address 00000000
+27.12.2021 17:46:04	Starting [TimerProc1]. Timers count = 0; Users count = 1
+27.12.2021 17:51:06	!
+27.12.2021 17:51:06	Started Service
+27.12.2021 17:51:07	User request [TimerProc1]
+27.12.2021 17:51:10	Starting [TimerProc1]. Timers count = 0; Users count = 1
+27.12.2021 17:51:12	Done [TimerProc1]
+27.12.2021 17:51:25	User request [TimerProc2]
+27.12.2021 17:51:25	Starting [TimerProc2]. Timers count = 0; Users count = 1
+27.12.2021 17:51:25	Done [TimerProc2]
+27.12.2021 17:51:29	User request [fu bitch]
+27.12.2021 17:51:29	Starting [fu bitch]. Timers count = 0; Users count = 1
+27.12.2021 17:51:33	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+27.12.2021 17:51:33	Done [fu bitch]
+27.12.2021 17:51:48	User request [TimerProc1]
+27.12.2021 17:51:48	Starting [TimerProc1]. Timers count = 0; Users count = 1
+27.12.2021 17:51:48	Done [TimerProc1]
+27.12.2021 17:51:50	User request [TimerProc2]
+27.12.2021 17:51:50	Starting [TimerProc2]. Timers count = 0; Users count = 1
+27.12.2021 17:51:50	Done [TimerProc2]
+27.12.2021 17:51:51	User request [fu bitch]
+27.12.2021 17:51:51	Starting [fu bitch]. Timers count = 0; Users count = 1
+27.12.2021 17:51:55	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+27.12.2021 17:51:55	Done [fu bitch]
+27.12.2021 17:51:59	User request [UserProc]
+27.12.2021 17:51:59	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 17:52:01	Stopped Service
+27.12.2021 17:52:01	!
+27.12.2021 17:52:29	!
+27.12.2021 17:52:29	Started Service
+27.12.2021 17:52:33	User request [TimerProc1]
+27.12.2021 17:52:33	Starting [TimerProc1]. Timers count = 0; Users count = 1
+27.12.2021 17:52:33	Done [TimerProc1]
+27.12.2021 17:52:34	User request [TimerProc2]
+27.12.2021 17:52:34	Starting [TimerProc2]. Timers count = 0; Users count = 1
+27.12.2021 17:52:34	Done [TimerProc2]
+27.12.2021 17:52:36	User request [UserProc]
+27.12.2021 17:52:36	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 17:52:37	Exception in Task Proc [UserProc]: Access violation at address 00000000. Read of address 00000000
+27.12.2021 17:52:37	Done [UserProc]
+27.12.2021 17:52:40	User request [fu bitch]
+27.12.2021 17:52:40	Starting [fu bitch]. Timers count = 0; Users count = 1
+27.12.2021 17:52:40	SetTaskToWork failed: GetProcAddress [fu bitch]
+			code 127: Не найдена указанная процедура
+27.12.2021 17:52:40	Done [fu bitch]
+27.12.2021 17:53:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+27.12.2021 17:53:00	Done [TimerProc2]
+27.12.2021 17:53:22	User request [TimerProc2]
+27.12.2021 17:53:22	Starting [TimerProc2]. Timers count = 0; Users count = 1
+27.12.2021 17:53:23	Done [TimerProc2]
+27.12.2021 17:53:27	Stopped Service
+27.12.2021 17:53:27	!
+27.12.2021 17:54:31	!
+27.12.2021 17:54:31	Started Service
+27.12.2021 17:54:40	User request [UserProc]
+27.12.2021 17:54:40	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 17:54:41	Exception in Task Proc [UserProc]: Access violation at address 00000000. Read of address 00000000
+27.12.2021 17:54:41	Done [UserProc]
+27.12.2021 17:54:56	Stopped Service
+27.12.2021 17:54:56	!
+27.12.2021 17:55:29	!
+27.12.2021 17:55:29	Started Service
+27.12.2021 17:55:31	User request [UserProc]
+27.12.2021 17:55:31	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 17:55:32	Exception in Task Proc [UserProc]: Access violation at address 00000000. Read of address 00000000
+27.12.2021 17:55:32	Done [UserProc]
+27.12.2021 17:56:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+27.12.2021 17:56:00	Done [TimerProc2]
+27.12.2021 17:57:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+27.12.2021 17:57:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+27.12.2021 17:57:00	Done [TimerProc1]
+27.12.2021 17:57:00	Done [TimerProc2]
+27.12.2021 17:58:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+27.12.2021 17:58:00	Done [TimerProc2]
+27.12.2021 17:59:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+27.12.2021 17:59:00	Done [TimerProc1]
+27.12.2021 17:59:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+27.12.2021 17:59:01	Done [TimerProc2]
+27.12.2021 18:00:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+27.12.2021 18:00:00	Done [TimerProc2]
+27.12.2021 18:00:04	Stopped Service
+27.12.2021 18:00:04	!
+27.12.2021 18:00:18	!
+27.12.2021 18:00:18	Started Service
+27.12.2021 18:00:21	User request [UserProc]
+27.12.2021 18:00:21	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 18:00:21	Done [UserProc]
+27.12.2021 18:01:01	Starting [TimerProc2]. Timers count = 1; Users count = 0
+27.12.2021 18:01:01	Done [TimerProc2]
+27.12.2021 18:01:18	Restart request recieved
+27.12.2021 18:01:18	Stopped Service
+27.12.2021 18:01:18	!
+27.12.2021 18:01:18	!
+27.12.2021 18:01:18	Started Service
+27.12.2021 18:01:25	User request [UserProc]
+27.12.2021 18:01:25	Starting [UserProc]. Timers count = 0; Users count = 1
+27.12.2021 18:01:34	Stopped Service
+27.12.2021 18:01:34	!
+30.12.2021 14:07:06	!
+30.12.2021 14:07:06	Started Service
+30.12.2021 14:09:22	Starting [TimerProc2]. Timers count = 1; Users count = 0
+30.12.2021 14:09:25	Starting [TimerProc1]. Timers count = 1; Users count = 0
+30.12.2021 14:09:25	Done [TimerProc2]
+30.12.2021 14:09:26	Done [TimerProc1]
+30.12.2021 14:10:08	Starting [TimerProc1]. Timers count = 1; Users count = 0
+30.12.2021 14:10:16	Starting [TimerProc2]. Timers count = 1; Users count = 0
+30.12.2021 14:10:16	Done [TimerProc1]
+30.12.2021 14:10:16	Done [TimerProc2]
+30.12.2021 14:10:22	Stopped Service
+30.12.2021 14:10:22	!
+30.12.2021 14:11:32	!
+30.12.2021 14:11:32	Started Service
+30.12.2021 14:11:45	Stopped Service
+30.12.2021 14:11:45	!
+30.12.2021 14:12:48	!
+30.12.2021 14:12:48	Started Service
+30.12.2021 14:13:09	Starting [TimerProc1]. Timers count = 1; Users count = 0
+30.12.2021 14:13:09	Done [TimerProc1]
+30.12.2021 14:15:40	Starting [TimerProc2]. Timers count = 1; Users count = 0
+30.12.2021 14:15:41	Starting [TimerProc1]. Timers count = 1; Users count = 0
+30.12.2021 14:15:41	Done [TimerProc2]
+30.12.2021 14:15:41	Done [TimerProc1]
+30.12.2021 14:16:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+30.12.2021 14:16:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+30.12.2021 14:16:00	Done [TimerProc2]
+30.12.2021 14:16:00	Done [TimerProc1]
+30.12.2021 14:17:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+30.12.2021 14:17:00	Done [TimerProc1]
+30.12.2021 14:18:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+30.12.2021 14:18:00	Done [TimerProc2]
+30.12.2021 14:18:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+30.12.2021 14:18:00	Done [TimerProc1]
+30.12.2021 14:19:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+30.12.2021 14:19:00	Done [TimerProc1]
+30.12.2021 14:20:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+30.12.2021 14:20:00	Done [TimerProc2]
+30.12.2021 14:20:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+30.12.2021 14:20:00	Done [TimerProc1]
+30.12.2021 14:21:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+30.12.2021 14:21:00	Done [TimerProc1]
+30.12.2021 14:22:00	Starting [TimerProc2]. Timers count = 1; Users count = 0
+30.12.2021 14:22:00	Done [TimerProc2]
+30.12.2021 14:22:00	Starting [TimerProc1]. Timers count = 1; Users count = 0
+30.12.2021 14:22:00	Done [TimerProc1]
+30.12.2021 17:10:12	Updated testdll\testdll.dll
+30.12.2021 17:15:28	!
+30.12.2021 17:15:28	Started Service
+30.12.2021 17:17:18	Updated testdll\testdll.dll
+30.12.2021 17:18:28	Starting [TimerProc2]. Timers count = 1; Users count = 0
+30.12.2021 17:18:30	Starting [TimerProc1]. Timers count = 1; Users count = 0
+30.12.2021 17:18:30	Done [TimerProc2]
+30.12.2021 17:18:30	Done [TimerProc1]
+30.12.2021 17:18:34	Stopped Service
+30.12.2021 17:18:34	!

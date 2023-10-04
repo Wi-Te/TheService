@@ -1,0 +1,19 @@
+syntax: regexp
+
+(?i)\.exe
+(?i)\.dll
+(?i)\.dcu
+(?i)\.ddp
+(?i)\.res
+(?i)\.log
+
+(?i)\.cfg
+(?i)\.skincfg
+(?i)\.dof
+(?i)\.dsk
+
+(?i)test.dbf
+
+\.\~\w{3}
+
+(?i)^svcworks/
