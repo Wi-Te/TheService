@@ -106,9 +106,9 @@ constructor TIniReader.Create(const IniFileName: string);
 begin
   hFile := CreateFile(PChar(IniFileName), GENERIC_READ, FILE_SHARE_READ, nil, OPEN_EXISTING, 0, 0);
   if hFile = INVALID_HANDLE_VALUE then
-    RaiseWinError('Не удалось открыть файл');
+    RaiseWinError('РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р»');
   if SetFilePointer(hFile, 0, nil, FILE_BEGIN) = INVALID_SET_FILE_POINTER then
-    RaiseWinError('Ошибка при открытии файла (seek)');
+    RaiseWinError('РћС€РёР±РєР° РїСЂРё РѕС‚РєСЂС‹С‚РёРё С„Р°Р№Р»Р° (seek)');
   SetLength(block, BLOCK_SZ);
   res := 0; idx := 0;
 end;
@@ -123,7 +123,7 @@ end;
 procedure TIniReader.ReadBlock;
 begin
   if ReadFile(hFile, block[1], BLOCK_SZ, res, nil) = False then
-    RaiseWinError('Ошибка при чтении файла (read)');
+    RaiseWinError('РћС€РёР±РєР° РїСЂРё С‡С‚РµРЅРёРё С„Р°Р№Р»Р° (read)');
   idx := 1;
 end;
 
@@ -485,19 +485,19 @@ var k, n: Cardinal;
 begin
   n := Length(buff);
   if WriteFile(hFile, buff[1], n, k, nil) = False then
-    RaiseWinError('Ошибка при записи в файл (write)');
+    RaiseWinError('РћС€РёР±РєР° РїСЂРё Р·Р°РїРёСЃРё РІ С„Р°Р№Р» (write)');
   if k < n then
-    RaiseWinError(Format('Ошибка при записи в файл (%d of %d written)', [k, n]));
+    RaiseWinError(Format('РћС€РёР±РєР° РїСЂРё Р·Р°РїРёСЃРё РІ С„Р°Р№Р» (%d of %d written)', [k, n]));
 end;
 
 begin
   try
     hFile := CreateFile(PChar(FileName+'.t'), GENERIC_WRITE, FILE_SHARE_READ, nil, CREATE_ALWAYS, 0, 0);
     if hFile = INVALID_HANDLE_VALUE then
-      RaiseWinError('Не удалось создать файл');
+      RaiseWinError('РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ С„Р°Р№Р»');
     try
       if SetFilePointer(hFile, 0, nil, FILE_BEGIN) = INVALID_SET_FILE_POINTER then
-        RaiseWinError('Ошибка при создании файла (seek)');
+        RaiseWinError('РћС€РёР±РєР° РїСЂРё СЃРѕР·РґР°РЅРёРё С„Р°Р№Р»Р° (seek)');
 
       for i := 0 to sct - 1 do begin
         WriteLine('['+sects[i]+']'#13#10);
@@ -510,7 +510,7 @@ begin
       CloseHandle(hFile);
     end;
     if CopyFile(PChar(FileName+'.t'), PChar(FileName), False) = False then
-      RaiseWinError('Ошибка при создании файла (MoveFile)');
+      RaiseWinError('РћС€РёР±РєР° РїСЂРё СЃРѕР·РґР°РЅРёРё С„Р°Р№Р»Р° (MoveFile)');
     DeleteFile(PChar(FileName+'.t'));
   except on e: Exception do
     raise Exception.Create('saTIniFile.SaveAsIniFile ['+FileName+']: '+e.Message);

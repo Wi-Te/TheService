@@ -17,60 +17,60 @@ type
 
   TMsgProc = procedure(Msg: Cardinal; wParam: WPARAM; lParam: LPARAM); stdcall; //server report messages handler in DLL
 
-  {все процедурки из ДЛЛ, назначенные на таймер или юзера, вызываются из WorkerThread'a
-  DLLMAIN, OnInit, OnServerMessage - вызываются из ServiceThread}
+  {РІСЃРµ РїСЂРѕС†РµРґСѓСЂРєРё РёР· Р”Р›Р›, РЅР°Р·РЅР°С‡РµРЅРЅС‹Рµ РЅР° С‚Р°Р№РјРµСЂ РёР»Рё СЋР·РµСЂР°, РІС‹Р·С‹РІР°СЋС‚СЃСЏ РёР· WorkerThread'a
+  DLLMAIN, OnInit, OnServerMessage - РІС‹Р·С‹РІР°СЋС‚СЃСЏ РёР· ServiceThread}
 
-  //Пользователи (потоки-обработчики запросов на сервере) ждут ответа от сервиса
-  //Вся нужная инфа для ответа пользователям собрана здесь
+  //РџРѕР»СЊР·РѕРІР°С‚РµР»Рё (РїРѕС‚РѕРєРё-РѕР±СЂР°Р±РѕС‚С‡РёРєРё Р·Р°РїСЂРѕСЃРѕРІ РЅР° СЃРµСЂРІРµСЂРµ) Р¶РґСѓС‚ РѕС‚РІРµС‚Р° РѕС‚ СЃРµСЂРІРёСЃР°
+  //Р’СЃСЏ РЅСѓР¶РЅР°СЏ РёРЅС„Р° РґР»СЏ РѕС‚РІРµС‚Р° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРј СЃРѕР±СЂР°РЅР° Р·РґРµСЃСЊ
   TClientInfo = class
   protected
-    e: THandle;                                 //евент, на котором вешается ожидание какого-то овтета
-    r: TClientResponse;                         //Статус запроса, который я буду отвечать пользователю
-    i: Integer; //reference count                 чтобы удалить себя, когда больше ненужен
-    w: THandle; //семафор для доступа к reference counter'у. Инфа обрабатывается и в ServiceThread'e, и в ServerClientThread'ах
+    e: THandle;                                 //РµРІРµРЅС‚, РЅР° РєРѕС‚РѕСЂРѕРј РІРµС€Р°РµС‚СЃСЏ РѕР¶РёРґР°РЅРёРµ РєР°РєРѕРіРѕ-С‚Рѕ РѕРІС‚РµС‚Р°
+    r: TClientResponse;                         //РЎС‚Р°С‚СѓСЃ Р·Р°РїСЂРѕСЃР°, РєРѕС‚РѕСЂС‹Р№ СЏ Р±СѓРґСѓ РѕС‚РІРµС‡Р°С‚СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЋ
+    i: Integer; //reference count                 С‡С‚РѕР±С‹ СѓРґР°Р»РёС‚СЊ СЃРµР±СЏ, РєРѕРіРґР° Р±РѕР»СЊС€Рµ РЅРµРЅСѓР¶РµРЅ
+    w: THandle; //СЃРµРјР°С„РѕСЂ РґР»СЏ РґРѕСЃС‚СѓРїР° Рє reference counter'Сѓ. РРЅС„Р° РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚СЃСЏ Рё РІ ServiceThread'e, Рё РІ ServerClientThread'Р°С…
   public
-    request: TRequest;                          //запрос со всеми данными
+    request: TRequest;                          //Р·Р°РїСЂРѕСЃ СЃРѕ РІСЃРµРјРё РґР°РЅРЅС‹РјРё
 
     constructor Create;
     destructor Destroy; override;
     property event: THandle read e;
     property resp: TClientResponse read r;
     procedure WakeUp(resp: TClientResponse);
-    procedure Release;                          //Уменьшить reference count
+    procedure Release;                          //РЈРјРµРЅСЊС€РёС‚СЊ reference count
   end;
 
-  //Задача. Может выполняться по таймеру, или по запросу пользователя. Определяется по имени вызываемой процедуры
-  //Все таймеры, которые захотели выполнить эту задачу, и все пользователи, которые запросили эту задачу, хранятся тут в списках
+  //Р—Р°РґР°С‡Р°. РњРѕР¶РµС‚ РІС‹РїРѕР»РЅСЏС‚СЊСЃСЏ РїРѕ С‚Р°Р№РјРµСЂСѓ, РёР»Рё РїРѕ Р·Р°РїСЂРѕСЃСѓ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ. РћРїСЂРµРґРµР»СЏРµС‚СЃСЏ РїРѕ РёРјРµРЅРё РІС‹Р·С‹РІР°РµРјРѕР№ РїСЂРѕС†РµРґСѓСЂС‹
+  //Р’СЃРµ С‚Р°Р№РјРµСЂС‹, РєРѕС‚РѕСЂС‹Рµ Р·Р°С…РѕС‚РµР»Рё РІС‹РїРѕР»РЅРёС‚СЊ СЌС‚Сѓ Р·Р°РґР°С‡Сѓ, Рё РІСЃРµ РїРѕР»СЊР·РѕРІР°С‚РµР»Рё, РєРѕС‚РѕСЂС‹Рµ Р·Р°РїСЂРѕСЃРёР»Рё СЌС‚Сѓ Р·Р°РґР°С‡Сѓ, С…СЂР°РЅСЏС‚СЃСЏ С‚СѓС‚ РІ СЃРїРёСЃРєР°С…
   PTask = ^TTask;
   TTask = record
-    next: PTask;     //Ссылка на другую задачу. Примитивный односвязный список
-    nproc: string;   //Имя выполняемой процедуры. Определяет задачу
-    pproc: Pointer;  //Конкретный адрес процедуры в DLL
+    next: PTask;     //РЎСЃС‹Р»РєР° РЅР° РґСЂСѓРіСѓСЋ Р·Р°РґР°С‡Сѓ. РџСЂРёРјРёС‚РёРІРЅС‹Р№ РѕРґРЅРѕСЃРІСЏР·РЅС‹Р№ СЃРїРёСЃРѕРє
+    nproc: string;   //РРјСЏ РІС‹РїРѕР»РЅСЏРµРјРѕР№ РїСЂРѕС†РµРґСѓСЂС‹. РћРїСЂРµРґРµР»СЏРµС‚ Р·Р°РґР°С‡Сѓ
+    pproc: Pointer;  //РљРѕРЅРєСЂРµС‚РЅС‹Р№ Р°РґСЂРµСЃ РїСЂРѕС†РµРґСѓСЂС‹ РІ DLL
 
-    //Перечень клиентов (TClientInfo принадлежит)
+    //РџРµСЂРµС‡РµРЅСЊ РєР»РёРµРЅС‚РѕРІ (TClientInfo РїСЂРёРЅР°РґР»РµР¶РёС‚)
     clients: array of TClientInfo;
     ecap, ecount: Integer;
 
-    //Перечень таймеров
+    //РџРµСЂРµС‡РµРЅСЊ С‚Р°Р№РјРµСЂРѕРІ
     tindxs: array of Integer;
     tcap, tcount: Integer;
 
-    //Аргументы вызова от пользователя. Собственная копия данных
+    //РђСЂРіСѓРјРµРЅС‚С‹ РІС‹Р·РѕРІР° РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ. РЎРѕР±СЃС‚РІРµРЅРЅР°СЏ РєРѕРїРёСЏ РґР°РЅРЅС‹С…
     buff: array of Byte;
     bsize: Byte;
   end;
 
-  //Рабочий поток, который выполняет задачи
+  //Р Р°Р±РѕС‡РёР№ РїРѕС‚РѕРє, РєРѕС‚РѕСЂС‹Р№ РІС‹РїРѕР»РЅСЏРµС‚ Р·Р°РґР°С‡Рё
   TWorkerThread = class(TThread)
   private
-    parentForm: THandle;  //Сюда отправляются сообщения об ошибках
-    wakeEvent: THandle;  //На этом евенте оно висит пока нечего делать
+    parentForm: THandle;  //РЎСЋРґР° РѕС‚РїСЂР°РІР»СЏСЋС‚СЃСЏ СЃРѕРѕР±С‰РµРЅРёСЏ РѕР± РѕС€РёР±РєР°С…
+    wakeEvent: THandle;  //РќР° СЌС‚РѕРј РµРІРµРЅС‚Рµ РѕРЅРѕ РІРёСЃРёС‚ РїРѕРєР° РЅРµС‡РµРіРѕ РґРµР»Р°С‚СЊ
     uado, ubde: Boolean;
 
 {    FOnStart: TStartProc;
-    FOnStop: TStopProc; //выбранные пользователем процедуры обработки запуска / остановки сервиса}
+    FOnStop: TStopProc; //РІС‹Р±СЂР°РЅРЅС‹Рµ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј РїСЂРѕС†РµРґСѓСЂС‹ РѕР±СЂР°Р±РѕС‚РєРё Р·Р°РїСѓСЃРєР° / РѕСЃС‚Р°РЅРѕРІРєРё СЃРµСЂРІРёСЃР°}
   public
-    task: PTask;         //Задача для работы
+    task: PTask;         //Р—Р°РґР°С‡Р° РґР»СЏ СЂР°Р±РѕС‚С‹
 
     function AbortCallback(): Boolean; stdcall;
     constructor Create(parent, event: THandle; UseADO, UseBDE: Boolean);
@@ -86,35 +86,35 @@ type
     procedure ServiceStop(Sender: TService; var Stopped: Boolean);
     procedure ServiceShutdown(Sender: TService);
   private
-    Handle: THandle;                     //Создам окно для отправки сообщений, которые я буду обрабатывать
-    realState: TCurrentStatus;           //Просто, чтобы понимать, действительное состояние сервера при получении сообщений от Сервис Менеджера
-    local, exename, dllname: string;     //имена исполняемых файлов. Автообновляться будут по особым правилам (длл нужно выгрузить, например)
-    selfupdate, userupdate: string;      //пути для поиска обновлений. Единый для всех обновлятор сервиса. И уникальный для каждого обновлятор полезной нагрузки
-    worklog, errorlog, descript: string; //полный путь и имя файла для ворклога и лога ошибок; описание сервиса для инсталляции. Все логи пишутся в ServiceThread'e
-    lastupdate: TDateTime;               //время последней проверки обновлений. используется, чтобы слишком часто не перелистывать все файлы в поисках новых
+    Handle: THandle;                     //РЎРѕР·РґР°Рј РѕРєРЅРѕ РґР»СЏ РѕС‚РїСЂР°РІРєРё СЃРѕРѕР±С‰РµРЅРёР№, РєРѕС‚РѕСЂС‹Рµ СЏ Р±СѓРґСѓ РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ
+    realState: TCurrentStatus;           //РџСЂРѕСЃС‚Рѕ, С‡С‚РѕР±С‹ РїРѕРЅРёРјР°С‚СЊ, РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕРµ СЃРѕСЃС‚РѕСЏРЅРёРµ СЃРµСЂРІРµСЂР° РїСЂРё РїРѕР»СѓС‡РµРЅРёРё СЃРѕРѕР±С‰РµРЅРёР№ РѕС‚ РЎРµСЂРІРёСЃ РњРµРЅРµРґР¶РµСЂР°
+    local, exename, dllname: string;     //РёРјРµРЅР° РёСЃРїРѕР»РЅСЏРµРјС‹С… С„Р°Р№Р»РѕРІ. РђРІС‚РѕРѕР±РЅРѕРІР»СЏС‚СЊСЃСЏ Р±СѓРґСѓС‚ РїРѕ РѕСЃРѕР±С‹Рј РїСЂР°РІРёР»Р°Рј (РґР»Р» РЅСѓР¶РЅРѕ РІС‹РіСЂСѓР·РёС‚СЊ, РЅР°РїСЂРёРјРµСЂ)
+    selfupdate, userupdate: string;      //РїСѓС‚Рё РґР»СЏ РїРѕРёСЃРєР° РѕР±РЅРѕРІР»РµРЅРёР№. Р•РґРёРЅС‹Р№ РґР»СЏ РІСЃРµС… РѕР±РЅРѕРІР»СЏС‚РѕСЂ СЃРµСЂРІРёСЃР°. Р СѓРЅРёРєР°Р»СЊРЅС‹Р№ РґР»СЏ РєР°Р¶РґРѕРіРѕ РѕР±РЅРѕРІР»СЏС‚РѕСЂ РїРѕР»РµР·РЅРѕР№ РЅР°РіСЂСѓР·РєРё
+    worklog, errorlog, descript: string; //РїРѕР»РЅС‹Р№ РїСѓС‚СЊ Рё РёРјСЏ С„Р°Р№Р»Р° РґР»СЏ РІРѕСЂРєР»РѕРіР° Рё Р»РѕРіР° РѕС€РёР±РѕРє; РѕРїРёСЃР°РЅРёРµ СЃРµСЂРІРёСЃР° РґР»СЏ РёРЅСЃС‚Р°Р»Р»СЏС†РёРё. Р’СЃРµ Р»РѕРіРё РїРёС€СѓС‚СЃСЏ РІ ServiceThread'e
+    lastupdate: TDateTime;               //РІСЂРµРјСЏ РїРѕСЃР»РµРґРЅРµР№ РїСЂРѕРІРµСЂРєРё РѕР±РЅРѕРІР»РµРЅРёР№. РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, С‡С‚РѕР±С‹ СЃР»РёС€РєРѕРј С‡Р°СЃС‚Рѕ РЅРµ РїРµСЂРµР»РёСЃС‚С‹РІР°С‚СЊ РІСЃРµ С„Р°Р№Р»С‹ РІ РїРѕРёСЃРєР°С… РЅРѕРІС‹С…
     exeupdated: Boolean;
     DllHandle: THandle;
 
-    Timers: TTimers;                     //полезная нагрузка
+    Timers: TTimers;                     //РїРѕР»РµР·РЅР°СЏ РЅР°РіСЂСѓР·РєР°
     Server: saTServer;
     Port: Word;
 
-    FSrvMessage: TMsgProc;               //выбранная пользователем процедура обработки сообщений СЕРВЕРА
-    FDllInit: TInitProc;                 //процедура инициализации ДЛЛ
-    sDllInit, sSrvMsg: string;           //имена этих процедур для поиска в длл
+    FSrvMessage: TMsgProc;               //РІС‹Р±СЂР°РЅРЅР°СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј РїСЂРѕС†РµРґСѓСЂР° РѕР±СЂР°Р±РѕС‚РєРё СЃРѕРѕР±С‰РµРЅРёР№ РЎР•Р Р’Р•Р Рђ
+    FDllInit: TInitProc;                 //РїСЂРѕС†РµРґСѓСЂР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё Р”Р›Р›
+    sDllInit, sSrvMsg: string;           //РёРјРµРЅР° СЌС‚РёС… РїСЂРѕС†РµРґСѓСЂ РґР»СЏ РїРѕРёСЃРєР° РІ РґР»Р»
 
-    bUsesADO, bUsesBDE: Boolean;         //флаги нужды инициализации АДО/БДЕ
+    bUsesADO, bUsesBDE: Boolean;         //С„Р»Р°РіРё РЅСѓР¶РґС‹ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё РђР”Рћ/Р‘Р”Р•
 
-    InitEvent: THandle;                  //Эвент имени рабочего потока. Надо же узнать, смог ли он успешно выполнить инициализацию, или всё зря
-    InitMessage: ^string;                //Место для хранения текста ошибки от рабочего потока
+    InitEvent: THandle;                  //Р­РІРµРЅС‚ РёРјРµРЅРё СЂР°Р±РѕС‡РµРіРѕ РїРѕС‚РѕРєР°. РќР°РґРѕ Р¶Рµ СѓР·РЅР°С‚СЊ, СЃРјРѕРі Р»Рё РѕРЅ СѓСЃРїРµС€РЅРѕ РІС‹РїРѕР»РЅРёС‚СЊ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЋ, РёР»Рё РІСЃС‘ Р·СЂСЏ
+    InitMessage: ^string;                //РњРµСЃС‚Рѕ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ С‚РµРєСЃС‚Р° РѕС€РёР±РєРё РѕС‚ СЂР°Р±РѕС‡РµРіРѕ РїРѕС‚РѕРєР°
 
     FirstTask, LastTask: PTask;
-    //очередь задач для запуска. Сервис запускает задачи в отдельном потоке, в одном отдельном потоке.
-    //Но таймер и запросы собирает, пока задача выполняется
-    //Соответственно, когда задача выполнена, выбираем из очереди, что будем делать дальше
+    //РѕС‡РµСЂРµРґСЊ Р·Р°РґР°С‡ РґР»СЏ Р·Р°РїСѓСЃРєР°. РЎРµСЂРІРёСЃ Р·Р°РїСѓСЃРєР°РµС‚ Р·Р°РґР°С‡Рё РІ РѕС‚РґРµР»СЊРЅРѕРј РїРѕС‚РѕРєРµ, РІ РѕРґРЅРѕРј РѕС‚РґРµР»СЊРЅРѕРј РїРѕС‚РѕРєРµ.
+    //РќРѕ С‚Р°Р№РјРµСЂ Рё Р·Р°РїСЂРѕСЃС‹ СЃРѕР±РёСЂР°РµС‚, РїРѕРєР° Р·Р°РґР°С‡Р° РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ
+    //РЎРѕРѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕ, РєРѕРіРґР° Р·Р°РґР°С‡Р° РІС‹РїРѕР»РЅРµРЅР°, РІС‹Р±РёСЂР°РµРј РёР· РѕС‡РµСЂРµРґРё, С‡С‚Рѕ Р±СѓРґРµРј РґРµР»Р°С‚СЊ РґР°Р»СЊС€Рµ
 
-    WorkerThread: TWorkerThread;         //тот самый отдельный поток, который будет делать пользовательские задачи
-    WorkerEvent, QueueEvent: THandle;    //эвенты для управления этим потоком
+    WorkerThread: TWorkerThread;         //С‚РѕС‚ СЃР°РјС‹Р№ РѕС‚РґРµР»СЊРЅС‹Р№ РїРѕС‚РѕРє, РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ РґРµР»Р°С‚СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёРµ Р·Р°РґР°С‡Рё
+    WorkerEvent, QueueEvent: THandle;    //СЌРІРµРЅС‚С‹ РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ СЌС‚РёРј РїРѕС‚РѕРєРѕРј
 
     novellname, novellpass: string;
 
@@ -184,7 +184,7 @@ const
   WM_SVC_RESTART = WM_USER + 6;
 
   MESSAGE_WINDOW_CLASS_NAME = 'SvcMsgCls';
-  UPDATES_COOLDOWN = 0.007; //это чуть больше 10 минут в днях
+  UPDATES_COOLDOWN = 0.007; //СЌС‚Рѕ С‡СѓС‚СЊ Р±РѕР»СЊС€Рµ 10 РјРёРЅСѓС‚ РІ РґРЅСЏС…
 
   UPDATE_EXE_NAME = 'TheService.exe';
 
@@ -192,21 +192,21 @@ var
   MessageWindowClass: Word;
   MyLogEvent: Cardinal;
 
-//Базовый error-reporting, результаты смотреть в "Журнале событий" Windows
-//Используется в saWriteLog.OnError
-//Планировал юзать из разных потоков, поэтому упор на тред-сейф
-//С другой стороны, имя приложухи для сообщений должно быть задано правильно
+//Р‘Р°Р·РѕРІС‹Р№ error-reporting, СЂРµР·СѓР»СЊС‚Р°С‚С‹ СЃРјРѕС‚СЂРµС‚СЊ РІ "Р–СѓСЂРЅР°Р»Рµ СЃРѕР±С‹С‚РёР№" Windows
+//РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ saWriteLog.OnError
+//РџР»Р°РЅРёСЂРѕРІР°Р» СЋР·Р°С‚СЊ РёР· СЂР°Р·РЅС‹С… РїРѕС‚РѕРєРѕРІ, РїРѕСЌС‚РѕРјСѓ СѓРїРѕСЂ РЅР° С‚СЂРµРґ-СЃРµР№С„
+//РЎ РґСЂСѓРіРѕР№ СЃС‚РѕСЂРѕРЅС‹, РёРјСЏ РїСЂРёР»РѕР¶СѓС…Рё РґР»СЏ СЃРѕРѕР±С‰РµРЅРёР№ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ Р·Р°РґР°РЅРѕ РїСЂР°РІРёР»СЊРЅРѕ
 procedure WindowsEventLog(const msg: string);
 var p: PChar;
 begin
   p := PChar(msg);
   ReportEvent(MyLogEvent, EVENTLOG_ERROR_TYPE, 0, 1, nil, 1, 0, @p, nil);
-  //AService.LogMessage меня не устраивает потому что не тред-сейф
+  //AService.LogMessage РјРµРЅСЏ РЅРµ СѓСЃС‚СЂР°РёРІР°РµС‚ РїРѕС‚РѕРјСѓ С‡С‚Рѕ РЅРµ С‚СЂРµРґ-СЃРµР№С„
 end;
 
-//Это для окна, которое создается в ServiceStart, выполняется, насколько я высянил, в ServiceThread
-//Принимает сообщения от таймеров, от сервера, от рабочего треда, здесь происходит всё управление текущими делами, разада задач, сбор результатов, обработка ошибок
-//Запросы от таймеров или юзеров выполняются в WorkerThread'e, всё остальное, в том числе менеджмент очереди тасков - в этом треде
+//Р­С‚Рѕ РґР»СЏ РѕРєРЅР°, РєРѕС‚РѕСЂРѕРµ СЃРѕР·РґР°РµС‚СЃСЏ РІ ServiceStart, РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ, РЅР°СЃРєРѕР»СЊРєРѕ СЏ РІС‹СЃСЏРЅРёР», РІ ServiceThread
+//РџСЂРёРЅРёРјР°РµС‚ СЃРѕРѕР±С‰РµРЅРёСЏ РѕС‚ С‚Р°Р№РјРµСЂРѕРІ, РѕС‚ СЃРµСЂРІРµСЂР°, РѕС‚ СЂР°Р±РѕС‡РµРіРѕ С‚СЂРµРґР°, Р·РґРµСЃСЊ РїСЂРѕРёСЃС…РѕРґРёС‚ РІСЃС‘ СѓРїСЂР°РІР»РµРЅРёРµ С‚РµРєСѓС‰РёРјРё РґРµР»Р°РјРё, СЂР°Р·Р°РґР° Р·Р°РґР°С‡, СЃР±РѕСЂ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ, РѕР±СЂР°Р±РѕС‚РєР° РѕС€РёР±РѕРє
+//Р—Р°РїСЂРѕСЃС‹ РѕС‚ С‚Р°Р№РјРµСЂРѕРІ РёР»Рё СЋР·РµСЂРѕРІ РІС‹РїРѕР»РЅСЏСЋС‚СЃСЏ РІ WorkerThread'e, РІСЃС‘ РѕСЃС‚Р°Р»СЊРЅРѕРµ, РІ С‚РѕРј С‡РёСЃР»Рµ РјРµРЅРµРґР¶РјРµРЅС‚ РѕС‡РµСЂРµРґРё С‚Р°СЃРєРѕРІ - РІ СЌС‚РѕРј С‚СЂРµРґРµ
 function WndProc(hWnd: THandle; Msg: Cardinal; wParam: WPARAM; lParam: LPARAM): Integer; stdcall;
 begin
   try
@@ -356,11 +356,11 @@ begin
         inf.request := req;
         PostMessage(AService.Handle, WM_SRV_REQUEST, Integer(inf), 0);
       except on e: Exception do begin
-        FreeAndNil(inf); //что-то пошло не так, никто не вызовет второй Release
+        FreeAndNil(inf); //С‡С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє, РЅРёРєС‚Рѕ РЅРµ РІС‹Р·РѕРІРµС‚ РІС‚РѕСЂРѕР№ Release
         raise Exception.Create('making inf: '+e.Message);
       end end;
-      //Если мы дошли до сюда, то inf никто не удалит, пока я его не релизну
-      //Тоже самое в основном потоке, никто не удалит инфо оттуда, пока он сам его не релизнет
+      //Р•СЃР»Рё РјС‹ РґРѕС€Р»Рё РґРѕ СЃСЋРґР°, С‚Рѕ inf РЅРёРєС‚Рѕ РЅРµ СѓРґР°Р»РёС‚, РїРѕРєР° СЏ РµРіРѕ РЅРµ СЂРµР»РёР·РЅСѓ
+      //РўРѕР¶Рµ СЃР°РјРѕРµ РІ РѕСЃРЅРѕРІРЅРѕРј РїРѕС‚РѕРєРµ, РЅРёРєС‚Рѕ РЅРµ СѓРґР°Р»РёС‚ РёРЅС„Рѕ РѕС‚С‚СѓРґР°, РїРѕРєР° РѕРЅ СЃР°Рј РµРіРѕ РЅРµ СЂРµР»РёР·РЅРµС‚
 
       while not AThread.Terminated do try
         case WaitForSingleObject(inf.e, SOCKET_INTERVAL * 1000) of
@@ -394,7 +394,7 @@ end;
 
 
 
-{ дерьмо, навязанное разработчиками }
+{ РґРµСЂСЊРјРѕ, РЅР°РІСЏР·Р°РЅРЅРѕРµ СЂР°Р·СЂР°Р±РѕС‚С‡РёРєР°РјРё }
 procedure ServiceController(CtrlCode: DWord); stdcall;
 begin
   AService.Controller(CtrlCode);
@@ -405,13 +405,13 @@ begin
   Result := ServiceController;
 end;
 
-{ инициализация }
+{ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ }
 function TAService.Init: Boolean;
 begin
   Result := False;
 
-  //Перед любыми действиями я должен определиться, кто я, где я, куда писать логи
-  //Потом просто задаются начальные значения (нулевые) для всяких объектов
+  //РџРµСЂРµРґ Р»СЋР±С‹РјРё РґРµР№СЃС‚РІРёСЏРјРё СЏ РґРѕР»Р¶РµРЅ РѕРїСЂРµРґРµР»РёС‚СЊСЃСЏ, РєС‚Рѕ СЏ, РіРґРµ СЏ, РєСѓРґР° РїРёСЃР°С‚СЊ Р»РѕРіРё
+  //РџРѕС‚РѕРј РїСЂРѕСЃС‚Рѕ Р·Р°РґР°СЋС‚СЃСЏ РЅР°С‡Р°Р»СЊРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ (РЅСѓР»РµРІС‹Рµ) РґР»СЏ РІСЃСЏРєРёС… РѕР±СЉРµРєС‚РѕРІ
 
   try
     exename := ParamStr(0);
@@ -423,7 +423,7 @@ begin
     MyLogEvent := RegisterEventSource(nil, PChar(Self.Name)); //"TheService"
     if MyLogEvent = 0 then saRaiseLastError('Failed to RegisterEventSource: ');
   except on e: Exception do
-    Exit; //Если сдохло тут, то я бессилен
+    Exit; //Р•СЃР»Рё СЃРґРѕС…Р»Рѕ С‚СѓС‚, С‚Рѕ СЏ Р±РµСЃСЃРёР»РµРЅ
   end;
 
   try
@@ -460,7 +460,7 @@ begin
   end;
 end;
 
-{ инсталляция / деинсталляция }
+{ РёРЅСЃС‚Р°Р»Р»СЏС†РёСЏ / РґРµРёРЅСЃС‚Р°Р»Р»СЏС†РёСЏ }
 procedure TAService.ServiceBeforeInstall(Sender: TService);
 var
   err: string;
@@ -480,15 +480,15 @@ begin
     end;
 
     if descript = ''
-    then raise Exception.Create('description не должен быть пустым');
+    then raise Exception.Create('description РЅРµ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј');
 
     if Self.ServiceStartName = ''
-    then saWriteLog(errorlog, 'OnInstall: логин не задан, настройка входа в Novell на вашей совести');
+    then saWriteLog(errorlog, 'OnInstall: Р»РѕРіРёРЅ РЅРµ Р·Р°РґР°РЅ, РЅР°СЃС‚СЂРѕР№РєР° РІС…РѕРґР° РІ Novell РЅР° РІР°С€РµР№ СЃРѕРІРµСЃС‚Рё');
   except on e: Exception do begin
     err := 'Exception in BeforeInstall: '+e.Message;
     saWriteLog(errorlog, err);
 
-    //словит сервис менеджер и выплюнет усанавливающему в лицо, установка фейлится, сервис не установлен
+    //СЃР»РѕРІРёС‚ СЃРµСЂРІРёСЃ РјРµРЅРµРґР¶РµСЂ Рё РІС‹РїР»СЋРЅРµС‚ СѓСЃР°РЅР°РІР»РёРІР°СЋС‰РµРјСѓ РІ Р»РёС†Рѕ, СѓСЃС‚Р°РЅРѕРІРєР° С„РµР№Р»РёС‚СЃСЏ, СЃРµСЂРІРёСЃ РЅРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅ
     raise Exception.Create(err);
   end; end;
 end;
@@ -529,7 +529,7 @@ begin
   except on e: Exception do begin
     key := 'Exception in AfterInstall: '+e.Message;
     saWriteLog(errorlog, key);
-    //сервис-менеджер, в лицо устанавливающему, сервис, который уже установлен, удаляется кхерам
+    //СЃРµСЂРІРёСЃ-РјРµРЅРµРґР¶РµСЂ, РІ Р»РёС†Рѕ СѓСЃС‚Р°РЅР°РІР»РёРІР°СЋС‰РµРјСѓ, СЃРµСЂРІРёСЃ, РєРѕС‚РѕСЂС‹Р№ СѓР¶Рµ СѓСЃС‚Р°РЅРѕРІР»РµРЅ, СѓРґР°Р»СЏРµС‚СЃСЏ РєС…РµСЂР°Рј
     raise Exception.Create(key);
   end; end;
 end;
@@ -555,7 +555,7 @@ begin
   except on e: Exception do begin
     key := 'Exception in BeforeUninstall: '+e.Message;
     saWriteLog(errorlog, key);
-    //в лицо, ну ты понел, сервис не удаляется
+    //РІ Р»РёС†Рѕ, РЅСѓ С‚С‹ РїРѕРЅРµР», СЃРµСЂРІРёСЃ РЅРµ СѓРґР°Р»СЏРµС‚СЃСЏ
     raise Exception.Create(key);
   end; end;
 end;
@@ -569,14 +569,14 @@ begin
     worklog := local + worklog;
     ForceDirectories(worklog);
   end else if not DirectoryExists(worklog) then
-    raise Exception.Create('Нет доступа ['+worklog+']: '+saMsgLastError);
+    raise Exception.Create('РќРµС‚ РґРѕСЃС‚СѓРїР° ['+worklog+']: '+saMsgLastError);
 
   GetLocalTime(st);
   worklog := worklog + Format('%.4d%.2d', [st.wYear, st.wMonth]) + '.txt';
 end;
 
 
-{ старт / стоп }
+{ СЃС‚Р°СЂС‚ / СЃС‚РѕРї }
 procedure TAService.ServiceStart(Sender: TService; var Started: Boolean);
 var
   key: string;
@@ -588,7 +588,7 @@ var
 begin
   if realState = csStopped then try
     try
-      try //прочитать логин пароль для подключения к новеллу
+      try //РїСЂРѕС‡РёС‚Р°С‚СЊ Р»РѕРіРёРЅ РїР°СЂРѕР»СЊ РґР»СЏ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Рє РЅРѕРІРµР»Р»Сѓ
         reg := nil;
         reg := TRegistry.Create(KEY_READ);
         reg.RootKey := HKEY_LOCAL_MACHINE;
@@ -611,7 +611,7 @@ begin
     try
       ininame := local + ChangeFileExt(exename, '.ini');
 
-      try //прочитать всяческие настроки из ини файла
+      try //РїСЂРѕС‡РёС‚Р°С‚СЊ РІСЃСЏС‡РµСЃРєРёРµ РЅР°СЃС‚СЂРѕРєРё РёР· РёРЅРё С„Р°Р№Р»Р°
         ini := nil;
         ini := saTIniFile.Create;
         ini.LoadSections(ininame, ['service', 'server', 'payload']);
@@ -639,7 +639,7 @@ begin
         ini.Free;
       end;
 
-      //прочитать таймера из того же ини файла
+      //РїСЂРѕС‡РёС‚Р°С‚СЊ С‚Р°Р№РјРµСЂР° РёР· С‚РѕРіРѕ Р¶Рµ РёРЅРё С„Р°Р№Р»Р°
       Timers := GetTimers(ininame, sections);
     except on e: Exception do
       raise Exception.Create('Error reading settings from *.ini: '+e.Message);
@@ -647,7 +647,7 @@ begin
 
     InitWorkLog;
 
-    //проверить целостность прочитанных настроек
+    //РїСЂРѕРІРµСЂРёС‚СЊ С†РµР»РѕСЃС‚РЅРѕСЃС‚СЊ РїСЂРѕС‡РёС‚Р°РЅРЅС‹С… РЅР°СЃС‚СЂРѕРµРє
     if (Length(Timers) = 0) and (Self.Port = 0)
     then raise Exception.Create('No server and no timers specified');
 
@@ -656,20 +656,20 @@ begin
 
     CheckTimers(Timers);
 
-    //подключиться к новеллу
+    //РїРѕРґРєР»СЋС‡РёС‚СЊСЃСЏ Рє РЅРѕРІРµР»Р»Сѓ
     if Self.novellname <> '' then DoNetUse('\\fs', Self.novellname, Self.novellpass, local + 'net_use.log');
 
     CheckUpdates(True);
     LoadDll;
 
-    //создать чапельник для очереди сообщений
+    //СЃРѕР·РґР°С‚СЊ С‡Р°РїРµР»СЊРЅРёРє РґР»СЏ РѕС‡РµСЂРµРґРё СЃРѕРѕР±С‰РµРЅРёР№
     Self.Handle := MakeWindow;
     saSock.saSockMessageHandle := Self.Handle;
 
-    //Должно быть создано ПЕРЕД таймерами, сервером, рабочим тредом
+    //Р”РѕР»Р¶РЅРѕ Р±С‹С‚СЊ СЃРѕР·РґР°РЅРѕ РџР•Р Р•Р” С‚Р°Р№РјРµСЂР°РјРё, СЃРµСЂРІРµСЂРѕРј, СЂР°Р±РѕС‡РёРј С‚СЂРµРґРѕРј
     QueueEvent := saCheckResult(CreateEvent(nil, False, True, nil), 0, 'QueueEvent.CreateEvent');
 
-    //Инициализация рабочего треда
+    //РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЂР°Р±РѕС‡РµРіРѕ С‚СЂРµРґР°
     WorkerEvent := saCheckResult(CreateEvent(nil, False, False, nil), 0, 'WorkerEvent.CreateEvent');
     WorkerThread := TWorkerThread.Create(Self.Handle, WorkerEvent, bUsesADO, bUsesBDE);
     FDllInit(WorkerThread.AbortCallback);
@@ -677,10 +677,10 @@ begin
 {    if sOnStart > '' then WorkerThread.FOnStart := GetProc(sOnStart);
     if sOnStop > '' then WorkerThread.FOnStop := GetProc(sOnStop);}
 
-    //Инициализация евента для ожидания резуьльтатов инициализации
+    //РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РµРІРµРЅС‚Р° РґР»СЏ РѕР¶РёРґР°РЅРёСЏ СЂРµР·СѓСЊР»СЊС‚Р°С‚РѕРІ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё
     InitEvent := saCheckResult(Windows.CreateEvent(nil, False, False, nil), 0, 'Create InitEvent');
 
-    WorkerThread.Resume; //Я жду от потока первым делом дёрнуть InitEvent
+    WorkerThread.Resume; //РЇ Р¶РґСѓ РѕС‚ РїРѕС‚РѕРєР° РїРµСЂРІС‹Рј РґРµР»РѕРј РґС‘СЂРЅСѓС‚СЊ InitEvent
     case WaitForSingleObject(InitEvent, 20000) of
       WAIT_OBJECT_0: ;
       WAIT_FAILED: raise Exception.Create('InitEvent WAIT_FAILED');
@@ -688,10 +688,10 @@ begin
       WAIT_ABANDONED: raise Exception.Create('InitEvent WAIT_ABANDONED');
     end;
     if InitMessage <> nil then raise Exception.Create(InitMessage^);
-    //Освобождаются эти ресурсы в StopAndFree после потока, который может их использовать
+    //РћСЃРІРѕР±РѕР¶РґР°СЋС‚СЃСЏ СЌС‚Рё СЂРµСЃСѓСЂСЃС‹ РІ StopAndFree РїРѕСЃР»Рµ РїРѕС‚РѕРєР°, РєРѕС‚РѕСЂС‹Р№ РјРѕР¶РµС‚ РёС… РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ
 
 
-    //стартануть сервер
+    //СЃС‚Р°СЂС‚Р°РЅСѓС‚СЊ СЃРµСЂРІРµСЂ
     if Self.Port > 0 then begin
       Server := saTServer.Create(Port, MySockCallback);
       Server.OpenMyServer;
@@ -722,7 +722,7 @@ begin
 
     KillTimers;
 
-    //эту всю хрень надо будет переделать, нафиг все эти проверки, просто рубанул функцию и забыл
+    //СЌС‚Сѓ РІСЃСЋ С…СЂРµРЅСЊ РЅР°РґРѕ Р±СѓРґРµС‚ РїРµСЂРµРґРµР»Р°С‚СЊ, РЅР°С„РёРі РІСЃРµ СЌС‚Рё РїСЂРѕРІРµСЂРєРё, РїСЂРѕСЃС‚Рѕ СЂСѓР±Р°РЅСѓР» С„СѓРЅРєС†РёСЋ Рё Р·Р°Р±С‹Р»
     if QueueEvent > 0 then try
       FreeTasks;
       CloseHandle(QueueEvent);
@@ -803,7 +803,7 @@ begin
       WriteWorkLog('!');
     end;
 
-    CheckUpdates(True);  //обновить сам сервис, пока не не запустился снова
+    CheckUpdates(True);  //РѕР±РЅРѕРІРёС‚СЊ СЃР°Рј СЃРµСЂРІРёСЃ, РїРѕРєР° РЅРµ РЅРµ Р·Р°РїСѓСЃС‚РёР»СЃСЏ СЃРЅРѕРІР°
     realState := csStopped;
   end;
 
@@ -854,9 +854,9 @@ end;
 
 
 
-{ обработка событий }
+{ РѕР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёР№ }
 
-//Сработал таймер, а это значит...
+//РЎСЂР°Р±РѕС‚Р°Р» С‚Р°Р№РјРµСЂ, Р° СЌС‚Рѕ Р·РЅР°С‡РёС‚...
 function TAService.OnTimer(TimerID: Cardinal): Integer;
 var
   i: Integer;
@@ -865,24 +865,24 @@ var
 begin
   Result := 0;
   Windows.KillTimer(Self.Handle, TimerID);
-  //Отключим этот таймер. Потом перезапустим (если сервер работает и таймер найден в перечне)
+  //РћС‚РєР»СЋС‡РёРј СЌС‚РѕС‚ С‚Р°Р№РјРµСЂ. РџРѕС‚РѕРј РїРµСЂРµР·Р°РїСѓСЃС‚РёРј (РµСЃР»Рё СЃРµСЂРІРµСЂ СЂР°Р±РѕС‚Р°РµС‚ Рё С‚Р°Р№РјРµСЂ РЅР°Р№РґРµРЅ РІ РїРµСЂРµС‡РЅРµ)
 
   if realState = csRunning then begin
-    //Обязательно найдём этот таймер в нашем списке таймеров, там вся нужная информация
+    //РћР±СЏР·Р°С‚РµР»СЊРЅРѕ РЅР°Р№РґС‘Рј СЌС‚РѕС‚ С‚Р°Р№РјРµСЂ РІ РЅР°С€РµРј СЃРїРёСЃРєРµ С‚Р°Р№РјРµСЂРѕРІ, С‚Р°Рј РІСЃСЏ РЅСѓР¶РЅР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ
     i := FindTimer(Timers, TimerID);
     if i < 0 then
       raise Exception.Create('cant find timer ['+IntToStr(TimerID)+']')
     else begin
       s := Timers[i].nproc;
 
-      //Обязательно синхронизируем любые доступы к очереди задач
+      //РћР±СЏР·Р°С‚РµР»СЊРЅРѕ СЃРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµРј Р»СЋР±С‹Рµ РґРѕСЃС‚СѓРїС‹ Рє РѕС‡РµСЂРµРґРё Р·Р°РґР°С‡
       WaitForSingleObject(QueueEvent, Infinite);
       try
         p := FindTask(s);
         if p = nil
         then AddTaskFromTimer(s, i)
         else AddTimerToTask(p, i);
-        //Если такая задача уже есть в очереди, то добавим в неё этот таймер, иначе создадим новую задачу
+        //Р•СЃР»Рё С‚Р°РєР°СЏ Р·Р°РґР°С‡Р° СѓР¶Рµ РµСЃС‚СЊ РІ РѕС‡РµСЂРµРґРё, С‚Рѕ РґРѕР±Р°РІРёРј РІ РЅРµС‘ СЌС‚РѕС‚ С‚Р°Р№РјРµСЂ, РёРЅР°С‡Рµ СЃРѕР·РґР°РґРёРј РЅРѕРІСѓСЋ Р·Р°РґР°С‡Сѓ
       finally
         SetEvent(QueueEvent);
       end;
@@ -890,8 +890,8 @@ begin
   end;
 end;
 
-//поискать процедуру в очереди на обработку
-//Синхронизируется через QueueEvent (который autoreset), вызывается только после захвата евента
+//РїРѕРёСЃРєР°С‚СЊ РїСЂРѕС†РµРґСѓСЂСѓ РІ РѕС‡РµСЂРµРґРё РЅР° РѕР±СЂР°Р±РѕС‚РєСѓ
+//РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµС‚СЃСЏ С‡РµСЂРµР· QueueEvent (РєРѕС‚РѕСЂС‹Р№ autoreset), РІС‹Р·С‹РІР°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ Р·Р°С…РІР°С‚Р° РµРІРµРЅС‚Р°
 function TAService.FindTask(const nproc: string): PTask;
 begin
   Result := FirstTask;
@@ -899,8 +899,8 @@ begin
   do Result := Result.next;
 end;
 
-//создать новый таск, заказчик - таймер
-//Синхронизируется через QueueEvent (который autoreset), вызывается только после захвата евента
+//СЃРѕР·РґР°С‚СЊ РЅРѕРІС‹Р№ С‚Р°СЃРє, Р·Р°РєР°Р·С‡РёРє - С‚Р°Р№РјРµСЂ
+//РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµС‚СЃСЏ С‡РµСЂРµР· QueueEvent (РєРѕС‚РѕСЂС‹Р№ autoreset), РІС‹Р·С‹РІР°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ Р·Р°С…РІР°С‚Р° РµРІРµРЅС‚Р°
 procedure TAService.AddTaskFromTimer(const nproc: string; tmidx: Integer);
 var p: PTask;
 begin
@@ -913,30 +913,30 @@ begin
   TaskQueueAdd(p);
 end;
 
-//таск уже есть, добавить потребителя в него (таймер)
-//Синхронизируется через QueueEvent (который autoreset), вызывается только после захвата евента
+//С‚Р°СЃРє СѓР¶Рµ РµСЃС‚СЊ, РґРѕР±Р°РІРёС‚СЊ РїРѕС‚СЂРµР±РёС‚РµР»СЏ РІ РЅРµРіРѕ (С‚Р°Р№РјРµСЂ)
+//РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµС‚СЃСЏ С‡РµСЂРµР· QueueEvent (РєРѕС‚РѕСЂС‹Р№ autoreset), РІС‹Р·С‹РІР°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ Р·Р°С…РІР°С‚Р° РµРІРµРЅС‚Р°
 procedure TAService.AddTimerToTask(p: PTask; tmidx: Integer);
 var i: Integer;
 begin
-  //Если этот таймер уже (внезапно) в списке клиентов, то ничего не надо делать
+  //Р•СЃР»Рё СЌС‚РѕС‚ С‚Р°Р№РјРµСЂ СѓР¶Рµ (РІРЅРµР·Р°РїРЅРѕ) РІ СЃРїРёСЃРєРµ РєР»РёРµРЅС‚РѕРІ, С‚Рѕ РЅРёС‡РµРіРѕ РЅРµ РЅР°РґРѕ РґРµР»Р°С‚СЊ
   for i := 0 to p.tcount - 1 do
     if p.tindxs[i] = tmidx then Exit;
 
-  //Размер списка, если что
+  //Р Р°Р·РјРµСЂ СЃРїРёСЃРєР°, РµСЃР»Рё С‡С‚Рѕ
   if p.tcount >= p.tcap then begin
     Inc(p.tcap, 8);
     SetLength(p.tindxs, p.tcap);
   end;
 
-  //Добавим таймер в список
+  //Р”РѕР±Р°РІРёРј С‚Р°Р№РјРµСЂ РІ СЃРїРёСЃРѕРє
   p.tindxs[p.tcount] := tmidx;
   Inc(p.tcount);
 end;
 
-//Есть запрос от пользователя
-//Если нет параметров, то можно попасть в таск, созданный таймером
-//Если есть параметры, то для каждого разного набора параметров создается отдельный таск
-//Одинаковые вызовы с одинаковыми параметрами слипаются в один таск
+//Р•СЃС‚СЊ Р·Р°РїСЂРѕСЃ РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+//Р•СЃР»Рё РЅРµС‚ РїР°СЂР°РјРµС‚СЂРѕРІ, С‚Рѕ РјРѕР¶РЅРѕ РїРѕРїР°СЃС‚СЊ РІ С‚Р°СЃРє, СЃРѕР·РґР°РЅРЅС‹Р№ С‚Р°Р№РјРµСЂРѕРј
+//Р•СЃР»Рё РµСЃС‚СЊ РїР°СЂР°РјРµС‚СЂС‹, С‚Рѕ РґР»СЏ РєР°Р¶РґРѕРіРѕ СЂР°Р·РЅРѕРіРѕ РЅР°Р±РѕСЂР° РїР°СЂР°РјРµС‚СЂРѕРІ СЃРѕР·РґР°РµС‚СЃСЏ РѕС‚РґРµР»СЊРЅС‹Р№ С‚Р°СЃРє
+//РћРґРёРЅР°РєРѕРІС‹Рµ РІС‹Р·РѕРІС‹ СЃ РѕРґРёРЅР°РєРѕРІС‹РјРё РїР°СЂР°РјРµС‚СЂР°РјРё СЃР»РёРїР°СЋС‚СЃСЏ РІ РѕРґРёРЅ С‚Р°СЃРє
 procedure TAService.OnServerRequest(Msg: Cardinal; wParam: WPARAM; lParam: LPARAM);
 var
   p: PTask;
@@ -951,8 +951,8 @@ begin
     try
       p := FindTaskArg(@t.request);
       if (p = nil)
-      then AddTaskFromUser(t) //Нет подходящих тасков, сделаем новый
-      else AddClientToTask(p, t); //Такой таск уже есть, добавим клиента
+      then AddTaskFromUser(t) //РќРµС‚ РїРѕРґС…РѕРґСЏС‰РёС… С‚Р°СЃРєРѕРІ, СЃРґРµР»Р°РµРј РЅРѕРІС‹Р№
+      else AddClientToTask(p, t); //РўР°РєРѕР№ С‚Р°СЃРє СѓР¶Рµ РµСЃС‚СЊ, РґРѕР±Р°РІРёРј РєР»РёРµРЅС‚Р°
     finally
       SetEvent(QueueEvent);
     end;
@@ -964,21 +964,21 @@ begin
   Result := FirstTask;
   while Result <> nil do begin
     if (Result.nproc = Request.nproc) and (Result.bsize = Request.bsize) then begin
-      if Result.bsize = 0 then Exit; //Та же процедура без параметров
-      if CompareMem(@(Result.buff[0]), @(request.buff[0]), Result.bsize) then Exit; //Одинаковые параметры
+      if Result.bsize = 0 then Exit; //РўР° Р¶Рµ РїСЂРѕС†РµРґСѓСЂР° Р±РµР· РїР°СЂР°РјРµС‚СЂРѕРІ
+      if CompareMem(@(Result.buff[0]), @(request.buff[0]), Result.bsize) then Exit; //РћРґРёРЅР°РєРѕРІС‹Рµ РїР°СЂР°РјРµС‚СЂС‹
     end;
 
     Result := Result.next;
   end;
 end;
 
-//Добавить потребителя (пользователя) в существующий таск
-//Синхронизируется через QueueEvent (который autoreset), вызывается только после захвата евента
+//Р”РѕР±Р°РІРёС‚СЊ РїРѕС‚СЂРµР±РёС‚РµР»СЏ (РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ) РІ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ С‚Р°СЃРє
+//РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµС‚СЃСЏ С‡РµСЂРµР· QueueEvent (РєРѕС‚РѕСЂС‹Р№ autoreset), РІС‹Р·С‹РІР°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ Р·Р°С…РІР°С‚Р° РµРІРµРЅС‚Р°
 procedure TAService.AddClientToTask(p: PTask; const e: TClientInfo);
 var i: Integer;
 begin
   for i := 0 to p.ecount - 1 do
-    if p.clients[i] = e then Exit; //Очень удивлюсь если когда-то это сработает
+    if p.clients[i] = e then Exit; //РћС‡РµРЅСЊ СѓРґРёРІР»СЋСЃСЊ РµСЃР»Рё РєРѕРіРґР°-С‚Рѕ СЌС‚Рѕ СЃСЂР°Р±РѕС‚Р°РµС‚
 
   if p.ecount >= p.ecap then begin
     Inc(p.ecap, 8);
@@ -989,7 +989,7 @@ begin
   Inc(p.ecount);
 end;
 
-//Синхронизируется через QueueEvent (который autoreset), вызывается только после захвата евента
+//РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµС‚СЃСЏ С‡РµСЂРµР· QueueEvent (РєРѕС‚РѕСЂС‹Р№ autoreset), РІС‹Р·С‹РІР°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ Р·Р°С…РІР°С‚Р° РµРІРµРЅС‚Р°
 procedure TAService.AddTaskFromUser(const e: TClientInfo);
 var p: PTask;
 begin
@@ -1001,20 +1001,20 @@ begin
 
   p.bsize := e.request.bsize;
   if p.bsize > 0 then begin
-    SetLength(p.buff, p.bsize); //Данные из запроса копируются в таск. Everyone manages it's own shit
+    SetLength(p.buff, p.bsize); //Р”Р°РЅРЅС‹Рµ РёР· Р·Р°РїСЂРѕСЃР° РєРѕРїРёСЂСѓСЋС‚СЃСЏ РІ С‚Р°СЃРє. Everyone manages it's own shit
     Move(e.request.buff[0], p.buff[0], p.bsize);
   end;
 
   TaskQueueAdd(p);
 end;
 
-//Синхронизируется через QueueEvent (который autoreset), вызывается только после захвата евента
+//РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµС‚СЃСЏ С‡РµСЂРµР· QueueEvent (РєРѕС‚РѕСЂС‹Р№ autoreset), РІС‹Р·С‹РІР°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ Р·Р°С…РІР°С‚Р° РµРІРµРЅС‚Р°
 procedure TAService.TaskQueueAdd(p: PTask);
 begin
   if FirstTask = nil then begin
     FirstTask := p;
     LastTask := p;
-    //Нет задач, значит воркер спит
+    //РќРµС‚ Р·Р°РґР°С‡, Р·РЅР°С‡РёС‚ РІРѕСЂРєРµСЂ СЃРїРёС‚
     SetTaskToWork(p);
   end else begin
     LastTask^.next := p;
@@ -1022,32 +1022,32 @@ begin
   end;
 end;
 
-//Выбрать следующий таск для работы
-//Синхронизируется через QueueEvent (который autoreset), вызывается только после захвата евента
+//Р’С‹Р±СЂР°С‚СЊ СЃР»РµРґСѓСЋС‰РёР№ С‚Р°СЃРє РґР»СЏ СЂР°Р±РѕС‚С‹
+//РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµС‚СЃСЏ С‡РµСЂРµР· QueueEvent (РєРѕС‚РѕСЂС‹Р№ autoreset), РІС‹Р·С‹РІР°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ Р·Р°С…РІР°С‚Р° РµРІРµРЅС‚Р°
 function  TAService.TaskQueueSelect: PTask;
 begin
   Result := FirstTask;
   if Result = nil then Exit;
 
-  repeat //Попробую поискать запросы от пользователей
+  repeat //РџРѕРїСЂРѕР±СѓСЋ РїРѕРёСЃРєР°С‚СЊ Р·Р°РїСЂРѕСЃС‹ РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
     if Result.ecount > 0 then Exit
     else Result := Result.next;
   until Result = nil;
 
-  //От пользователя ничего нет, возвращаемся к первому попавшемуся
+  //РћС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РЅРёС‡РµРіРѕ РЅРµС‚, РІРѕР·РІСЂР°С‰Р°РµРјСЃСЏ Рє РїРµСЂРІРѕРјСѓ РїРѕРїР°РІС€РµРјСѓСЃСЏ
   Result := FirstTask;
 end;
 
-//Убрать выполненный таск из очереди. Буду ругаться если не найду его
-//Синхронизируется через QueueEvent (который autoreset), вызывается только после захвата евента
+//РЈР±СЂР°С‚СЊ РІС‹РїРѕР»РЅРµРЅРЅС‹Р№ С‚Р°СЃРє РёР· РѕС‡РµСЂРµРґРё. Р‘СѓРґСѓ СЂСѓРіР°С‚СЊСЃСЏ РµСЃР»Рё РЅРµ РЅР°Р№РґСѓ РµРіРѕ
+//РЎРёРЅС…СЂРѕРЅРёР·РёСЂСѓРµС‚СЃСЏ С‡РµСЂРµР· QueueEvent (РєРѕС‚РѕСЂС‹Р№ autoreset), РІС‹Р·С‹РІР°РµС‚СЃСЏ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ Р·Р°С…РІР°С‚Р° РµРІРµРЅС‚Р°
 procedure TAService.TaskQueueRemove(p: PTask);
 var a, b: PTask;
 begin
-  a := nil;       //Предыдущий таск
-  b := FirstTask; //Текущий таск
+  a := nil;       //РџСЂРµРґС‹РґСѓС‰РёР№ С‚Р°СЃРє
+  b := FirstTask; //РўРµРєСѓС‰РёР№ С‚Р°СЃРє
 
   while b <> nil do begin
-    if b = p then begin //Наш таск найден, будем вырезать
+    if b = p then begin //РќР°С€ С‚Р°СЃРє РЅР°Р№РґРµРЅ, Р±СѓРґРµРј РІС‹СЂРµР·Р°С‚СЊ
       if b.next = nil then LastTask := a; //p == b == LastTask
       if a = nil then FirstTask := b.next //p == b == FirstTask
       else a.next := b.next;
@@ -1058,11 +1058,11 @@ begin
     b := b.next;
   end;
 
-  raise Exception.Create('TaskQueueRemove таск не найден в очереди!');
+  raise Exception.Create('TaskQueueRemove С‚Р°СЃРє РЅРµ РЅР°Р№РґРµРЅ РІ РѕС‡РµСЂРµРґРё!');
 end;
 
-//В ожидании клиетна висит MySockCallback, после WakeUp он отвиснет и вернет пользователю ответ
-//Каждый клиент зохвачен Таском и MySockCallback, как только оба его отпустят (а я хз кто раньше, у них потоки разные)
+//Р’ РѕР¶РёРґР°РЅРёРё РєР»РёРµС‚РЅР° РІРёСЃРёС‚ MySockCallback, РїРѕСЃР»Рµ WakeUp РѕРЅ РѕС‚РІРёСЃРЅРµС‚ Рё РІРµСЂРЅРµС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЋ РѕС‚РІРµС‚
+//РљР°Р¶РґС‹Р№ РєР»РёРµРЅС‚ Р·РѕС…РІР°С‡РµРЅ РўР°СЃРєРѕРј Рё MySockCallback, РєР°Рє С‚РѕР»СЊРєРѕ РѕР±Р° РµРіРѕ РѕС‚РїСѓСЃС‚СЏС‚ (Р° СЏ С…Р· РєС‚Рѕ СЂР°РЅСЊС€Рµ, Сѓ РЅРёС… РїРѕС‚РѕРєРё СЂР°Р·РЅС‹Рµ)
 procedure ReleaseClients(p: PTask; resp: TClientResponse);
 var i: Integer;
 begin
@@ -1095,13 +1095,13 @@ var
   t: RTimer;
 begin
   try
-    p := WorkerThread.task; //Таск, который делал тред
+    p := WorkerThread.task; //РўР°СЃРє, РєРѕС‚РѕСЂС‹Р№ РґРµР»Р°Р» С‚СЂРµРґ
 
     WaitForSingleObject(QueueEvent, INFINITE);
     try
-      TaskQueueRemove(p); //изъять таск из очереди
+      TaskQueueRemove(p); //РёР·СЉСЏС‚СЊ С‚Р°СЃРє РёР· РѕС‡РµСЂРµРґРё
 
-      q := TaskQueueSelect; //выбрать следующий таск для работы
+      q := TaskQueueSelect; //РІС‹Р±СЂР°С‚СЊ СЃР»РµРґСѓСЋС‰РёР№ С‚Р°СЃРє РґР»СЏ СЂР°Р±РѕС‚С‹
       if q <> nil then SetTaskToWork(q);
     finally
       SetEvent(QueueEvent);
@@ -1157,7 +1157,7 @@ begin
   Dispose(p);
 end;
 
-//Вызывается до старта таймеров или после стопа таймеров, поэтому уведомляет только клиентов
+//Р’С‹Р·С‹РІР°РµС‚СЃСЏ РґРѕ СЃС‚Р°СЂС‚Р° С‚Р°Р№РјРµСЂРѕРІ РёР»Рё РїРѕСЃР»Рµ СЃС‚РѕРїР° С‚Р°Р№РјРµСЂРѕРІ, РїРѕСЌС‚РѕРјСѓ СѓРІРµРґРѕРјР»СЏРµС‚ С‚РѕР»СЊРєРѕ РєР»РёРµРЅС‚РѕРІ
 procedure TAService.FreeTasks;
 var p: PTask;
 begin
@@ -1193,22 +1193,22 @@ var
 begin
   if SysUtils.FindFirst(src + '*.*', faAnyFile, sr) = 0 then try
     repeat
-      if not ((sr.Name = '') or (sr.Name = '.') or (sr.Name = '..')) then try  //это не файло
+      if not ((sr.Name = '') or (sr.Name = '.') or (sr.Name = '..')) then try  //СЌС‚Рѕ РЅРµ С„Р°Р№Р»Рѕ
         srcfile := src + sr.Name;
         dstfile := dst + sr.Name;
 
         if (AnsiCompareText(dstfile, local + exename) = 0)
         or (AnsiCompareText(dstfile, local + dllname) = 0)
         or (AnsiCompareText(sr.Name, UPDATE_EXE_NAME) = 0) then
-          Continue; //эти обрабатываются персонально
+          Continue; //СЌС‚Рё РѕР±СЂР°Р±Р°С‚С‹РІР°СЋС‚СЃСЏ РїРµСЂСЃРѕРЅР°Р»СЊРЅРѕ
 
-        if (sr.Attr and faDirectory) > 0 then begin          //если оно папко, то впадаем в рекурсию
+        if (sr.Attr and faDirectory) > 0 then begin          //РµСЃР»Рё РѕРЅРѕ РїР°РїРєРѕ, С‚Рѕ РІРїР°РґР°РµРј РІ СЂРµРєСѓСЂСЃРёСЋ
           if not DirectoryExists(dstfile) then begin
             if not CreateDir(dstfile)
             then saRaiseLastError('CreateDir('+dstfile+')');
           end;
           CopyFiles(srcfile + '\', dstfile + '\', ur + 1);
-        end else begin                                      //оно не папко, значит оно - файло
+        end else begin                                      //РѕРЅРѕ РЅРµ РїР°РїРєРѕ, Р·РЅР°С‡РёС‚ РѕРЅРѕ - С„Р°Р№Р»Рѕ
           if FileAge(srcfile) > FileAge(dstfile)
           then saCopyFileSure(srcfile, dstfile);
         end;
@@ -1221,19 +1221,19 @@ begin
   end;
 end;
 
-//Вызывается onStart и onStop, пока все остановлено и отключено
-//Хочу еще вызывать регулярно, при срабатывании любых таймеров или сообщений, но хз насчет "ресурсы используются в рабочем потоке". Подумаю
+//Р’С‹Р·С‹РІР°РµС‚СЃСЏ onStart Рё onStop, РїРѕРєР° РІСЃРµ РѕСЃС‚Р°РЅРѕРІР»РµРЅРѕ Рё РѕС‚РєР»СЋС‡РµРЅРѕ
+//РҐРѕС‡Сѓ РµС‰Рµ РІС‹Р·С‹РІР°С‚СЊ СЂРµРіСѓР»СЏСЂРЅРѕ, РїСЂРё СЃСЂР°Р±Р°С‚С‹РІР°РЅРёРё Р»СЋР±С‹С… С‚Р°Р№РјРµСЂРѕРІ РёР»Рё СЃРѕРѕР±С‰РµРЅРёР№, РЅРѕ С…Р· РЅР°СЃС‡РµС‚ "СЂРµСЃСѓСЂСЃС‹ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ РІ СЂР°Р±РѕС‡РµРј РїРѕС‚РѕРєРµ". РџРѕРґСѓРјР°СЋ
 procedure TAService.CheckUpdates;
 var
   newupdate: TDateTime;
   src, dst: string;
   reload: Boolean;
 begin
-  newupdate := Now; //Пытаемся обновляться не слишком часто
+  newupdate := Now; //РџС‹С‚Р°РµРјСЃСЏ РѕР±РЅРѕРІР»СЏС‚СЊСЃСЏ РЅРµ СЃР»РёС€РєРѕРј С‡Р°СЃС‚Рѕ
   if (forced = True) or ((newupdate - lastupdate) > UPDATES_COOLDOWN) then begin
     lastupdate := newupdate;
 
-    //Апдейт самого сервиса, один для всех, сервис запущен, соответственно апдейт сработает только после перезапуска
+    //РђРїРґРµР№С‚ СЃР°РјРѕРіРѕ СЃРµСЂРІРёСЃР°, РѕРґРёРЅ РґР»СЏ РІСЃРµС…, СЃРµСЂРІРёСЃ Р·Р°РїСѓС‰РµРЅ, СЃРѕРѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕ Р°РїРґРµР№С‚ СЃСЂР°Р±РѕС‚Р°РµС‚ С‚РѕР»СЊРєРѕ РїРѕСЃР»Рµ РїРµСЂРµР·Р°РїСѓСЃРєР°
     if selfupdate <> '' then try
       saDirectoryMustExist(selfupdate);
 
@@ -1250,10 +1250,10 @@ begin
 
       CopyFiles(selfupdate, local, 0);
     except on e: Exception do
-      saWriteLog(errorlog, 'Ошибка автоматического обновления сервиса: ' + e.Message);
+      saWriteLog(errorlog, 'РћС€РёР±РєР° Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРµСЂРІРёСЃР°: ' + e.Message);
     end;
 
-    //Апдейт пользовательской нагрузки. DLL надо отключить для обновления, остальные файлы просто пытаюсь скопировать
+    //РђРїРґРµР№С‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕР№ РЅР°РіСЂСѓР·РєРё. DLL РЅР°РґРѕ РѕС‚РєР»СЋС‡РёС‚СЊ РґР»СЏ РѕР±РЅРѕРІР»РµРЅРёСЏ, РѕСЃС‚Р°Р»СЊРЅС‹Рµ С„Р°Р№Р»С‹ РїСЂРѕСЃС‚Рѕ РїС‹С‚Р°СЋСЃСЊ СЃРєРѕРїРёСЂРѕРІР°С‚СЊ
     if userupdate <> '' then try
       saDirectoryMustExist(userupdate);
 
@@ -1266,7 +1266,7 @@ begin
           saCopyFileSure(src, dst);
           WriteWorkLog('Updated ' + dllname);
         except on e: Exception do
-          saWriteLog(errorlog, 'Ошибка автоматического обновления DLL: ' + e.Message);
+          saWriteLog(errorlog, 'РћС€РёР±РєР° Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РѕР±РЅРѕРІР»РµРЅРёСЏ DLL: ' + e.Message);
         end;
 
         if (forced = False) then begin
@@ -1277,7 +1277,7 @@ begin
 
       CopyFiles(userupdate, local, 0);
     except on e: Exception do
-      saWriteLog(errorlog, 'Ошибка автоматического обновления программы: ' + e.Message);
+      saWriteLog(errorlog, 'РћС€РёР±РєР° Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РѕР±РЅРѕРІР»РµРЅРёСЏ РїСЂРѕРіСЂР°РјРјС‹: ' + e.Message);
     end;
   end;
 end;
@@ -1367,20 +1367,20 @@ begin
 
   try
     while True do begin
-      //Ждём зеленого гудка
+      //Р–РґС‘Рј Р·РµР»РµРЅРѕРіРѕ РіСѓРґРєР°
       case WaitForSingleObject(wakeEvent, INFINITE) of
         WAIT_OBJECT_0:;
         WAIT_FAILED: raise Exception.Create('WAIT_FAILED');
         WAIT_TIMEOUT: raise Exception.Create('WAIT_TIMEOUT');
         WAIT_ABANDONED: raise Exception.Create('WAIT_ABANDONED');
       end;
-      //Нас разбудили
+      //РќР°СЃ СЂР°Р·Р±СѓРґРёР»Рё
 
-      //Закрываемся, если нас выключили
+      //Р—Р°РєСЂС‹РІР°РµРјСЃСЏ, РµСЃР»Рё РЅР°СЃ РІС‹РєР»СЋС‡РёР»Рё
       if Self.Terminated then Break;
 
       try
-        //Если не закрылось, тогда работаем, у нас есть задача. Должна быть назначена перед побудкой
+        //Р•СЃР»Рё РЅРµ Р·Р°РєСЂС‹Р»РѕСЃСЊ, С‚РѕРіРґР° СЂР°Р±РѕС‚Р°РµРј, Сѓ РЅР°СЃ РµСЃС‚СЊ Р·Р°РґР°С‡Р°. Р”РѕР»Р¶РЅР° Р±С‹С‚СЊ РЅР°Р·РЅР°С‡РµРЅР° РїРµСЂРµРґ РїРѕР±СѓРґРєРѕР№
         if task.bsize > 0 then begin
           @up := task.pproc;
           r := up(task.buff, task.bsize);
@@ -1391,8 +1391,8 @@ begin
 
         if not Self.Terminated
         then PostMessage(parentForm, WM_THREAD_READY, r, 0);
-        //Рапортуем о результатах, если есть кому
-        //Если тред убит, то клиенты уже все отключены
+        //Р Р°РїРѕСЂС‚СѓРµРј Рѕ СЂРµР·СѓР»СЊС‚Р°С‚Р°С…, РµСЃР»Рё РµСЃС‚СЊ РєРѕРјСѓ
+        //Р•СЃР»Рё С‚СЂРµРґ СѓР±РёС‚, С‚Рѕ РєР»РёРµРЅС‚С‹ СѓР¶Рµ РІСЃРµ РѕС‚РєР»СЋС‡РµРЅС‹
       except on e: Exception do
         PostMessage(parentForm, WM_THREAD_ERROR, 0, StrToLparam('Exception in Task Proc ['+task.nproc+']: '+e.Message));
       end;

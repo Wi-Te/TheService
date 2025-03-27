@@ -17,7 +17,7 @@
 25.02.2022 17:52:54	Started Service
 25.02.2022 17:52:59	User request [UserProc]
 25.02.2022 17:52:59	Starting [UserProc]. Timers count = 0; Users count = 1
-25.02.2022 17:53:40	Exception in Task Proc [UserProc]: Разрушительный сбой
+25.02.2022 17:53:40	Exception in Task Proc [UserProc]: Р Р°Р·СЂСѓС€РёС‚РµР»СЊРЅС‹Р№ СЃР±РѕР№
 25.02.2022 17:53:40	Starting [TimerProc1]. Timers count = 1; Users count = 0
 25.02.2022 17:53:40	Done [UserProc]
 25.02.2022 17:53:40	Done [TimerProc1]
@@ -106,7 +106,7 @@
 28.02.2022 10:09:30	User request [fu bitch]
 28.02.2022 10:09:30	Starting [fu bitch]. Timers count = 0; Users count = 1
 28.02.2022 10:09:35	SetTaskToWork failed: GetProcAddress [fu bitch]
-			code 127: Не найдена указанная процедура
+			code 127: РќРµ РЅР°Р№РґРµРЅР° СѓРєР°Р·Р°РЅРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР°
 28.02.2022 10:09:35	Done [fu bitch]
 28.02.2022 10:09:39	User request [TimerProc1]
 28.02.2022 10:09:39	Starting [TimerProc1]. Timers count = 0; Users count = 1
@@ -165,7 +165,7 @@
 28.02.2022 11:35:55	User request [fu bitch]
 28.02.2022 11:35:55	Starting [fu bitch]. Timers count = 0; Users count = 1
 28.02.2022 11:36:24	SetTaskToWork failed: GetProcAddress [fu bitch]
-			code 127: Не найдена указанная процедура
+			code 127: РќРµ РЅР°Р№РґРµРЅР° СѓРєР°Р·Р°РЅРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР°
 28.02.2022 11:36:24	Done [fu bitch]
 28.02.2022 11:36:24	Starting [TimerProc1]. Timers count = 1; Users count = 0
 28.02.2022 11:37:09	Starting [TimerProc2]. Timers count = 1; Users count = 0
@@ -174,7 +174,7 @@
 28.02.2022 11:37:39	User request [fu bitch]
 28.02.2022 11:39:11	Starting [fu bitch]. Timers count = 0; Users count = 1
 28.02.2022 11:39:48	SetTaskToWork failed: GetProcAddress [fu bitch]
-			code 127: Не найдена указанная процедура
+			code 127: РќРµ РЅР°Р№РґРµРЅР° СѓРєР°Р·Р°РЅРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР°
 28.02.2022 11:39:48	Done [fu bitch]
 28.02.2022 11:39:48	Starting [TimerProc2]. Timers count = 1; Users count = 0
 28.02.2022 11:40:17	Starting [TimerProc1]. Timers count = 1; Users count = 0
@@ -201,7 +201,7 @@
 28.02.2022 11:47:13	User request [fu bitch]
 28.02.2022 11:47:37	Starting [fu bitch]. Timers count = 0; Users count = 1
 28.02.2022 11:47:39	SetTaskToWork failed: GetProcAddress [fu bitch]
-			code 127: Не найдена указанная процедура
+			code 127: РќРµ РЅР°Р№РґРµРЅР° СѓРєР°Р·Р°РЅРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР°
 28.02.2022 11:47:39	Done [fu bitch]
 28.02.2022 11:47:41	Stopped Service
 28.02.2022 11:47:41	!
@@ -210,7 +210,7 @@
 28.02.2022 11:50:22	User request [fu bitch]
 28.02.2022 11:50:26	Starting [fu bitch]. Timers count = 0; Users count = 1
 28.02.2022 11:50:43	SetTaskToWork failed: GetProcAddress [fu bitch]
-			code 127: Не найдена указанная процедура
+			code 127: РќРµ РЅР°Р№РґРµРЅР° СѓРєР°Р·Р°РЅРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР°
 28.02.2022 11:51:13	Done [fu bitch]
 28.02.2022 11:51:15	Starting [TimerProc1]. Timers count = 1; Users count = 0
 28.02.2022 11:51:15	Done [TimerProc1]

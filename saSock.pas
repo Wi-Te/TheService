@@ -1,10 +1,10 @@
 unit saSock;
-{сверер шлёт логи, перехватывайте сообщения (строка 91..96, или поиск по saSM_First)
-для получения логов на имя вашей формы, сделайте saSockMessageHandle := Form1.Handle
-SASM_FIRSTMESS .. SASM_LASTMESS - логи сервера, call saMessToStr to get string message
+{СЃРІРµСЂРµСЂ С€Р»С‘С‚ Р»РѕРіРё, РїРµСЂРµС…РІР°С‚С‹РІР°Р№С‚Рµ СЃРѕРѕР±С‰РµРЅРёСЏ (СЃС‚СЂРѕРєР° 91..96, РёР»Рё РїРѕРёСЃРє РїРѕ saSM_First)
+РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ Р»РѕРіРѕРІ РЅР° РёРјСЏ РІР°С€РµР№ С„РѕСЂРјС‹, СЃРґРµР»Р°Р№С‚Рµ saSockMessageHandle := Form1.Handle
+SASM_FIRSTMESS .. SASM_LASTMESS - Р»РѕРіРё СЃРµСЂРІРµСЂР°, call saMessToStr to get string message
 SASM_ERROR - general error. Must call saLParamToStr to get message and release memory}
-{ThreadCallback - для сервера надо обязательно указать процедуру (в конструкторе),
-которая выполняется в теле каждого потока, общающегося на стороне сервера с клиентом}
+{ThreadCallback - РґР»СЏ СЃРµСЂРІРµСЂР° РЅР°РґРѕ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ СѓРєР°Р·Р°С‚СЊ РїСЂРѕС†РµРґСѓСЂСѓ (РІ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂРµ),
+РєРѕС‚РѕСЂР°СЏ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РІ С‚РµР»Рµ РєР°Р¶РґРѕРіРѕ РїРѕС‚РѕРєР°, РѕР±С‰Р°СЋС‰РµРіРѕСЃСЏ РЅР° СЃС‚РѕСЂРѕРЅРµ СЃРµСЂРІРµСЂР° СЃ РєР»РёРµРЅС‚РѕРј}
 
 interface
 
@@ -61,14 +61,14 @@ type
       FListenThread: saTListenThread;
       FPort: Word;
       FThreadCache: Byte;
-      FThreadList: TList;        //вызовы методов, связанных с этим списком должны быть сихнронизированы (FCloseEvent)
-      FCloseEvent: THandle;       //всего таких вызовов - три. Создание нового TMyClientServerThread, смерть старого, и общее закрытие сервера.
-      //Создание нового потока и закрытие сервера, по идее, никогда не будут пересекаться между собой
-      //так как, к тому моменту, как закрытие сервера доберется до FCloseEvent'а, принимающий поток уже будет завершен.
-      //Смерть старого потока, наоборот, может случиться как во время создания нового, так и во время закрытия сервера.
-      //Первые два - действия обязательные. Поэтому, они, если что, ждут (FCloseEvent.WaitFor(INFINITE)), пока умирающий поток уберет себя из списка.
-      //Третье действие - самоубийство потока - опционально, поэтому оно только проверяет состояние евента (FCloseEvent.WaitFor(0))
-      //и, если евент занят, не выполняется
+      FThreadList: TList;        //РІС‹Р·РѕРІС‹ РјРµС‚РѕРґРѕРІ, СЃРІСЏР·Р°РЅРЅС‹С… СЃ СЌС‚РёРј СЃРїРёСЃРєРѕРј РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СЃРёС…РЅСЂРѕРЅРёР·РёСЂРѕРІР°РЅС‹ (FCloseEvent)
+      FCloseEvent: THandle;       //РІСЃРµРіРѕ С‚Р°РєРёС… РІС‹Р·РѕРІРѕРІ - С‚СЂРё. РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ TMyClientServerThread, СЃРјРµСЂС‚СЊ СЃС‚Р°СЂРѕРіРѕ, Рё РѕР±С‰РµРµ Р·Р°РєСЂС‹С‚РёРµ СЃРµСЂРІРµСЂР°.
+      //РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ РїРѕС‚РѕРєР° Рё Р·Р°РєСЂС‹С‚РёРµ СЃРµСЂРІРµСЂР°, РїРѕ РёРґРµРµ, РЅРёРєРѕРіРґР° РЅРµ Р±СѓРґСѓС‚ РїРµСЂРµСЃРµРєР°С‚СЊСЃСЏ РјРµР¶РґСѓ СЃРѕР±РѕР№
+      //С‚Р°Рє РєР°Рє, Рє С‚РѕРјСѓ РјРѕРјРµРЅС‚Сѓ, РєР°Рє Р·Р°РєСЂС‹С‚РёРµ СЃРµСЂРІРµСЂР° РґРѕР±РµСЂРµС‚СЃСЏ РґРѕ FCloseEvent'Р°, РїСЂРёРЅРёРјР°СЋС‰РёР№ РїРѕС‚РѕРє СѓР¶Рµ Р±СѓРґРµС‚ Р·Р°РІРµСЂС€РµРЅ.
+      //РЎРјРµСЂС‚СЊ СЃС‚Р°СЂРѕРіРѕ РїРѕС‚РѕРєР°, РЅР°РѕР±РѕСЂРѕС‚, РјРѕР¶РµС‚ СЃР»СѓС‡РёС‚СЊСЃСЏ РєР°Рє РІРѕ РІСЂРµРјСЏ СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ, С‚Р°Рє Рё РІРѕ РІСЂРµРјСЏ Р·Р°РєСЂС‹С‚РёСЏ СЃРµСЂРІРµСЂР°.
+      //РџРµСЂРІС‹Рµ РґРІР° - РґРµР№СЃС‚РІРёСЏ РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ. РџРѕСЌС‚РѕРјСѓ, РѕРЅРё, РµСЃР»Рё С‡С‚Рѕ, Р¶РґСѓС‚ (FCloseEvent.WaitFor(INFINITE)), РїРѕРєР° СѓРјРёСЂР°СЋС‰РёР№ РїРѕС‚РѕРє СѓР±РµСЂРµС‚ СЃРµР±СЏ РёР· СЃРїРёСЃРєР°.
+      //РўСЂРµС‚СЊРµ РґРµР№СЃС‚РІРёРµ - СЃР°РјРѕСѓР±РёР№СЃС‚РІРѕ РїРѕС‚РѕРєР° - РѕРїС†РёРѕРЅР°Р»СЊРЅРѕ, РїРѕСЌС‚РѕРјСѓ РѕРЅРѕ С‚РѕР»СЊРєРѕ РїСЂРѕРІРµСЂСЏРµС‚ СЃРѕСЃС‚РѕСЏРЅРёРµ РµРІРµРЅС‚Р° (FCloseEvent.WaitFor(0))
+      //Рё, РµСЃР»Рё РµРІРµРЅС‚ Р·Р°РЅСЏС‚, РЅРµ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ
       FThreadCallback: saTServerCallback;
 
       function getActive: Boolean;
@@ -120,7 +120,7 @@ type
   function saMessToStr(Msg: Cardinal; wParam, lParam: Integer): string;
 
 const
-  SASM_FIRSTMESS = {WM_USER} $0400 + 5376;  //сообщения от сервера, задайте хэндл вашей формы как MySock.MySockLogHandle и перехватывайте
+  SASM_FIRSTMESS = {WM_USER} $0400 + 5376;  //СЃРѕРѕР±С‰РµРЅРёСЏ РѕС‚ СЃРµСЂРІРµСЂР°, Р·Р°РґР°Р№С‚Рµ С…СЌРЅРґР» РІР°С€РµР№ С„РѕСЂРјС‹ РєР°Рє MySock.MySockLogHandle Рё РїРµСЂРµС…РІР°С‚С‹РІР°Р№С‚Рµ
   SASM_STARTLISTEN = saSM_FirstMess + 0;    //ListenSocket  | PORT_Server
   SASM_STOPLISTEN  = saSM_FirstMess + 1;    //ListenSocket  | PORT_Server
   SASM_INCOMMING   = saSM_FirstMess + 2;    //ClientSocket  | IPADDR_Client
@@ -224,7 +224,7 @@ var
 begin
   try
     if (AThread = nil) or (AInterval = 0) then begin
-      if ATimeout = 0 then begin                                                  //блокирующий вызов
+      if ATimeout = 0 then begin                                                  //Р±Р»РѕРєРёСЂСѓСЋС‰РёР№ РІС‹Р·РѕРІ
         while (len > 0) do begin                                                  //just send! to victory or death! no timeout, no interval, no thread
           sent := send(ASocket, pData^, len, 0);
           if sent < 0 then
@@ -241,14 +241,14 @@ begin
       end;
     end;
 
-    //к этому моменту, я уверен, что у меня или есть ( Таймаут = Интервал != 0 ), в этом случае у селекта будет ровно столько попыток, сколько заходов понадобится сенду
-    //или есть Трэд и Интервал (а таймаута может и не быть). В этом случае мы крутимся, пока живет поток, или пока не истечет таймаут (которого может и не быть)
+    //Рє СЌС‚РѕРјСѓ РјРѕРјРµРЅС‚Сѓ, СЏ СѓРІРµСЂРµРЅ, С‡С‚Рѕ Сѓ РјРµРЅСЏ РёР»Рё РµСЃС‚СЊ ( РўР°Р№РјР°СѓС‚ = РРЅС‚РµСЂРІР°Р» != 0 ), РІ СЌС‚РѕРј СЃР»СѓС‡Р°Рµ Сѓ СЃРµР»РµРєС‚Р° Р±СѓРґРµС‚ СЂРѕРІРЅРѕ СЃС‚РѕР»СЊРєРѕ РїРѕРїС‹С‚РѕРє, СЃРєРѕР»СЊРєРѕ Р·Р°С…РѕРґРѕРІ РїРѕРЅР°РґРѕР±РёС‚СЃСЏ СЃРµРЅРґСѓ
+    //РёР»Рё РµСЃС‚СЊ РўСЂСЌРґ Рё РРЅС‚РµСЂРІР°Р» (Р° С‚Р°Р№РјР°СѓС‚Р° РјРѕР¶РµС‚ Рё РЅРµ Р±С‹С‚СЊ). Р’ СЌС‚РѕРј СЃР»СѓС‡Р°Рµ РјС‹ РєСЂСѓС‚РёРјСЃСЏ, РїРѕРєР° Р¶РёРІРµС‚ РїРѕС‚РѕРє, РёР»Рё РїРѕРєР° РЅРµ РёСЃС‚РµС‡РµС‚ С‚Р°Р№РјР°СѓС‚ (РєРѕС‚РѕСЂРѕРіРѕ РјРѕР¶РµС‚ Рё РЅРµ Р±С‹С‚СЊ)
     while (len > 0) do begin
       if (AThread <> nil) then if AThread.Terminated then
         Exit;  {raise EMySocketError.Create('send', WSAEINTR);}
 
       SetFDSet(fdset, time, ASocket, AInterval);
-      case select(0, nil, @fdset, nil, @time) of                                  //ожидание свободного системного буфера для отправки
+      case select(0, nil, @fdset, nil, @time) of                                  //РѕР¶РёРґР°РЅРёРµ СЃРІРѕР±РѕРґРЅРѕРіРѕ СЃРёСЃС‚РµРјРЅРѕРіРѕ Р±СѓС„РµСЂР° РґР»СЏ РѕС‚РїСЂР°РІРєРё
       0:  begin
             if (ATimeout > 0) then begin                                          //if timeout was set
               if (ATimeout > AInterval)                                           //if timeout still > time spent
@@ -385,9 +385,9 @@ var
   Addr: TSockAddrIn;
 begin
   if FListenSocket = INVALID_SOCKET then try
-    Startup;                                                                    //инициализация WSA
+    Startup;                                                                    //РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ WSA
 
-    FListenSocket := WinSock.socket(PF_INET, SOCK_STREAM, IPPROTO_IP);          //получаем сокет
+    FListenSocket := WinSock.socket(PF_INET, SOCK_STREAM, IPPROTO_IP);          //РїРѕР»СѓС‡Р°РµРј СЃРѕРєРµС‚
     if FListenSocket = INVALID_SOCKET
     then RaiseSockError(WSAGetLastError, 'make socket');                     //or [invalid handle + exception]
 
@@ -406,7 +406,7 @@ begin
       SocketClose(FListenSocket, True);
       raise;
     end;
-  except on e: Exception do  //Юзеру в харю
+  except on e: Exception do  //Р®Р·РµСЂСѓ РІ С…Р°СЂСЋ
     raise Exception.Create('Error in OpenMyServer: ' + e.Message);
   end;
 end;
@@ -422,7 +422,7 @@ begin
     if Assigned(FListenThread) then
       FListenThread.Terminate;
 
-    SocketClose(FListenSocket, True);               //закрыли принимающий сокет. В этот момент accept должен прерваться, и принимающий тред отлипнет
+    SocketClose(FListenSocket, True);               //Р·Р°РєСЂС‹Р»Рё РїСЂРёРЅРёРјР°СЋС‰РёР№ СЃРѕРєРµС‚. Р’ СЌС‚РѕС‚ РјРѕРјРµРЅС‚ accept РґРѕР»Р¶РµРЅ РїСЂРµСЂРІР°С‚СЊСЃСЏ, Рё РїСЂРёРЅРёРјР°СЋС‰РёР№ С‚СЂРµРґ РѕС‚Р»РёРїРЅРµС‚
     if Assigned(FListenThread) then begin
       FListenThread.Terminate;
       FListenThread.WaitFor;
@@ -433,14 +433,14 @@ begin
     try
       WaitForSingleObject(FCloseEvent, INFINITE);
 
-      for i := 0 to  FThreadList.Count - 1 do     //уведомим все имеющиеся клиентские треды о завершении
+      for i := 0 to  FThreadList.Count - 1 do     //СѓРІРµРґРѕРјРёРј РІСЃРµ РёРјРµСЋС‰РёРµСЃСЏ РєР»РёРµРЅС‚СЃРєРёРµ С‚СЂРµРґС‹ Рѕ Р·Р°РІРµСЂС€РµРЅРёРё
         saTServerClientThread(FThreadList[i]).Terminate;
-      while FThreadList.Count > 0 do begin      //освобождаем ресурсы
-        thread := FThreadList.Last;             //Все треды уже уведомлены о завершении
-        thread.WaitFor;                         //и, даже если самый первый тред будет закрываться дольше всех,
-        thread.Free;                            //это только означает, что WaitFor для всех остальных будем мнгновенным
+      while FThreadList.Count > 0 do begin      //РѕСЃРІРѕР±РѕР¶РґР°РµРј СЂРµСЃСѓСЂСЃС‹
+        thread := FThreadList.Last;             //Р’СЃРµ С‚СЂРµРґС‹ СѓР¶Рµ СѓРІРµРґРѕРјР»РµРЅС‹ Рѕ Р·Р°РІРµСЂС€РµРЅРёРё
+        thread.WaitFor;                         //Рё, РґР°Р¶Рµ РµСЃР»Рё СЃР°РјС‹Р№ РїРµСЂРІС‹Р№ С‚СЂРµРґ Р±СѓРґРµС‚ Р·Р°РєСЂС‹РІР°С‚СЊСЃСЏ РґРѕР»СЊС€Рµ РІСЃРµС…,
+        thread.Free;                            //СЌС‚Рѕ С‚РѕР»СЊРєРѕ РѕР·РЅР°С‡Р°РµС‚, С‡С‚Рѕ WaitFor РґР»СЏ РІСЃРµС… РѕСЃС‚Р°Р»СЊРЅС‹С… Р±СѓРґРµРј РјРЅРіРЅРѕРІРµРЅРЅС‹Рј
         FThreadList.Remove(thread);
-      end;                                      //хотя, может и залипнуть, конечно =)
+      end;                                      //С…РѕС‚СЏ, РјРѕР¶РµС‚ Рё Р·Р°Р»РёРїРЅСѓС‚СЊ, РєРѕРЅРµС‡РЅРѕ =)
     finally
       ReleaseMutex(FCloseEvent);
     end;
@@ -449,7 +449,7 @@ begin
   except
     on es: saESockException do begin
       ReportMess(SASM_SOCKETERROR, es.Socket, es.Code);
-      ReportError(0, 'CloseMyServer: ' + es.Message); //Надеюсь, кто-то перехватит
+      ReportError(0, 'CloseMyServer: ' + es.Message); //РќР°РґРµСЋСЃСЊ, РєС‚Рѕ-С‚Рѕ РїРµСЂРµС…РІР°С‚РёС‚
     end;
     on ee: Exception do
       ReportError(1, 'Error in CloseMyServer: ' + ee.Message);
@@ -481,7 +481,7 @@ var
   i: integer;
 begin
   try
-    for i:=0 to FThreadList.Count - 1 do begin                                  //Поиск отработавшего, но спящего потока
+    for i:=0 to FThreadList.Count - 1 do begin                                  //РџРѕРёСЃРє РѕС‚СЂР°Р±РѕС‚Р°РІС€РµРіРѕ, РЅРѕ СЃРїСЏС‰РµРіРѕ РїРѕС‚РѕРєР°
       Result := FThreadList[i];
       if Result.FSocket = INVALID_SOCKET then
         Exit;
@@ -686,7 +686,7 @@ begin
       SocketClose(FSocket, False);
       raise;
     end;
-  except on e: Exception do //Юзеру в харю
+  except on e: Exception do //Р®Р·РµСЂСѓ РІ С…Р°СЂСЋ
     raise Exception.Create('Error in OpenMyClient: ' + e.Message);
   end;
 end;

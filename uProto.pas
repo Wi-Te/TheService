@@ -1,45 +1,45 @@
 unit uProto;
 
-//Мой персональный протокол общения моего сервера и моих клиентов
-//У пользователей универсальный "указатель + размер буффера"
-//А остальное - моя внутренняя кухня и крутится тут
+//РњРѕР№ РїРµСЂСЃРѕРЅР°Р»СЊРЅС‹Р№ РїСЂРѕС‚РѕРєРѕР» РѕР±С‰РµРЅРёСЏ РјРѕРµРіРѕ СЃРµСЂРІРµСЂР° Рё РјРѕРёС… РєР»РёРµРЅС‚РѕРІ
+//РЈ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ СѓРЅРёРІРµСЂСЃР°Р»СЊРЅС‹Р№ "СѓРєР°Р·Р°С‚РµР»СЊ + СЂР°Р·РјРµСЂ Р±СѓС„С„РµСЂР°"
+//Рђ РѕСЃС‚Р°Р»СЊРЅРѕРµ - РјРѕСЏ РІРЅСѓС‚СЂРµРЅРЅСЏСЏ РєСѓС…РЅСЏ Рё РєСЂСѓС‚РёС‚СЃСЏ С‚СѓС‚
 
 interface
 
 uses saSock;
 
 const
-  PROTOCOL_VER: Word = 1; //просто увеличь это значение, если хочешь быть уверен, что сервер работает только с обновленными клиентами
+  PROTOCOL_VER: Word = 1; //РїСЂРѕСЃС‚Рѕ СѓРІРµР»РёС‡СЊ СЌС‚Рѕ Р·РЅР°С‡РµРЅРёРµ, РµСЃР»Рё С…РѕС‡РµС€СЊ Р±С‹С‚СЊ СѓРІРµСЂРµРЅ, С‡С‚Рѕ СЃРµСЂРІРµСЂ СЂР°Р±РѕС‚Р°РµС‚ С‚РѕР»СЊРєРѕ СЃ РѕР±РЅРѕРІР»РµРЅРЅС‹РјРё РєР»РёРµРЅС‚Р°РјРё
   PROTOCOL_RESTART_REQUEST = '!RESTART REQUEST!';
   SOCKET_TIMEOUT_SHORT = 10;
   SOCKET_TIMEOUT_LONG = 255;
-  SOCKET_INTERVAL = 5; //это все в секундах
+  SOCKET_INTERVAL = 5; //СЌС‚Рѕ РІСЃРµ РІ СЃРµРєСѓРЅРґР°С…
 
 type
   TClientResponse = (
-    crWait, //Heartbeat, ожидание выполнения запроса, всё ок
-    crSucc, //Запрос выполнен успешно, всё ок
-    crFail, //Запрос вернул код ошибки
-    crOff); //Произошла ошибка на стороне сервера или сервер был остановлен, и ваш запрос не будет выполнен. Или просто порвалась связь и ваш запрос (будет) выполнен
+    crWait, //Heartbeat, РѕР¶РёРґР°РЅРёРµ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РїСЂРѕСЃР°, РІСЃС‘ РѕРє
+    crSucc, //Р—Р°РїСЂРѕСЃ РІС‹РїРѕР»РЅРµРЅ СѓСЃРїРµС€РЅРѕ, РІСЃС‘ РѕРє
+    crFail, //Р—Р°РїСЂРѕСЃ РІРµСЂРЅСѓР» РєРѕРґ РѕС€РёР±РєРё
+    crOff); //РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РЅР° СЃС‚РѕСЂРѕРЅРµ СЃРµСЂРІРµСЂР° РёР»Рё СЃРµСЂРІРµСЂ Р±С‹Р» РѕСЃС‚Р°РЅРѕРІР»РµРЅ, Рё РІР°С€ Р·Р°РїСЂРѕСЃ РЅРµ Р±СѓРґРµС‚ РІС‹РїРѕР»РЅРµРЅ. РР»Рё РїСЂРѕСЃС‚Рѕ РїРѕСЂРІР°Р»Р°СЃСЊ СЃРІСЏР·СЊ Рё РІР°С€ Р·Р°РїСЂРѕСЃ (Р±СѓРґРµС‚) РІС‹РїРѕР»РЅРµРЅ
 
-  //Данные, которые будут отправлены серверу
+  //Р”Р°РЅРЅС‹Рµ, РєРѕС‚РѕСЂС‹Рµ Р±СѓРґСѓС‚ РѕС‚РїСЂР°РІР»РµРЅС‹ СЃРµСЂРІРµСЂСѓ
   PRequest = ^TRequest;
   TRequest = record
-    bsize: Integer;      //длина массива данных
-    buff: array of Byte; //собственная копия массива данных
-    nproc: string;       //имя запрошенной процедуры    
+    bsize: Integer;      //РґР»РёРЅР° РјР°СЃСЃРёРІР° РґР°РЅРЅС‹С…
+    buff: array of Byte; //СЃРѕР±СЃС‚РІРµРЅРЅР°СЏ РєРѕРїРёСЏ РјР°СЃСЃРёРІР° РґР°РЅРЅС‹С…
+    nproc: string;       //РёРјСЏ Р·Р°РїСЂРѕС€РµРЅРЅРѕР№ РїСЂРѕС†РµРґСѓСЂС‹    
   end;
 
-//Интерфейс протокола. Серверная часть
+//РРЅС‚РµСЂС„РµР№СЃ РїСЂРѕС‚РѕРєРѕР»Р°. РЎРµСЂРІРµСЂРЅР°СЏ С‡Р°СЃС‚СЊ
 procedure ServerReadRequest(const AThread: saTServerClientThread; var prq: TRequest);
 procedure ServerSendResponse(const AThread: saTServerClientThread; resp: TClientResponse);
 
-//Интерфейс протокола. Клиентская часть
+//РРЅС‚РµСЂС„РµР№СЃ РїСЂРѕС‚РѕРєРѕР»Р°. РљР»РёРµРЅС‚СЃРєР°СЏ С‡Р°СЃС‚СЊ
 function  ClientMakeRequest(const nproc: string): saTArrayOfByte;
 function  ClientMakeRequestArg(const request: TRequest): saTArrayOfByte;
 function  ClientReadResponse(const client: saTClient; const AThread: saTPublicTerminatedThread): TClientResponse;
 
-//Для передачи строковых сообщений между потоками
+//Р”Р»СЏ РїРµСЂРµРґР°С‡Рё СЃС‚СЂРѕРєРѕРІС‹С… СЃРѕРѕР±С‰РµРЅРёР№ РјРµР¶РґСѓ РїРѕС‚РѕРєР°РјРё
 function StrToLparam(const str: string): Integer;
 function LParamToStr(lparam: Integer): string;
 
@@ -47,7 +47,7 @@ implementation
 
 uses SysUtils;
 
-//Запаковывает запрос в пакет для отправки. Собственная копия всех данных
+//Р—Р°РїР°РєРѕРІС‹РІР°РµС‚ Р·Р°РїСЂРѕСЃ РІ РїР°РєРµС‚ РґР»СЏ РѕС‚РїСЂР°РІРєРё. РЎРѕР±СЃС‚РІРµРЅРЅР°СЏ РєРѕРїРёСЏ РІСЃРµС… РґР°РЅРЅС‹С…
 {PROT_VERS|  SS   | BS        | NPROC     }
 {  0, ps  | ps, 4 | ps + 4, 4 | ps + 8, ss}
 {  0..1   | 2..5  | 6..9      | 10..19    }
@@ -62,15 +62,15 @@ begin
     SetLength(Result, ss + ps + 8);
 
     Move(PROTOCOL_VER, Result[0], ps); //PROTOCOL_VER
-    Move(ss,           Result[ps], 4);  //SS = Длина NProc
-    Move(bs,           Result[ps+4], 4); //BS = Длина Args
+    Move(ss,           Result[ps], 4);  //SS = Р”Р»РёРЅР° NProc
+    Move(bs,           Result[ps+4], 4); //BS = Р”Р»РёРЅР° Args
     Move(nproc[1],     Result[ps+8], ss); //Nproc
   except on e: Exception do
     raise Exception.Create('MakeRequest: '+e.Message);
   end;
 end;
 
-//Запаковывает запрос в пакет для отправки. Собственная копия всех данных
+//Р—Р°РїР°РєРѕРІС‹РІР°РµС‚ Р·Р°РїСЂРѕСЃ РІ РїР°РєРµС‚ РґР»СЏ РѕС‚РїСЂР°РІРєРё. РЎРѕР±СЃС‚РІРµРЅРЅР°СЏ РєРѕРїРёСЏ РІСЃРµС… РґР°РЅРЅС‹С…
 {PROT_VERS|  SS   |   BS      | NPROC      | BUFF            }
 {  0, ps  | ps, 4 | ps + 4, 4 | ps + 8, ss | ps + ss + 8, bs }
 {  0..1   | 2..5  |   6..9    | 10..19     |   20 ...        }
@@ -85,8 +85,8 @@ begin
     SetLength(Result, ss + bs + ps + 8);
                                    
     Move(PROTOCOL_VER,     Result[0], ps);  //PROTOCOL_VER
-    Move(ss,               Result[ps], 4);   //SS = Длина NProc
-    Move(bs,               Result[ps+4], 4);  //BS = длина args
+    Move(ss,               Result[ps], 4);   //SS = Р”Р»РёРЅР° NProc
+    Move(bs,               Result[ps+4], 4);  //BS = РґР»РёРЅР° args
     Move(request.nproc[1], Result[ps+8], ss);  //Nproc
     Move(request.buff[0],  Result[ps+ss+8], bs);//Args
   except on e: Exception do
@@ -94,7 +94,7 @@ begin
   end;
 end;
 
-//Сервер получает собственную копию данных запроса
+//РЎРµСЂРІРµСЂ РїРѕР»СѓС‡Р°РµС‚ СЃРѕР±СЃС‚РІРµРЅРЅСѓСЋ РєРѕРїРёСЋ РґР°РЅРЅС‹С… Р·Р°РїСЂРѕСЃР°
 { prot | ss | bs | nproc | buff }
 {  ps     4    4    ss     bs   }
 procedure ServerReadRequest(const AThread: saTServerClientThread; var prq: TRequest);
@@ -109,7 +109,7 @@ begin
       SetLength(buff, 255);
 
       ps := SizeOf(PROTOCOL_VER);
-      AThread.RecvData(@buff[0], ps, SOCKET_TIMEOUT_LONG, SOCKET_INTERVAL); //ждем между подключением и пересылкой данных, поэтому long
+      AThread.RecvData(@buff[0], ps, SOCKET_TIMEOUT_LONG, SOCKET_INTERVAL); //Р¶РґРµРј РјРµР¶РґСѓ РїРѕРґРєР»СЋС‡РµРЅРёРµРј Рё РїРµСЂРµСЃС‹Р»РєРѕР№ РґР°РЅРЅС‹С…, РїРѕСЌС‚РѕРјСѓ long
       if not CompareMem(@PROTOCOL_VER, @buff[0], ps) then raise Exception.Create('wrong protocol version');
 
       //get nproc length and buffer size
@@ -117,9 +117,9 @@ begin
       Move(buff[0], ss, 4);
       Move(buff[4], bs, 4);
 
-      if (ss = 0) then raise Exception.Create('пустая строка');
-      if (ss < 0) or (ss > 255) then raise Exception.Create('неправдоподобная длина строки = '+IntToStr(ss));
-      if (bs < 0) or (bs > 255) then raise Exception.Create('упоротый объем данных (args) = '+IntToStr(bs));
+      if (ss = 0) then raise Exception.Create('РїСѓСЃС‚Р°СЏ СЃС‚СЂРѕРєР°');
+      if (ss < 0) or (ss > 255) then raise Exception.Create('РЅРµРїСЂР°РІРґРѕРїРѕРґРѕР±РЅР°СЏ РґР»РёРЅР° СЃС‚СЂРѕРєРё = '+IntToStr(ss));
+      if (bs < 0) or (bs > 255) then raise Exception.Create('СѓРїРѕСЂРѕС‚С‹Р№ РѕР±СЉРµРј РґР°РЅРЅС‹С… (args) = '+IntToStr(bs));
 
       //get nproc
       AThread.RecvData(@buff[0], ss, SOCKET_TIMEOUT_LONG, SOCKET_INTERVAL);
@@ -141,7 +141,7 @@ begin
   end;
 end;
 
-//Отправка ответа клиенту. Heartbeat и отчет о выполеннии/ошибке
+//РћС‚РїСЂР°РІРєР° РѕС‚РІРµС‚Р° РєР»РёРµРЅС‚Сѓ. Heartbeat Рё РѕС‚С‡РµС‚ Рѕ РІС‹РїРѕР»РµРЅРЅРёРё/РѕС€РёР±РєРµ
 procedure ServerSendResponse(const AThread: saTServerClientThread; resp: TClientResponse);
 var
   buff: array of Byte;
@@ -167,7 +167,7 @@ begin
   end;
 end;
 
-//Клиент получает ответ от сервера
+//РљР»РёРµРЅС‚ РїРѕР»СѓС‡Р°РµС‚ РѕС‚РІРµС‚ РѕС‚ СЃРµСЂРІРµСЂР°
 { prot | resp }
 {  ps  |  rs  }
 function ClientReadResponse(const client: saTClient; const AThread: saTPublicTerminatedThread): TClientResponse;
@@ -184,7 +184,7 @@ begin
       then SetLength(buff, ps)
       else SetLength(buff, rs);
 
-      client.RecvData(AThread, @buff[0], ps, SOCKET_TIMEOUT_LONG, SOCKET_INTERVAL); //между heartbeat сообщениями проходит, как минимум, SOCKET_INTERVAL, поэтому long
+      client.RecvData(AThread, @buff[0], ps, SOCKET_TIMEOUT_LONG, SOCKET_INTERVAL); //РјРµР¶РґСѓ heartbeat СЃРѕРѕР±С‰РµРЅРёСЏРјРё РїСЂРѕС…РѕРґРёС‚, РєР°Рє РјРёРЅРёРјСѓРј, SOCKET_INTERVAL, РїРѕСЌС‚РѕРјСѓ long
       if not CompareMem(@PROTOCOL_VER, @buff[0], ps) then raise Exception.Create('wrong protocol version');
 
       client.RecvData(AThread, @buff[0], rs, SOCKET_TIMEOUT_SHORT, SOCKET_INTERVAL);

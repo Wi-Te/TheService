@@ -49,9 +49,9 @@ procedure TForm1.ClientThreadResponceHandler;
 begin
   case TClientStatus(Msg.WParam) of
     csWaiting: Windows.Beep(50, 50);
-    csCompleted: RequestDone('Выполнено');
-    csRetFailed: RequestDone('Провалено');
-    csAbandoned: RequestDone('Ошибка на стороне сервера');
+    csCompleted: RequestDone('Р’С‹РїРѕР»РЅРµРЅРѕ');
+    csRetFailed: RequestDone('РџСЂРѕРІР°Р»РµРЅРѕ');
+    csAbandoned: RequestDone('РћС€РёР±РєР° РЅР° СЃС‚РѕСЂРѕРЅРµ СЃРµСЂРІРµСЂР°');
     csException: RequestDone(LParamToStr(Msg.LParam));
   end;
 end;
@@ -60,21 +60,21 @@ procedure TForm1.Button1Click(Sender: TObject);
 begin
   if RequestInit('Running Request1')
   then ClientThread.CallTimerProc('TimerProc1')
-  else ShowMessage('Занято');
+  else ShowMessage('Р—Р°РЅСЏС‚Рѕ');
 end;  
 
 procedure TForm1.Button5Click(Sender: TObject);
 begin
   if RequestInit('Running Request2')
   then ClientThread.CallTimerProc('TimerProc2')
-  else ShowMessage('Занято');
+  else ShowMessage('Р—Р°РЅСЏС‚Рѕ');
 end;
 
 procedure TForm1.Button3Click(Sender: TObject);
 begin
   if RequestInit('Running Request2')
   then ClientThread.CallUserProc('UserProc', @Edit1.Text[1], Length(Edit1.Text))
-  else ShowMessage('Занято');
+  else ShowMessage('Р—Р°РЅСЏС‚Рѕ');
 end;    
 
 procedure TForm1.bAbortClick(Sender: TObject);

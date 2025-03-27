@@ -21,7 +21,7 @@ Items from queue are executed one at a time in a separate worker thread, and are
 So it is possible to have a call queued while that same call is executed, but impossible to have same call queued multiple times.
 Subsequent requests will be redirected to a single queued item.
 
-Every client request is handled separately, client will recieve heartbeat while their request is queued/executed and call resuld upon completion.
+Every client request is handled separately, client will recieve heartbeat while their request is queued/executed and call_result upon completion.
 (client application template and example are included)
 
 1) As a windows service this tool covers:
@@ -41,7 +41,7 @@ Every client request is handled separately, client will recieve heartbeat while 
 
 Client-server details:
  - WinSock TCP/IP;
- - Call any procesure from compatible DLL;
+ - Call any procedure from compatible DLL;
  - Supports passing any (reasonable) argument into procedure call;
  - Client can stay connected and recieve exit code from theri procedure;
  - Support any reasonable amount of simultaneously connected clients.

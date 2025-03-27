@@ -88,15 +88,15 @@ function saKeyPressNum(var Key: Char; Negative: Boolean = False; Decimals: Boole
 function saIsNumeric(const str: string; sep: saTCharSet = []; dec: saTCharSet = []; neg: Boolean = False): Boolean;
 
 var saLogErrorCallback: procedure(const msg: string);
-//в случае фейла, saWriteLog покажет на экран стандартное сообщение, мол, алярм, все погибло
-//если хотите, то присвойте этой переменной свою функцию, например, для сервисов, где диалогове окно не вариант
+//РІ СЃР»СѓС‡Р°Рµ С„РµР№Р»Р°, saWriteLog РїРѕРєР°Р¶РµС‚ РЅР° СЌРєСЂР°РЅ СЃС‚Р°РЅРґР°СЂС‚РЅРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ, РјРѕР», Р°Р»СЏСЂРј, РІСЃРµ РїРѕРіРёР±Р»Рѕ
+//РµСЃР»Рё С…РѕС‚РёС‚Рµ, С‚Рѕ РїСЂРёСЃРІРѕР№С‚Рµ СЌС‚РѕР№ РїРµСЂРµРјРµРЅРЅРѕР№ СЃРІРѕСЋ С„СѓРЅРєС†РёСЋ, РЅР°РїСЂРёРјРµСЂ, РґР»СЏ СЃРµСЂРІРёСЃРѕРІ, РіРґРµ РґРёР°Р»РѕРіРѕРІРµ РѕРєРЅРѕ РЅРµ РІР°СЂРёР°РЅС‚
 
 implementation
 
 uses SysUtils, StrUtils, Controls, Classes;
 
 const
-  SA_BLOCKSIZE = 65536; //в байтах, размер буффера для операций чтения/заипси
+  SA_BLOCKSIZE = 65536; //РІ Р±Р°Р№С‚Р°С…, СЂР°Р·РјРµСЂ Р±СѓС„С„РµСЂР° РґР»СЏ РѕРїРµСЂР°С†РёР№ С‡С‚РµРЅРёСЏ/Р·Р°РёРїСЃРё
 
 {$WARNINGS OFF}
 
@@ -127,29 +127,29 @@ begin
   raise Exception.Create(msg + #13#10 + saMsgLastError);
 end;
 
-//проверяет выхлоп всяких таких
+//РїСЂРѕРІРµСЂСЏРµС‚ РІС‹С…Р»РѕРї РІСЃСЏРєРёС… С‚Р°РєРёС…
 //"BOOL WINAPI Blah-Blah(foo, bar); If the function fails, the return value is zero"
-//функций, и чуть что, кидается исключениями, с красиво отформатированным текстом, с заданным заголовком
-//возвращает результат проверяемой проедуры
+//С„СѓРЅРєС†РёР№, Рё С‡СѓС‚СЊ С‡С‚Рѕ, РєРёРґР°РµС‚СЃСЏ РёСЃРєР»СЋС‡РµРЅРёСЏРјРё, СЃ РєСЂР°СЃРёРІРѕ РѕС‚С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅС‹Рј С‚РµРєСЃС‚РѕРј, СЃ Р·Р°РґР°РЅРЅС‹Рј Р·Р°РіРѕР»РѕРІРєРѕРј
+//РІРѕР·РІСЂР°С‰Р°РµС‚ СЂРµР·СѓР»СЊС‚Р°С‚ РїСЂРѕРІРµСЂСЏРµРјРѕР№ РїСЂРѕРµРґСѓСЂС‹
 function saCheckResult(procResult: LongBool; const caption: string): LongBool; overload;
 begin
   Result := procResult;
   if not procResult then saRaiseLastError(caption);
 end;
 
-//проверяет выхлоп всяких таких
+//РїСЂРѕРІРµСЂСЏРµС‚ РІС‹С…Р»РѕРї РІСЃСЏРєРёС… С‚Р°РєРёС…
 //"DWORD WINAPI Blah-Blah(foo, bar); If the function fails, the return value is INVALID_ANYTHING
-//функций, и чуть что, кидается исключениями, с красиво отформатированным текстом, с заданным зголовком
-//возвращает результат проверяемой проедуры
+//С„СѓРЅРєС†РёР№, Рё С‡СѓС‚СЊ С‡С‚Рѕ, РєРёРґР°РµС‚СЃСЏ РёСЃРєР»СЋС‡РµРЅРёСЏРјРё, СЃ РєСЂР°СЃРёРІРѕ РѕС‚С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅС‹Рј С‚РµРєСЃС‚РѕРј, СЃ Р·Р°РґР°РЅРЅС‹Рј Р·РіРѕР»РѕРІРєРѕРј
+//РІРѕР·РІСЂР°С‰Р°РµС‚ СЂРµР·СѓР»СЊС‚Р°С‚ РїСЂРѕРІРµСЂСЏРµРјРѕР№ РїСЂРѕРµРґСѓСЂС‹
 function saCheckResult(procResult, failValue: Cardinal; const caption: string): Cardinal; overload;
 begin
   Result := procResult;
   if procResult = failValue then saRaiseLastError(caption);
 end;
 
-//проверяет наличие указанног офайла
-//вобщем-то, та же фигня, что и "SysUtils.FileExists",
-//но без обертки из FileFirst и тягомотины с таймштампами
+//РїСЂРѕРІРµСЂСЏРµС‚ РЅР°Р»РёС‡РёРµ СѓРєР°Р·Р°РЅРЅРѕРі РѕС„Р°Р№Р»Р°
+//РІРѕР±С‰РµРј-С‚Рѕ, С‚Р° Р¶Рµ С„РёРіРЅСЏ, С‡С‚Рѕ Рё "SysUtils.FileExists",
+//РЅРѕ Р±РµР· РѕР±РµСЂС‚РєРё РёР· FileFirst Рё С‚СЏРіРѕРјРѕС‚РёРЅС‹ СЃ С‚Р°Р№РјС€С‚Р°РјРїР°РјРё
 function saFileExists(const fullname: string): Boolean;
 var
   fh: Cardinal;
@@ -166,27 +166,27 @@ begin
   end;
 end;
 
-//Выдаёт exception, если каталог не существует
+//Р’С‹РґР°С‘С‚ exception, РµСЃР»Рё РєР°С‚Р°Р»РѕРі РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
 procedure saDirectoryMustExist(const path: string);
 begin
   if not SysUtils.DirectoryExists(path) then
-    raise Exception.Create('Нет доступа к ['+path+']: '+saMsgLastError);
+    raise Exception.Create('РќРµС‚ РґРѕСЃС‚СѓРїР° Рє ['+path+']: '+saMsgLastError);
 end;
 
-//разбирает имя файла на имя и расширение
+//СЂР°Р·Р±РёСЂР°РµС‚ РёРјСЏ С„Р°Р№Р»Р° РЅР° РёРјСЏ Рё СЂР°СЃС€РёСЂРµРЅРёРµ
 procedure saSplitFileNameExt(const fnameext: string; out fname, fext: string);
 var
   k: integer;
 begin
   for k := length(fnameext) downto 1 do
     if fnameext[k] = '.' then begin
-      //расширение в наличии
+      //СЂР°СЃС€РёСЂРµРЅРёРµ РІ РЅР°Р»РёС‡РёРё
       fname := PChar(Copy(fnameext, 1, k-1));
       fext  := PChar(Copy(fnameext, k, MaxInt));
       Exit;
     end;
 
-  //расширения нема, только имя
+  //СЂР°СЃС€РёСЂРµРЅРёСЏ РЅРµРјР°, С‚РѕР»СЊРєРѕ РёРјСЏ
   fname := PChar(fnameext);
   fext  := '';
 end;
@@ -223,7 +223,7 @@ var
   i, x: Integer;
   nam, ext, fmt: string;
 begin
-  //да, я ссусь отключенной оптимизации булевских условий
+  //РґР°, СЏ СЃСЃСѓСЃСЊ РѕС‚РєР»СЋС‡РµРЅРЅРѕР№ РѕРїС‚РёРјРёР·Р°С†РёРё Р±СѓР»РµРІСЃРєРёС… СѓСЃР»РѕРІРёР№
   if MustUseSuff = False then begin
     Result := fname;
     MustUseSuff := not callback(fpath, fname, cbparam);
@@ -232,7 +232,7 @@ begin
   if MustUseSuff then begin
     saSplitFileNameExt(fname, nam, ext);
 
-    //добавляем разделитель между именем и суффиксом
+    //РґРѕР±Р°РІР»СЏРµРј СЂР°Р·РґРµР»РёС‚РµР»СЊ РјРµР¶РґСѓ РёРјРµРЅРµРј Рё СЃСѓС„С„РёРєСЃРѕРј
     if separ <> #0 then begin
       i := Length(nam);
       if (i > 0) and (nam[i] <> separ) then
@@ -241,11 +241,11 @@ begin
 
 
     if width > 6
-    then width := 6;       //хватит тебе. потому что.
+    then width := 6;       //С…РІР°С‚РёС‚ С‚РµР±Рµ. РїРѕС‚РѕРјСѓ С‡С‚Рѕ.
 
     if width = 0
     then fmt := '%s%d%s'
-    else fmt := '%s%.'+Chr(width+48)+'d%s';  //а это - инттостр для бедных, то есть для цифры, одной
+    else fmt := '%s%.'+Chr(width+48)+'d%s';  //Р° СЌС‚Рѕ - РёРЅС‚С‚РѕСЃС‚СЂ РґР»СЏ Р±РµРґРЅС‹С…, С‚Рѕ РµСЃС‚СЊ РґР»СЏ С†РёС„СЂС‹, РѕРґРЅРѕР№
 
     if width = 0 then x := 999999
     else begin
@@ -263,9 +263,9 @@ begin
   end;
 end;
 
-//fpath ОБЯЗАТЕЛЬНО заканчивается на слеш
-//добирает имя файла числовым нарастающим суффиксом, пока не найдется незанятое имя файла
-//Не подходит для разных пользователей/потоков !!!!!!!!!!!!
+//fpath РћР‘РЇР—РђРўР•Р›Р¬РќРћ Р·Р°РєР°РЅС‡РёРІР°РµС‚СЃСЏ РЅР° СЃР»РµС€
+//РґРѕР±РёСЂР°РµС‚ РёРјСЏ С„Р°Р№Р»Р° С‡РёСЃР»РѕРІС‹Рј РЅР°СЂР°СЃС‚Р°СЋС‰РёРј СЃСѓС„С„РёРєСЃРѕРј, РїРѕРєР° РЅРµ РЅР°Р№РґРµС‚СЃСЏ РЅРµР·Р°РЅСЏС‚РѕРµ РёРјСЏ С„Р°Р№Р»Р°
+//РќРµ РїРѕРґС…РѕРґРёС‚ РґР»СЏ СЂР°Р·РЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№/РїРѕС‚РѕРєРѕРІ !!!!!!!!!!!!
 function saGetAvailableFileName(const fpath, fname: string; minwidth: Byte = 0; separator: Char = #0): string;
 begin
   Result := saInternalIterateFileName(fpath, fname, minwidth, separator, False, saInternalGetAvailableFilename, nil);
@@ -281,7 +281,7 @@ begin
   if not saFilesBinaryEqual(srcfile, dstfile) then raise Exception.Create('saCopyFileSurePickName failed: dest file ['+dstfile+'] seems to be corrupt');
 end;
 
-//Копирует файл. Бросается исключениями в случае неудачи
+//РљРѕРїРёСЂСѓРµС‚ С„Р°Р№Р». Р‘СЂРѕСЃР°РµС‚СЃСЏ РёСЃРєР»СЋС‡РµРЅРёСЏРјРё РІ СЃР»СѓС‡Р°Рµ РЅРµСѓРґР°С‡Рё
 procedure saCopyFileSure(const src, dst: string; FailIfExists: Boolean = False);
 begin
   saCheckResult(Windows.CopyFile(PChar(src), PChar(dst), FailIfExists), 'saCopyFileSure failed to copy [' + src + '] to [' + dst + ']');
@@ -292,8 +292,8 @@ var lasterr: string;
 begin
   while not Windows.CopyFile(PChar(src), PChar(dst), FailIfExists) do begin
     lasterr := 'error ' + saMsgLastError;
-    if Windows.MessageBox(0, PChar('Не удалось копировать файл [' + src + '] to [' + dst + ']: ' + lasterr), 'Ошибка копирования', MB_ICONWARNING or MB_RETRYCANCEL) <> mrRetry
-    then raise Exception.Create('Прервано пользователем: ' + lasterr);
+    if Windows.MessageBox(0, PChar('РќРµ СѓРґР°Р»РѕСЃСЊ РєРѕРїРёСЂРѕРІР°С‚СЊ С„Р°Р№Р» [' + src + '] to [' + dst + ']: ' + lasterr), 'РћС€РёР±РєР° РєРѕРїРёСЂРѕРІР°РЅРёСЏ', MB_ICONWARNING or MB_RETRYCANCEL) <> mrRetry
+    then raise Exception.Create('РџСЂРµСЂРІР°РЅРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј: ' + lasterr);
   end;
 end;
 
@@ -320,8 +320,8 @@ begin
   Result := saCheckResult(Windows.CreateFile(PChar(fullname), GENERIC_ALL, FILE_SHARE_NONE, nil, OPEN_EXISTING, 0, 0), INVALID_HANDLE_VALUE, 'saOpenFileExcl ['+fullname+']');
 end;
 
-//открываем файл для чтения, шарим только чтение (схерали, запись тоже шарим!), возвращаем чапельник
-//если файла не существует, то тихо мирно возвращаем invalid handle
+//РѕС‚РєСЂС‹РІР°РµРј С„Р°Р№Р» РґР»СЏ С‡С‚РµРЅРёСЏ, С€Р°СЂРёРј С‚РѕР»СЊРєРѕ С‡С‚РµРЅРёРµ (СЃС…РµСЂР°Р»Рё, Р·Р°РїРёСЃСЊ С‚РѕР¶Рµ С€Р°СЂРёРј!), РІРѕР·РІСЂР°С‰Р°РµРј С‡Р°РїРµР»СЊРЅРёРє
+//РµСЃР»Рё С„Р°Р№Р»Р° РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚, С‚Рѕ С‚РёС…Рѕ РјРёСЂРЅРѕ РІРѕР·РІСЂР°С‰Р°РµРј invalid handle
 function saOpenFileReadIfExists(const fullname: string): Cardinal;
 var
   err: Cardinal;
@@ -334,8 +334,8 @@ begin
   end;
 end;
 
-//сравнивает побитово два файла
-//если один или оба указаннх файла не существует - вернет FALSE
+//СЃСЂР°РІРЅРёРІР°РµС‚ РїРѕР±РёС‚РѕРІРѕ РґРІР° С„Р°Р№Р»Р°
+//РµСЃР»Рё РѕРґРёРЅ РёР»Рё РѕР±Р° СѓРєР°Р·Р°РЅРЅС… С„Р°Р№Р»Р° РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ - РІРµСЂРЅРµС‚ FALSE
 function saFilesBinaryEqual(const fn1, fn2: string): Boolean;
 var
   fs1, fs2: Int64Rec;
@@ -371,13 +371,13 @@ begin
         saCheckResult(Windows.ReadFile(fh1, bf1[1], SA_BLOCKSIZE, bs1, nil), 'saBinaryEqual read "'+fn1+'"');
         saCheckResult(Windows.ReadFile(fh2, bf2[1], SA_BLOCKSIZE, bs2, nil), 'saBinaryEqual read "'+fn2+'"');
         if (bs1 <> bs2) then begin
-          Result := False; Break;        //разная длина файлов. Сразу нет
+          Result := False; Break;        //СЂР°Р·РЅР°СЏ РґР»РёРЅР° С„Р°Р№Р»РѕРІ. РЎСЂР°Р·Сѓ РЅРµС‚
         end else if (bs1 = 0) then begin
-          Result := True;  Break;        //длина одинаковая, нулевая. Мы уже были в конце файла, и до сих пор не нашли отличий?
+          Result := True;  Break;        //РґР»РёРЅР° РѕРґРёРЅР°РєРѕРІР°СЏ, РЅСѓР»РµРІР°СЏ. РњС‹ СѓР¶Рµ Р±С‹Р»Рё РІ РєРѕРЅС†Рµ С„Р°Р№Р»Р°, Рё РґРѕ СЃРёС… РїРѕСЂ РЅРµ РЅР°С€Р»Рё РѕС‚Р»РёС‡РёР№?
         end else if not CompareMem(@bf1[1], @bf2[1], bs1) then begin
-          Result := False; Break;        //чота из файлов прочиталось, но не совпадает по содержимому
+          Result := False; Break;        //С‡РѕС‚Р° РёР· С„Р°Р№Р»РѕРІ РїСЂРѕС‡РёС‚Р°Р»РѕСЃСЊ, РЅРѕ РЅРµ СЃРѕРІРїР°РґР°РµС‚ РїРѕ СЃРѕРґРµСЂР¶РёРјРѕРјСѓ
         end else if (bs1 < SA_BLOCKSIZE) then begin
-          Result := True;  Break;        //содержимое совпадает, в файлах больше ничего не осталось
+          Result := True;  Break;        //СЃРѕРґРµСЂР¶РёРјРѕРµ СЃРѕРІРїР°РґР°РµС‚, РІ С„Р°Р№Р»Р°С… Р±РѕР»СЊС€Рµ РЅРёС‡РµРіРѕ РЅРµ РѕСЃС‚Р°Р»РѕСЃСЊ
         end;
       end;
     end;
@@ -387,36 +387,36 @@ begin
   end;
 end;
 
-//заменяет нули на пробелы в ДБФке, кроме шапки
-//и да, я свято верю, что ДБФ больше 4гб весом не должны существовать
+//Р·Р°РјРµРЅСЏРµС‚ РЅСѓР»Рё РЅР° РїСЂРѕР±РµР»С‹ РІ Р”Р‘Р¤РєРµ, РєСЂРѕРјРµ С€Р°РїРєРё
+//Рё РґР°, СЏ СЃРІСЏС‚Рѕ РІРµСЂСЋ, С‡С‚Рѕ Р”Р‘Р¤ Р±РѕР»СЊС€Рµ 4РіР± РІРµСЃРѕРј РЅРµ РґРѕР»Р¶РЅС‹ СЃСѓС‰РµСЃС‚РІРѕРІР°С‚СЊ
 procedure saFixDBF(const fullname: string);
 var
   fh, cursor, blocksz, res, filesize, i: Cardinal;
   block: string;
   changed: Boolean;
 begin
-  //открыть файло
+  //РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р»Рѕ
   fh := saCheckResult(
     Windows.CreateFile(PChar(fullname), GENERIC_READ or GENERIC_WRITE, FILE_SHARE_READ, nil, OPEN_EXISTING, 0, 0),
     INVALID_HANDLE_VALUE, 'saFixDBF Open file "'+fullname+'"');
   try
-    //читаем длину заголовка
+    //С‡РёС‚Р°РµРј РґР»РёРЅСѓ Р·Р°РіРѕР»РѕРІРєР°
     filesize := saCheckResult(
                   Windows.SetFilePointer(fh, 0, nil, FILE_END), INVALID_SET_FILE_POINTER, 'saFixDBF Seek FSz');
     saCheckResult(Windows.SetFilePointer(fh, 8, nil, FILE_BEGIN), INVALID_SET_FILE_POINTER, 'saFixDBF Seek HSz');
-    cursor := 0; //во избежание конфуза, ибо в нем 4 байта, а читаем только младшие 2
+    cursor := 0; //РІРѕ РёР·Р±РµР¶Р°РЅРёРµ РєРѕРЅС„СѓР·Р°, РёР±Рѕ РІ РЅРµРј 4 Р±Р°Р№С‚Р°, Р° С‡РёС‚Р°РµРј С‚РѕР»СЊРєРѕ РјР»Р°РґС€РёРµ 2
     saCheckResult(Windows.ReadFile(fh, cursor, 2, res, nil), 'saFixDBF Read HSz');
     if res <> 2 then raise Exception.Create('saFixDBF Got '+inttostr(res)+' bytes reading HSz');
 
-    //погнали по блокам
+    //РїРѕРіРЅР°Р»Рё РїРѕ Р±Р»РѕРєР°Рј
     SetLength(block, SA_BLOCKSIZE);
 
     while cursor < filesize do begin
-      //читаем блок
+      //С‡РёС‚Р°РµРј Р±Р»РѕРє
       saCheckResult(Windows.SetFilePointer(fh, cursor, nil, FILE_BEGIN), INVALID_SET_FILE_POINTER, 'saFixDBF Seek block read');
       saCheckResult(Windows.ReadFile(fh, block[1], SA_BLOCKSIZE, blocksz, nil), 'saFixDBF Read block');
 
-      //обрабатываем блок
+      //РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј Р±Р»РѕРє
       changed := False;
       for i := 1 to blocksz do begin
         if block[i] = #0 then begin
@@ -428,14 +428,14 @@ begin
         end;
       end;
 
-      //пишем взад
+      //РїРёС€РµРј РІР·Р°Рґ
       if changed then begin
         saCheckResult(Windows.SetFilePointer(fh, cursor, nil, FILE_BEGIN), INVALID_SET_FILE_POINTER, 'saFixDBF Seek block read');
         saCheckResult(Windows.WriteFile(fh, block[1], blocksz, res, nil), 'saFixDBF Write block');
         if blocksz <> res then raise Exception.Create(Format('saFixDBF written [%d] bytes, expected [%d]', [res, blocksz]));
       end;
 
-      //двигаем курсор
+      //РґРІРёРіР°РµРј РєСѓСЂСЃРѕСЂ
       cursor := cursor + blocksz;
     end;
   finally
@@ -443,7 +443,7 @@ begin
   end;
 end;
 
-//рубит признак индекса в ДБФке
+//СЂСѓР±РёС‚ РїСЂРёР·РЅР°Рє РёРЅРґРµРєСЃР° РІ Р”Р‘Р¤РєРµ
 procedure saKillIdx(const fullname: string);
 var
   fh, res: Cardinal;
@@ -476,7 +476,7 @@ begin
     [wDay, wMonth, wYear, wHour, wMinute, wSecond]);
 end;
 
-//записывает сообщение (разбирает его на строки) в текстовый файл, с меткой времени
+//Р·Р°РїРёСЃС‹РІР°РµС‚ СЃРѕРѕР±С‰РµРЅРёРµ (СЂР°Р·Р±РёСЂР°РµС‚ РµРіРѕ РЅР° СЃС‚СЂРѕРєРё) РІ С‚РµРєСЃС‚РѕРІС‹Р№ С„Р°Р№Р», СЃ РјРµС‚РєРѕР№ РІСЂРµРјРµРЅРё
 procedure saWriteLog(const fullname, msg: string);
 const
   linechr = [#10, #13];
@@ -499,18 +499,18 @@ begin
       k := 1;
 
       while k <= n do begin
-        //тримаем начало строки
+        //С‚СЂРёРјР°РµРј РЅР°С‡Р°Р»Рѕ СЃС‚СЂРѕРєРё
         while (k <= n) and (msg[k] in skipchr) do Inc(k);
 
-        //ищем конец строки
+        //РёС‰РµРј РєРѕРЅРµС† СЃС‚СЂРѕРєРё
         q := k + 1;
         while (q <= n) and not (msg[q] in linechr) do Inc(q);
         len := q - k;
 
-        //тримаем конец строки
+        //С‚СЂРёРјР°РµРј РєРѕРЅРµС† СЃС‚СЂРѕРєРё
         while msg[k + len - 1] in skipchr do Dec(len);
 
-        //пишем строку
+        //РїРёС€РµРј СЃС‚СЂРѕРєСѓ
         if k <= n then begin
           buff := datestamp + Copy(msg, k, len) + #13#10;
           len := Length(buff);
@@ -524,11 +524,11 @@ begin
       Windows.CloseHandle(fh);
     end;
   except on e: Exception do begin
-    errmsg := 'Ошибка при записи в журнал событий!'#13#10 + e.Message + #13#10#13#10'Исходное сообщение:'#13#10 + msg;
+    errmsg := 'РћС€РёР±РєР° РїСЂРё Р·Р°РїРёСЃРё РІ Р¶СѓСЂРЅР°Р» СЃРѕР±С‹С‚РёР№!'#13#10 + e.Message + #13#10#13#10'РСЃС…РѕРґРЅРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ:'#13#10 + msg;
     if @saLogErrorCallback = nil then begin
       if Windows.MessageBox(0,
-        PChar('ВНИМАНИЕ! Сохраните текст этого сообщения!'#13#10+errmsg),
-        PChar('Внимание! Важная информация'),
+        PChar('Р’РќРРњРђРќРР•! РЎРѕС…СЂР°РЅРёС‚Рµ С‚РµРєСЃС‚ СЌС‚РѕРіРѕ СЃРѕРѕР±С‰РµРЅРёСЏ!'#13#10+errmsg),
+        PChar('Р’РЅРёРјР°РЅРёРµ! Р’Р°Р¶РЅР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ'),
         MB_ICONSTOP or MB_ABORTRETRYIGNORE) = mrAbort
       then raise exception.Create('Abort');
     end else
@@ -536,7 +536,7 @@ begin
   end; end;
 end;
 
-//Создает лок-файл при надобности, возвращает нормальный или инвалидный хендл
+//РЎРѕР·РґР°РµС‚ Р»РѕРє-С„Р°Р№Р» РїСЂРё РЅР°РґРѕР±РЅРѕСЃС‚Рё, РІРѕР·РІСЂР°С‰Р°РµС‚ РЅРѕСЂРјР°Р»СЊРЅС‹Р№ РёР»Рё РёРЅРІР°Р»РёРґРЅС‹Р№ С…РµРЅРґР»
 function saLock(const fullname: string; access, share: Cardinal): THandle;
 var
   err: Cardinal;
@@ -656,8 +656,8 @@ begin
   end;
 end;
 
-//проверяет размер и дату файлов на одинаковость. Содержимое НЕ проверяет
-//если кто-то из файлов не существует, вернет false
+//РїСЂРѕРІРµСЂСЏРµС‚ СЂР°Р·РјРµСЂ Рё РґР°С‚Сѓ С„Р°Р№Р»РѕРІ РЅР° РѕРґРёРЅР°РєРѕРІРѕСЃС‚СЊ. РЎРѕРґРµСЂР¶РёРјРѕРµ РќР• РїСЂРѕРІРµСЂСЏРµС‚
+//РµСЃР»Рё РєС‚Рѕ-С‚Рѕ РёР· С„Р°Р№Р»РѕРІ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚, РІРµСЂРЅРµС‚ false
 function saSameFileDateSize(const fn1, fn2: string): Boolean;
 var
   fa1, fa2: WIN32_FILE_ATTRIBUTE_DATA;
@@ -674,7 +674,7 @@ begin
     and (fa1.nFileSizeHigh = fa2.nFileSizeHigh);
 end;
 
-//Проверяет, ссылаются ли два пути на один и тот же файл
+//РџСЂРѕРІРµСЂСЏРµС‚, СЃСЃС‹Р»Р°СЋС‚СЃСЏ Р»Рё РґРІР° РїСѓС‚Рё РЅР° РѕРґРёРЅ Рё С‚РѕС‚ Р¶Рµ С„Р°Р№Р»
 function saTheSameFile(const fn1, fn2: string): Boolean;
 var
   s1, s2: string;
@@ -683,7 +683,7 @@ var
 begin
   s1 := LowerCase(fn1);
   s2 := LowerCase(fn2);
-  //Очевидно одинаковые пути
+  //РћС‡РµРІРёРґРЅРѕ РѕРґРёРЅР°РєРѕРІС‹Рµ РїСѓС‚Рё
   if s1 = s2 then begin
     Result := True;
     Exit;
@@ -691,7 +691,7 @@ begin
 
   s1 := ExtractFileName(s1);
   s2 := ExtractFileName(s2);
-  //Очевидно разные файлы
+  //РћС‡РµРІРёРґРЅРѕ СЂР°Р·РЅС‹Рµ С„Р°Р№Р»С‹
   if s1 <> s2 then begin
     Result := False;
     Exit;
@@ -713,7 +713,7 @@ begin
       h1 := saOpenFileReadIfExists(fn1);
       h2 := saOpenFileReadIfExists(fn2);
 
-      //Кто-то из них недоступен, значит считаем что они разные
+      //РљС‚Рѕ-С‚Рѕ РёР· РЅРёС… РЅРµРґРѕСЃС‚СѓРїРµРЅ, Р·РЅР°С‡РёС‚ СЃС‡РёС‚Р°РµРј С‡С‚Рѕ РѕРЅРё СЂР°Р·РЅС‹Рµ
       if (h1 = INVALID_HANDLE_VALUE) or (h2 = INVALID_HANDLE_VALUE) then begin
         Result := False;
         Exit;

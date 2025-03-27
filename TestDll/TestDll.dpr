@@ -46,7 +46,7 @@ begin
 
   SetLength(s, size);
   Move(p^, s[1], size);
-  //Скопировать себе данные
+  //РЎРєРѕРїРёСЂРѕРІР°С‚СЊ СЃРµР±Рµ РґР°РЅРЅС‹Рµ
 
   if s = 'exception' then raise Exception.Create('FU');
 
@@ -64,13 +64,13 @@ begin
   end;
 
   {  try
-    //Имитирую бурную деятельность
+    //РРјРёС‚РёСЂСѓСЋ Р±СѓСЂРЅСѓСЋ РґРµСЏС‚РµР»СЊРЅРѕСЃС‚СЊ
     form := nil;
     form := TForm1.Create(nil);
 
     form.Edit1.Text := s;
     form.abortcallback := AbortCallback;
-    form.ShowModal; //будет висеть пока не закрою, или пока не сработает AbortCallback
+    form.ShowModal; //Р±СѓРґРµС‚ РІРёСЃРµС‚СЊ РїРѕРєР° РЅРµ Р·Р°РєСЂРѕСЋ, РёР»Рё РїРѕРєР° РЅРµ СЃСЂР°Р±РѕС‚Р°РµС‚ AbortCallback
   finally
     form.Free;
   end;

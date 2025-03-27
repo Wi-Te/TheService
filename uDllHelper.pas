@@ -3,8 +3,8 @@ unit uDllHelper;
 interface
 
 const
-  {копия из saSock}
-  SASM_FIRSTMESS = {WM_USER} $0400 + 5376;  //сообщения от сервера
+  {РєРѕРїРёСЏ РёР· saSock}
+  SASM_FIRSTMESS = {WM_USER} $0400 + 5376;  //СЃРѕРѕР±С‰РµРЅРёСЏ РѕС‚ СЃРµСЂРІРµСЂР°
   SASM_STARTLISTEN = saSM_FirstMess + 0;    //ListenSocket  | PORT_Server
   SASM_STOPLISTEN  = saSM_FirstMess + 1;    //ListenSocket  | PORT_Server
   SASM_INCOMMING   = saSM_FirstMess + 2;    //ClientSocket  | IPADDR_Client

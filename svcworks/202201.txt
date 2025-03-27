@@ -43,7 +43,7 @@
 03.01.2022 10:29:24	Started Service
 03.01.2022 10:29:25	User request [UserProc]
 03.01.2022 10:29:25	Starting [UserProc]. Timers count = 0; Users count = 1
-03.01.2022 10:29:25	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:29:25	Exception in Task Proc [UserProc]: Р Р°Р·СЂСѓС€РёС‚РµР»СЊРЅС‹Р№ СЃР±РѕР№
 03.01.2022 10:29:25	Done [UserProc]
 03.01.2022 10:29:42	User request [TimerProc2]
 03.01.2022 10:29:42	Starting [TimerProc2]. Timers count = 0; Users count = 1
@@ -53,7 +53,7 @@
 03.01.2022 10:29:44	Done [TimerProc1]
 03.01.2022 10:29:45	User request [UserProc]
 03.01.2022 10:29:45	Starting [UserProc]. Timers count = 0; Users count = 1
-03.01.2022 10:29:45	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:29:45	Exception in Task Proc [UserProc]: Р Р°Р·СЂСѓС€РёС‚РµР»СЊРЅС‹Р№ СЃР±РѕР№
 03.01.2022 10:29:45	Done [UserProc]
 03.01.2022 10:29:59	Stopped Service
 03.01.2022 10:29:59	!
@@ -75,7 +75,7 @@
 03.01.2022 10:31:11	Done [TimerProc2]
 03.01.2022 10:31:11	User request [UserProc]
 03.01.2022 10:31:11	Starting [UserProc]. Timers count = 0; Users count = 1
-03.01.2022 10:31:19	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:31:19	Exception in Task Proc [UserProc]: Р Р°Р·СЂСѓС€РёС‚РµР»СЊРЅС‹Р№ СЃР±РѕР№
 03.01.2022 10:31:19	Done [UserProc]
 03.01.2022 10:36:11	!
 03.01.2022 10:36:11	Started Service
@@ -89,7 +89,7 @@
 03.01.2022 10:36:29	Started Service
 03.01.2022 10:36:30	User request [UserProc]
 03.01.2022 10:36:30	Starting [UserProc]. Timers count = 0; Users count = 1
-03.01.2022 10:36:33	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:36:33	Exception in Task Proc [UserProc]: Р Р°Р·СЂСѓС€РёС‚РµР»СЊРЅС‹Р№ СЃР±РѕР№
 03.01.2022 10:36:33	Done [UserProc]
 03.01.2022 10:37:08	!
 03.01.2022 10:37:08	Started Service
@@ -105,7 +105,7 @@
 03.01.2022 10:37:22	Started Service
 03.01.2022 10:37:23	User request [UserProc]
 03.01.2022 10:37:24	Starting [UserProc]. Timers count = 0; Users count = 1
-03.01.2022 10:37:29	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:37:29	Exception in Task Proc [UserProc]: Р Р°Р·СЂСѓС€РёС‚РµР»СЊРЅС‹Р№ СЃР±РѕР№
 03.01.2022 10:37:29	Done [UserProc]
 03.01.2022 10:37:35	Stopped Service
 03.01.2022 10:37:35	!
@@ -146,7 +146,7 @@
 03.01.2022 10:39:46	Started Service
 03.01.2022 10:39:47	User request [UserProc]
 03.01.2022 10:39:47	Starting [UserProc]. Timers count = 0; Users count = 1
-03.01.2022 10:39:52	Exception in Task Proc [UserProc]: Разрушительный сбой
+03.01.2022 10:39:52	Exception in Task Proc [UserProc]: Р Р°Р·СЂСѓС€РёС‚РµР»СЊРЅС‹Р№ СЃР±РѕР№
 03.01.2022 10:39:52	Done [UserProc]
 03.01.2022 10:39:58	Stopped Service
 03.01.2022 10:39:58	!
