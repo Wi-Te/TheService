@@ -1,0 +1,20 @@
+cmd := 'cmd /c net use '+srv+' /user:'+uname+' '+upass+' >> "'+log+'" 2>&1';
+uname == .xxxx.xxx.xxxx.xxxxxx
+DoNetUse('\\xx',        uname,    upass,  flog);
+DoNetUse('\\xxxxx',  'xxxx', 'xxxx', flog);
+DoNetUse('\\xxxxxt', 'xxxx', 'xxxx', flog);
+
+//если я правильно понял, этот юзер не в домене, он локальный для xxxxxxxx
+
+
+
+#Параметры для комманды NET USE
+#[\\<ComputerName>\<ShareName>[\<volume>]]
+#[/user:[<DomainName>\]<UserName>]
+#[/user:[<DottedDomainName>\]<UserName>]
+#[/user:[<UserName@DottedDomainName>]
+#connecto - перечень разделенных пробелами адресов,
+#           к которым будет подсоединяться указанный пользователь, используя указанный пароль
+username = xxxx
+password = xxxx
+connecto = \\xx "\\xxxxx" "\\xxxxxt"
